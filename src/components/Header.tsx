@@ -46,7 +46,7 @@ export function Header({ complaints }: HeaderProps) {
                 <img
                   src="/bk-logo.png"
                   alt="Burger King"
-                  className="w-[180px] h-[180px] object-cover drop-shadow-xl scale-125"
+                  className="w-[160px] h-[160px] object-contain drop-shadow-xl"
                   style={{ objectPosition: 'center' }}
                 />
               </div>

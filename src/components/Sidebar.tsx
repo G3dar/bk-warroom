@@ -5,22 +5,28 @@ import { getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
 
 interface SidebarProps {
   complaints: ComplaintWithMetadata[];
+  keywordsIndex: string[];
   selectedCategory: string | null;
   selectedAnger: string | null;
   selectedState: string | null;
+  selectedKeywords: string[];
   onCategoryChange: (category: string | null) => void;
   onAngerChange: (anger: string | null) => void;
   onStateChange: (state: string | null) => void;
+  onKeywordsChange: (keywords: string[]) => void;
 }
 
 export function Sidebar({
   complaints,
+  keywordsIndex,
   selectedCategory,
   selectedAnger,
   selectedState,
+  selectedKeywords,
   onCategoryChange,
   onAngerChange,
   onStateChange,
+  onKeywordsChange,
 }: SidebarProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>('category');
 
@@ -54,7 +60,30 @@ export function Sidebar({
     }
   });
 
+  // Calculate keyword counts
+  const keywordCounts: Record<string, number> = {};
+  complaints.forEach((c) => {
+    c.keywords?.forEach((keyword) => {
+      keywordCounts[keyword] = (keywordCounts[keyword] || 0) + 1;
+    });
+  });
+
+  // Get top 20 keywords by frequency
+  const topKeywords = Object.entries(keywordCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 20)
+    .map(([keyword]) => keyword);
+
   const totalComplaints = complaints.length;
+
+  // Handler for toggling keyword selection
+  const toggleKeyword = (keyword: string) => {
+    if (selectedKeywords.includes(keyword)) {
+      onKeywordsChange(selectedKeywords.filter((k) => k !== keyword));
+    } else {
+      onKeywordsChange([...selectedKeywords, keyword]);
+    }
+  };
 
   return (
     <aside className="w-80 bg-[#FAFAFA] border-r border-[#E5E5E5] overflow-y-auto shadow-sm">
@@ -207,7 +236,7 @@ export function Sidebar({
         </div>
 
         {/* State Filter */}
-        <div className="mb-6">
+        <div className="mb-8">
           <button
             onClick={() => toggleSection('state')}
             className="flex items-center justify-between w-full mb-3 text-[#1D1D1F] font-semibold hover:text-[#007AFF] transition-colors text-[15px]"
@@ -246,6 +275,67 @@ export function Sidebar({
                     </button>
                   );
                 })}
+            </div>
+          )}
+        </div>
+
+        {/* Keywords Filter */}
+        <div className="mb-6">
+          <button
+            onClick={() => toggleSection('keywords')}
+            className="flex items-center justify-between w-full mb-3 text-[#1D1D1F] font-semibold hover:text-[#007AFF] transition-colors text-[15px]"
+          >
+            <div className="flex items-center gap-2">
+              <span>Keywords</span>
+              {selectedKeywords.length > 0 && (
+                <span className="bg-[#007AFF] text-white text-[11px] font-bold px-2 py-0.5 rounded-full">
+                  {selectedKeywords.length}
+                </span>
+              )}
+            </div>
+            {expandedSection === 'keywords' ? (
+              <ChevronDown className="w-4 h-4 text-[#86868B]" />
+            ) : (
+              <ChevronRight className="w-4 h-4 text-[#86868B]" />
+            )}
+          </button>
+
+          {expandedSection === 'keywords' && (
+            <div className="space-y-3">
+              {selectedKeywords.length > 0 && (
+                <div className="pb-2 border-b border-[#E5E5E5]">
+                  <button
+                    onClick={() => onKeywordsChange([])}
+                    className="text-[13px] text-[#007AFF] hover:text-[#0051D5] font-semibold transition-colors"
+                  >
+                    Clear all ({selectedKeywords.length})
+                  </button>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-1.5 max-h-96 overflow-y-auto pr-1">
+                {topKeywords.map((keyword) => {
+                  const isSelected = selectedKeywords.includes(keyword);
+                  const count = keywordCounts[keyword];
+
+                  return (
+                    <button
+                      key={keyword}
+                      onClick={() => toggleKeyword(keyword)}
+                      className={`px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all ${
+                        isSelected
+                          ? 'bg-[#007AFF] text-white shadow-md'
+                          : 'bg-white text-[#1D1D1F] hover:bg-[#007AFF]/10 hover:text-[#007AFF] border border-[#E5E5E5]'
+                      }`}
+                    >
+                      <span>{keyword}</span>
+                      <span className={`ml-1.5 text-[11px] font-bold ${isSelected ? 'text-white/80' : 'text-[#86868B]'}`}>
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>

@@ -8,11 +8,12 @@ import type { ComplaintWithMetadata } from './types/complaints';
 import { normalizeCategoryName } from './utils/formatters';
 
 function App() {
-  const { complaints } = useComplaints();
+  const { complaints, keywordsIndex } = useComplaints();
   const [selectedComplaint, setSelectedComplaint] = useState<ComplaintWithMetadata | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedAnger, setSelectedAnger] = useState<string | null>(null);
   const [selectedState, setSelectedState] = useState<string | null>(null);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isFeedFocused, setIsFeedFocused] = useState(true);
 
@@ -34,6 +35,16 @@ function App() {
         return false;
       }
 
+      // Keyword filter (OR logic - complaint must have at least one selected keyword)
+      if (selectedKeywords.length > 0) {
+        const hasMatchingKeyword = selectedKeywords.some((selectedKeyword) =>
+          complaint.keywords?.includes(selectedKeyword)
+        );
+        if (!hasMatchingKeyword) {
+          return false;
+        }
+      }
+
       // Search filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
@@ -50,7 +61,7 @@ function App() {
 
       return true;
     });
-  }, [complaints, selectedCategory, selectedAnger, selectedState, searchQuery]);
+  }, [complaints, selectedCategory, selectedAnger, selectedState, selectedKeywords, searchQuery]);
 
   // Sort complaints by timestamp (most recent first)
   const sortedComplaints = useMemo(() => {
@@ -64,12 +75,15 @@ function App() {
       <div className="flex-1 flex overflow-hidden">
         <Sidebar
           complaints={complaints}
+          keywordsIndex={keywordsIndex}
           selectedCategory={selectedCategory}
           selectedAnger={selectedAnger}
           selectedState={selectedState}
+          selectedKeywords={selectedKeywords}
           onCategoryChange={setSelectedCategory}
           onAngerChange={setSelectedAnger}
           onStateChange={setSelectedState}
+          onKeywordsChange={setSelectedKeywords}
         />
 
         <ComplaintFeed

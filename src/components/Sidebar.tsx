@@ -57,7 +57,7 @@ export function Sidebar({
   const totalComplaints = complaints.length;
 
   return (
-    <aside className="w-80 bg-white border-r border-[#E5E5E5] overflow-y-auto shadow-sm">
+    <aside className="w-80 bg-[#FAFAFA] border-r border-[#E5E5E5] overflow-y-auto shadow-sm">
       <div className="p-4">
         <h2 className="text-[11px] font-bold text-[#86868B] uppercase tracking-wider mb-6">
           Filters

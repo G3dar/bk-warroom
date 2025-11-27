@@ -43,7 +43,7 @@ export function ConversationPanel({ complaint, onClose }: ConversationPanelProps
         className="w-[600px] bg-white border-l border-[#E5E5E5] flex flex-col"
       >
         {/* Header */}
-        <div className="px-4 py-3 border-b border-[#E5E5E5] bg-white shadow-sm">
+        <div className="px-4 py-3 border-b border-[#E5E5E5] bg-gradient-to-r from-white to-[#FAFAFA] shadow-sm">
           <div className="flex items-start justify-between mb-2">
             <div className="flex-1">
               <h2 className="text-xl font-semibold text-[#1D1D1F] mb-1">
@@ -100,7 +100,7 @@ export function ConversationPanel({ complaint, onClose }: ConversationPanelProps
         </div>
 
         {/* Conversation Thread */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 bg-[#FAFAFA]">
+        <div className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-b from-[#F8F8F8] to-[#FAFAFA]">
           <div className="mb-4 text-center">
             <div className="inline-block px-3 py-1 rounded-full bg-white text-xs text-[#86868B] shadow-sm">
               {complaint.timestamp.toLocaleDateString('en-US', {
@@ -118,7 +118,7 @@ export function ConversationPanel({ complaint, onClose }: ConversationPanelProps
         </div>
 
         {/* Extracted Data Card */}
-        <div className="px-4 py-3 border-t border-[#E5E5E5] bg-white shadow-sm">
+        <div className="px-4 py-3 border-t border-[#E5E5E5] bg-gradient-to-r from-[#FAFAFA] to-white shadow-sm">
           <div className="flex items-center gap-2 mb-2">
             <Info className="w-4 h-4 text-[#86868B]" />
             <h3 className="text-sm font-semibold text-[#1D1D1F] uppercase tracking-wide">

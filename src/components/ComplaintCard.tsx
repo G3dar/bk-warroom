@@ -22,8 +22,8 @@ export function ComplaintCard({ complaint, isSelected, onClick }: ComplaintCardP
       onClick={onClick}
       className={`w-full text-left p-3 rounded-xl transition-all ${
         isSelected
-          ? 'card-selected bg-[#E3F2FD]'
-          : 'card bg-white'
+          ? 'card-selected'
+          : 'card'
       }`}
     >
       {/* Header Row */}

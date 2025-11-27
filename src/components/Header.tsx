@@ -38,7 +38,7 @@ export function Header({ complaints }: HeaderProps) {
   const topCategory = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'N/A';
 
   return (
-    <header className="bg-white border-b border-[#E5E5E5] shadow-sm">
+    <header className="bg-gradient-to-b from-white to-[#FAFAFA] border-b border-[#E5E5E5] shadow-sm">
       <div className="px-5 py-2">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">

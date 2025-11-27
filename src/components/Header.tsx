@@ -54,7 +54,7 @@ export function Header({ complaints }: HeaderProps) {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F5F5F7]">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100">
               <div className="status-dot status-live pulse-subtle" />
               <span className="text-[12px] font-semibold text-[#34C759]">Live</span>
             </div>
@@ -78,28 +78,28 @@ export function Header({ complaints }: HeaderProps) {
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#F5F5F7]">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
             <span className="text-[12px] text-[#86868B]">Routing to</span>
             <span className="text-[12px] font-semibold text-[#1D1D1F]">Tom Curtis, CEO</span>
           </div>
 
           <div className="flex gap-2.5">
             {/* Total */}
-            <div className="stat-card min-w-[110px] px-3 py-2">
+            <div className="stat-card min-w-[110px] px-3 py-2" style={{ backgroundColor: 'rgba(142, 142, 147, 0.06)' }}>
               <div className="text-[10px] text-[#86868B] uppercase tracking-wider font-semibold mb-1">Total</div>
               <div className="text-[26px] font-semibold text-[#1D1D1F] leading-none mb-0.5">{totalComplaints}</div>
               <div className="text-[11px] text-[#86868B]">messages</div>
             </div>
 
             {/* Today */}
-            <div className="stat-card min-w-[110px] px-3 py-2">
+            <div className="stat-card min-w-[110px] px-3 py-2" style={{ backgroundColor: 'rgba(0, 122, 255, 0.06)' }}>
               <div className="text-[10px] text-[#86868B] uppercase tracking-wider font-semibold mb-1">Today</div>
               <div className="text-[26px] font-semibold text-[#007AFF] leading-none mb-0.5">{todayCount}</div>
               <div className="text-[11px] text-[#86868B]">new</div>
             </div>
 
             {/* High Priority */}
-            <div className="stat-card min-w-[110px] px-3 py-2">
+            <div className="stat-card min-w-[110px] px-3 py-2" style={{ backgroundColor: 'rgba(255, 59, 48, 0.06)' }}>
               <div className="text-[10px] text-[#86868B] uppercase tracking-wider font-semibold mb-1">Priority</div>
               <div className="text-[26px] font-semibold text-[#FF3B30] leading-none mb-0.5 flex items-center gap-1.5">
                 {highPriority}
@@ -109,14 +109,14 @@ export function Header({ complaints }: HeaderProps) {
             </div>
 
             {/* Avg Anger */}
-            <div className="stat-card min-w-[110px] px-3 py-2">
+            <div className="stat-card min-w-[110px] px-3 py-2" style={{ backgroundColor: 'rgba(255, 149, 0, 0.06)' }}>
               <div className="text-[10px] text-[#86868B] uppercase tracking-wider font-semibold mb-1">Avg Anger</div>
               <div className="text-[26px] font-semibold text-[#FF9500] leading-none mb-0.5">{avgAnger}</div>
               <div className="text-[11px] text-[#86868B]">out of 10</div>
             </div>
 
             {/* Top Issue */}
-            <div className="stat-card min-w-[130px] px-3 py-2">
+            <div className="stat-card min-w-[130px] px-3 py-2" style={{ backgroundColor: 'rgba(147, 51, 234, 0.06)' }}>
               <div className="text-[10px] text-[#86868B] uppercase tracking-wider font-semibold mb-1">Top Issue</div>
               <div className="text-[17px] font-semibold text-[#1D1D1F] capitalize truncate leading-none mb-0.5">{topCategory}</div>
               <div className="text-[11px] text-[#86868B]">most common</div>

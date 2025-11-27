@@ -1,5 +1,4 @@
-import { useEffect, useRef, useMemo, useCallback } from 'react';
-import { List, type ListImperativeAPI } from 'react-window';
+import { useEffect, useRef } from 'react';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
 import type { ComplaintWithMetadata } from '../types/complaints';
@@ -25,7 +24,6 @@ export function ComplaintFeed({
 }: ComplaintFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedCardRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<ListImperativeAPI | null>(null);
 
   useEffect(() => {
     if (!isFeedFocused) return;
@@ -69,35 +67,13 @@ export function ComplaintFeed({
 
   // Scroll selected card into view
   useEffect(() => {
-    if (selectedComplaint && isFeedFocused && listRef.current) {
-      const index = complaints.findIndex((c) => c.id === selectedComplaint.id);
-      if (index !== -1) {
-        listRef.current.scrollToRow({ index, align: 'smart' });
-      }
+    if (selectedComplaint && selectedCardRef.current) {
+      selectedCardRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
     }
-  }, [selectedComplaint, isFeedFocused, complaints]);
-
-  // Memoized complaint selection handler
-  const handleSelectComplaint = useCallback((complaint: ComplaintWithMetadata) => {
-    onSelectComplaint(complaint);
-  }, [onSelectComplaint]);
-
-  // Memoized Row renderer for virtualized list
-  const Row = useCallback(({ index, style }: any) => {
-    const complaint = complaints[index];
-    return (
-      <div style={style}>
-        <div className="px-6 pb-2">
-          <ComplaintCard
-            complaint={complaint}
-            isSelected={selectedComplaint?.id === complaint.id}
-            onClick={() => handleSelectComplaint(complaint)}
-            isFocused={isFeedFocused && selectedComplaint?.id === complaint.id}
-          />
-        </div>
-      </div>
-    );
-  }, [complaints, selectedComplaint, handleSelectComplaint, isFeedFocused]);
+  }, [selectedComplaint]);
 
   return (
     <div
@@ -130,16 +106,21 @@ export function ComplaintFeed({
             </div>
           </div>
         ) : (
-          <List
-            listRef={listRef}
-            defaultHeight={window.innerHeight - 250}
-            rowCount={complaints.length}
-            rowHeight={140}
-            rowComponent={Row}
-            rowProps={{}}
-            overscanCount={5}
-            className="scrollbar-thin"
-          />
+          <div className="flex-1 overflow-y-auto scrollbar-thin px-6 space-y-2 pb-6">
+            {complaints.map((complaint) => (
+              <div
+                key={complaint.id}
+                ref={selectedComplaint?.id === complaint.id ? selectedCardRef : null}
+              >
+                <ComplaintCard
+                  complaint={complaint}
+                  isSelected={selectedComplaint?.id === complaint.id}
+                  onClick={() => onSelectComplaint(complaint)}
+                  isFocused={isFeedFocused && selectedComplaint?.id === complaint.id}
+                />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>

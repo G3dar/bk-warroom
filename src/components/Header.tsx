@@ -38,7 +38,7 @@ export function Header({ complaints }: HeaderProps) {
 
   return (
     <header className="bg-gradient-to-br from-orange-50/60 via-white to-red-50/40 border-b-2 border-[#FF8732]/30 shadow-lg">
-      <div className="px-6 py-[3px]">
+      <div className="px-6 py-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-4">

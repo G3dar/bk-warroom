@@ -42,11 +42,14 @@ export function Header({ complaints }: HeaderProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-4">
-              <img
-                src="/bk-logo.png"
-                alt="Burger King"
-                className="w-40 h-40 object-contain drop-shadow-xl"
-              />
+              <div className="w-32 h-32 overflow-hidden flex items-center justify-center">
+                <img
+                  src="/bk-logo.png"
+                  alt="Burger King"
+                  className="w-[200px] h-[200px] object-cover drop-shadow-xl scale-150"
+                  style={{ objectPosition: 'center' }}
+                />
+              </div>
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-200 shadow-md">
                   <div className="status-dot status-live pulse-subtle" />

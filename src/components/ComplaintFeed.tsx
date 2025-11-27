@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { FixedSizeList as List } from 'react-window';
+import { FixedSizeList } from 'react-window';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
 import type { ComplaintWithMetadata } from '../types/complaints';
@@ -25,7 +25,7 @@ export function ComplaintFeed({
 }: ComplaintFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedCardRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<List>(null);
+  const listRef = useRef<FixedSizeList>(null);
 
   useEffect(() => {
     if (!isFeedFocused) return;
@@ -125,7 +125,7 @@ export function ComplaintFeed({
             </div>
           </div>
         ) : (
-          <List
+          <FixedSizeList
             ref={listRef}
             height={window.innerHeight - 250}
             itemCount={complaints.length}
@@ -134,7 +134,7 @@ export function ComplaintFeed({
             className="scrollbar-thin"
           >
             {Row}
-          </List>
+          </FixedSizeList>
         )}
       </div>
     </div>

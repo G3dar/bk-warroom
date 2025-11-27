@@ -131,6 +131,7 @@ export function ComplaintFeed({
             rowCount={complaints.length}
             rowHeight={140}
             rowComponent={Row}
+            rowProps={{}}
             className="scrollbar-thin"
           />
         )}

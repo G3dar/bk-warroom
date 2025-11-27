@@ -18,14 +18,19 @@ export function ComplaintFeed({
   onSearchChange,
 }: ComplaintFeedProps) {
   return (
-    <div className="flex-1 bg-[#F5F5F7] p-4 overflow-y-auto">
+    <div className="flex-1 bg-[#F5F5F7] p-6 overflow-y-auto">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-4">
-          <h2 className="text-[24px] font-semibold text-[#1D1D1F] leading-tight mb-1.5">
-            Messages
-          </h2>
-          <p className="text-[15px] text-[#86868B] mb-5">
-            {complaints.length} {complaints.length === 1 ? 'conversation' : 'conversations'}
+        <div className="mb-6">
+          <div className="flex items-baseline gap-3 mb-2">
+            <h2 className="text-[32px] font-black text-[#1D1D1F] leading-none tracking-tight">
+              Messages
+            </h2>
+            <span className="text-[18px] font-bold text-[#007AFF] px-3 py-1 bg-blue-50 rounded-full border border-blue-100">
+              {complaints.length}
+            </span>
+          </div>
+          <p className="text-[14px] text-[#86868B] font-medium mb-5">
+            {complaints.length === 1 ? '1 conversation' : `${complaints.length} conversations`}
           </p>
           <SearchBar value={searchQuery} onChange={onSearchChange} />
         </div>

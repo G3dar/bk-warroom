@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo, useCallback } from 'react';
 import { List, type ListImperativeAPI } from 'react-window';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
@@ -77,8 +77,13 @@ export function ComplaintFeed({
     }
   }, [selectedComplaint, isFeedFocused, complaints]);
 
-  // Row renderer for virtualized list
-  const Row = ({ index, style }: any) => {
+  // Memoized complaint selection handler
+  const handleSelectComplaint = useCallback((complaint: ComplaintWithMetadata) => {
+    onSelectComplaint(complaint);
+  }, [onSelectComplaint]);
+
+  // Memoized Row renderer for virtualized list
+  const Row = useCallback(({ index, style }: any) => {
     const complaint = complaints[index];
     return (
       <div style={style}>
@@ -86,13 +91,13 @@ export function ComplaintFeed({
           <ComplaintCard
             complaint={complaint}
             isSelected={selectedComplaint?.id === complaint.id}
-            onClick={() => onSelectComplaint(complaint)}
+            onClick={() => handleSelectComplaint(complaint)}
             isFocused={isFeedFocused && selectedComplaint?.id === complaint.id}
           />
         </div>
       </div>
     );
-  };
+  }, [complaints, selectedComplaint, handleSelectComplaint, isFeedFocused]);
 
   return (
     <div
@@ -132,6 +137,7 @@ export function ComplaintFeed({
             rowHeight={140}
             rowComponent={Row}
             rowProps={{}}
+            overscanCount={5}
             className="scrollbar-thin"
           />
         )}

@@ -1,5 +1,5 @@
+import { memo } from 'react';
 import { MapPin, Clock } from 'lucide-react';
-import { motion } from 'framer-motion';
 import type { ComplaintWithMetadata } from '../types/complaints';
 import { formatRelativeTime, getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
 
@@ -10,18 +10,15 @@ interface ComplaintCardProps {
   isFocused?: boolean;
 }
 
-export function ComplaintCard({ complaint, isSelected, onClick, isFocused }: ComplaintCardProps) {
+export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected, onClick, isFocused }: ComplaintCardProps) {
   // Get first customer message for preview
   const firstMessage = complaint.thread.find((m) => m.role === 'customer')?.message || '';
   const preview = firstMessage.length > 85 ? firstMessage.slice(0, 85) + '...' : firstMessage;
 
   return (
-    <motion.button
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.005 }}
+    <button
       onClick={onClick}
-      className={`w-full text-left p-3 rounded-xl transition-all ${
+      className={`w-full text-left p-3 rounded-xl transition-all hover:scale-[1.005] ${
         isSelected
           ? 'card-selected'
           : 'card'
@@ -80,6 +77,6 @@ export function ComplaintCard({ complaint, isSelected, onClick, isFocused }: Com
           </span>
         ))}
       </div>
-    </motion.button>
+    </button>
   );
-}
+});

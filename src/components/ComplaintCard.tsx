@@ -7,9 +7,10 @@ interface ComplaintCardProps {
   complaint: ComplaintWithMetadata;
   isSelected: boolean;
   onClick: () => void;
+  isFocused?: boolean;
 }
 
-export function ComplaintCard({ complaint, isSelected, onClick }: ComplaintCardProps) {
+export function ComplaintCard({ complaint, isSelected, onClick, isFocused }: ComplaintCardProps) {
   // Get first customer message for preview
   const firstMessage = complaint.thread.find((m) => m.role === 'customer')?.message || '';
   const preview = firstMessage.length > 85 ? firstMessage.slice(0, 85) + '...' : firstMessage;
@@ -24,7 +25,7 @@ export function ComplaintCard({ complaint, isSelected, onClick }: ComplaintCardP
         isSelected
           ? 'card-selected'
           : 'card'
-      }`}
+      } ${isFocused ? 'ring-4 ring-[#007AFF]/30' : ''}`}
     >
       {/* Header Row */}
       <div className="flex items-start justify-between mb-2">

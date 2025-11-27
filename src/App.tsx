@@ -14,6 +14,7 @@ function App() {
   const [selectedAnger, setSelectedAnger] = useState<string | null>(null);
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isFeedFocused, setIsFeedFocused] = useState(true);
 
   // Filter complaints
   const filteredComplaints = useMemo(() => {
@@ -77,11 +78,15 @@ function App() {
           onSelectComplaint={setSelectedComplaint}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
+          isFeedFocused={isFeedFocused}
+          onFocusChange={setIsFeedFocused}
         />
 
         <ConversationPanel
           complaint={selectedComplaint}
           onClose={() => setSelectedComplaint(null)}
+          isFeedFocused={isFeedFocused}
+          onFocusChange={setIsFeedFocused}
         />
       </div>
     </div>

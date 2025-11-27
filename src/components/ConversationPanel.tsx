@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import { Phone, MapPin, X, Info } from 'lucide-react';
 import { SMSBubble } from './SMSBubble';
 import type { ComplaintWithMetadata } from '../types/complaints';
@@ -7,9 +8,41 @@ import { getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
 interface ConversationPanelProps {
   complaint: ComplaintWithMetadata | null;
   onClose: () => void;
+  isFeedFocused: boolean;
+  onFocusChange: (focused: boolean) => void;
 }
 
-export function ConversationPanel({ complaint, onClose }: ConversationPanelProps) {
+export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusChange }: ConversationPanelProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!complaint || isFeedFocused) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          container.scrollBy({ top: 100, behavior: 'smooth' });
+          break;
+
+        case 'ArrowUp':
+          e.preventDefault();
+          container.scrollBy({ top: -100, behavior: 'smooth' });
+          break;
+
+        case 'ArrowLeft':
+          e.preventDefault();
+          onFocusChange(true);
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [complaint, isFeedFocused, onFocusChange]);
   if (!complaint) {
     return (
       <div className="w-[600px] bg-white border-l border-[#E5E5E5] flex items-center justify-center">
@@ -40,7 +73,10 @@ export function ConversationPanel({ complaint, onClose }: ConversationPanelProps
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: 100, opacity: 0 }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="w-[600px] bg-white border-l border-[#E5E5E5] flex flex-col"
+        className={`w-[600px] bg-white border-l flex flex-col ${
+          isFeedFocused ? 'border-[#E5E5E5]' : 'border-[#007AFF] border-l-4'
+        }`}
+        onClick={() => onFocusChange(false)}
       >
         {/* Header */}
         <div className="px-4 py-3 border-b border-[#E5E5E5] bg-gradient-to-r from-white to-[#FAFAFA] shadow-sm">
@@ -100,7 +136,7 @@ export function ConversationPanel({ complaint, onClose }: ConversationPanelProps
         </div>
 
         {/* Conversation Thread */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-b from-[#F8F8F8] to-[#FAFAFA]">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-b from-[#F8F8F8] to-[#FAFAFA]">
           <div className="mb-4 text-center">
             <div className="inline-block px-3 py-1 rounded-full bg-white text-xs text-[#86868B] shadow-sm">
               {complaint.timestamp.toLocaleDateString('en-US', {

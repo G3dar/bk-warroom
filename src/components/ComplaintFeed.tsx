@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
 import type { ComplaintWithMetadata } from '../types/complaints';
@@ -8,6 +9,8 @@ interface ComplaintFeedProps {
   onSelectComplaint: (complaint: ComplaintWithMetadata) => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
+  isFeedFocused: boolean;
+  onFocusChange: (focused: boolean) => void;
 }
 
 export function ComplaintFeed({
@@ -16,9 +19,68 @@ export function ComplaintFeed({
   onSelectComplaint,
   searchQuery,
   onSearchChange,
+  isFeedFocused,
+  onFocusChange,
 }: ComplaintFeedProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const selectedCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isFeedFocused) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!complaints.length) return;
+
+      const currentIndex = complaints.findIndex((c) => c.id === selectedComplaint?.id);
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          if (currentIndex < complaints.length - 1) {
+            onSelectComplaint(complaints[currentIndex + 1]);
+          } else if (currentIndex === -1) {
+            onSelectComplaint(complaints[0]);
+          }
+          break;
+
+        case 'ArrowUp':
+          e.preventDefault();
+          if (currentIndex > 0) {
+            onSelectComplaint(complaints[currentIndex - 1]);
+          } else if (currentIndex === -1) {
+            onSelectComplaint(complaints[complaints.length - 1]);
+          }
+          break;
+
+        case 'ArrowRight':
+          e.preventDefault();
+          if (selectedComplaint) {
+            onFocusChange(false);
+          }
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [complaints, selectedComplaint, isFeedFocused, onSelectComplaint, onFocusChange]);
+
+  // Scroll selected card into view
+  useEffect(() => {
+    if (selectedCardRef.current && isFeedFocused) {
+      selectedCardRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  }, [selectedComplaint, isFeedFocused]);
+
   return (
-    <div className="flex-1 bg-[#F5F5F7] p-6 overflow-y-auto">
+    <div
+      ref={containerRef}
+      className="flex-1 bg-[#F5F5F7] p-6 overflow-y-auto"
+      onClick={() => onFocusChange(true)}
+    >
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
           <div className="flex items-baseline gap-3 mb-2">
@@ -43,13 +105,18 @@ export function ComplaintFeed({
           </div>
         ) : (
           <div className="space-y-2">
-            {complaints.map((complaint) => (
-              <ComplaintCard
+            {complaints.map((complaint, index) => (
+              <div
                 key={complaint.id}
-                complaint={complaint}
-                isSelected={selectedComplaint?.id === complaint.id}
-                onClick={() => onSelectComplaint(complaint)}
-              />
+                ref={selectedComplaint?.id === complaint.id ? selectedCardRef : null}
+              >
+                <ComplaintCard
+                  complaint={complaint}
+                  isSelected={selectedComplaint?.id === complaint.id}
+                  onClick={() => onSelectComplaint(complaint)}
+                  isFocused={isFeedFocused && selectedComplaint?.id === complaint.id}
+                />
+              </div>
             ))}
           </div>
         )}

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { FixedSizeList } from 'react-window';
+import { List, ListImperativeAPI } from 'react-window';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
 import type { ComplaintWithMetadata } from '../types/complaints';
@@ -25,7 +25,7 @@ export function ComplaintFeed({
 }: ComplaintFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedCardRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<FixedSizeList>(null);
+  const listRef = useRef<ListImperativeAPI | null>(null);
 
   useEffect(() => {
     if (!isFeedFocused) return;
@@ -72,17 +72,17 @@ export function ComplaintFeed({
     if (selectedComplaint && isFeedFocused && listRef.current) {
       const index = complaints.findIndex((c) => c.id === selectedComplaint.id);
       if (index !== -1) {
-        listRef.current.scrollToItem(index, 'smart');
+        listRef.current.scrollToRow({ index, align: 'smart' });
       }
     }
   }, [selectedComplaint, isFeedFocused, complaints]);
 
   // Row renderer for virtualized list
-  const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => {
+  const Row = ({ index, style }: any) => {
     const complaint = complaints[index];
     return (
-      <div style={{ ...style, paddingBottom: '8px' }}>
-        <div className="px-6">
+      <div style={style}>
+        <div className="px-6 pb-2">
           <ComplaintCard
             complaint={complaint}
             isSelected={selectedComplaint?.id === complaint.id}
@@ -125,16 +125,14 @@ export function ComplaintFeed({
             </div>
           </div>
         ) : (
-          <FixedSizeList
-            ref={listRef}
-            height={window.innerHeight - 250}
-            itemCount={complaints.length}
-            itemSize={140}
-            width="100%"
+          <List
+            listRef={listRef}
+            defaultHeight={window.innerHeight - 250}
+            rowCount={complaints.length}
+            rowHeight={140}
+            rowComponent={Row}
             className="scrollbar-thin"
-          >
-            {Row}
-          </FixedSizeList>
+          />
         )}
       </div>
     </div>

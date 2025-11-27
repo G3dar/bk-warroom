@@ -41,11 +41,38 @@ export function Header({ complaints }: HeaderProps) {
       <div className="px-6 py-2.5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <img
-              src="/bk-logo.png"
-              alt="Burger King"
-              className="w-20 h-20 object-contain drop-shadow-md"
-            />
+            <div className="flex flex-col gap-2">
+              <img
+                src="/bk-logo.png"
+                alt="Burger King"
+                className="w-20 h-20 object-contain drop-shadow-md"
+              />
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100">
+                  <div className="status-dot status-live pulse-subtle" />
+                  <span className="text-[12px] font-semibold text-[#34C759]">Live</span>
+                </div>
+
+                <div className="text-left">
+                  <div className="text-[11px] text-[#86868B]">
+                    {currentTime.toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </div>
+                  <div className="text-[14px] font-semibold text-[#1D1D1F] tracking-tight">
+                    {currentTime.toLocaleTimeString('en-US', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-16 w-px bg-[#E5E5E5]"></div>
+
             <div className="flex items-center gap-4">
               <div>
                 <h1 className="text-[24px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D62300] via-[#FF8732] to-[#D62300] tracking-tight leading-none mb-1">
@@ -64,26 +91,6 @@ export function Header({ complaints }: HeaderProps) {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100">
-              <div className="status-dot status-live pulse-subtle" />
-              <span className="text-[12px] font-semibold text-[#34C759]">Live</span>
-            </div>
-
-            <div className="text-right">
-              <div className="text-[11px] text-[#86868B]">
-                {currentTime.toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </div>
-              <div className="text-[14px] font-semibold text-[#1D1D1F] tracking-tight">
-                {currentTime.toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
-              </div>
-            </div>
           </div>
         </div>
 

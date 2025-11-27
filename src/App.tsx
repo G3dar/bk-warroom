@@ -68,6 +68,17 @@ function App() {
     return [...filteredComplaints].sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
   }, [filteredComplaints]);
 
+  // Handle keyword click - toggle keyword selection
+  const handleKeywordClick = (keyword: string) => {
+    setSelectedKeywords((prev) => {
+      if (prev.includes(keyword)) {
+        return prev.filter((k) => k !== keyword);
+      } else {
+        return [...prev, keyword];
+      }
+    });
+  };
+
   return (
     <div className="h-screen flex flex-col bg-[#F5F5F7]">
       <Header complaints={complaints} />
@@ -94,6 +105,7 @@ function App() {
           onSearchChange={setSearchQuery}
           isFeedFocused={isFeedFocused}
           onFocusChange={setIsFeedFocused}
+          onKeywordClick={handleKeywordClick}
         />
 
         <ConversationPanel

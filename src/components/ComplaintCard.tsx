@@ -8,9 +8,10 @@ interface ComplaintCardProps {
   isSelected: boolean;
   onClick: () => void;
   isFocused?: boolean;
+  onKeywordClick?: (keyword: string) => void;
 }
 
-export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected, onClick, isFocused }: ComplaintCardProps) {
+export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected, onClick, isFocused, onKeywordClick }: ComplaintCardProps) {
   // Get first customer message for preview
   const firstMessage = complaint.thread.find((m) => m.role === 'customer')?.message || '';
   const preview = firstMessage.length > 85 ? firstMessage.slice(0, 85) + '...' : firstMessage;
@@ -72,9 +73,16 @@ export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected
         )}
         {/* Display first 2-3 keywords */}
         {complaint.keywords?.slice(0, 3).map((keyword, idx) => (
-          <span key={idx} className="badge badge-blue text-[11px]">
+          <button
+            key={idx}
+            onClick={(e) => {
+              e.stopPropagation();
+              onKeywordClick?.(keyword);
+            }}
+            className="badge badge-blue text-[11px] hover:bg-[#007AFF] hover:text-white transition-colors cursor-pointer"
+          >
             {keyword}
-          </span>
+          </button>
         ))}
       </div>
     </button>

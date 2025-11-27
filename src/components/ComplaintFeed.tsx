@@ -11,6 +11,7 @@ interface ComplaintFeedProps {
   onSearchChange: (query: string) => void;
   isFeedFocused: boolean;
   onFocusChange: (focused: boolean) => void;
+  onKeywordClick: (keyword: string) => void;
 }
 
 export function ComplaintFeed({
@@ -21,6 +22,7 @@ export function ComplaintFeed({
   onSearchChange,
   isFeedFocused,
   onFocusChange,
+  onKeywordClick,
 }: ComplaintFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedCardRef = useRef<HTMLDivElement>(null);
@@ -97,11 +99,12 @@ export function ComplaintFeed({
             isSelected={isSelected}
             onClick={() => handleCardClick(complaint)}
             isFocused={isFocused}
+            onKeywordClick={onKeywordClick}
           />
         </div>
       );
     });
-  }, [complaints, selectedComplaint, isFeedFocused, handleCardClick]);
+  }, [complaints, selectedComplaint, isFeedFocused, handleCardClick, onKeywordClick]);
 
   return (
     <div

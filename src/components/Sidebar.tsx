@@ -81,9 +81,22 @@ export function Sidebar({
             <div className="space-y-2.5">
               {Object.entries(categoryCounts)
                 .sort((a, b) => b[1] - a[1])
-                .map(([category, count]) => {
+                .map(([category, count], index) => {
                   const percentage = ((count / totalComplaints) * 100).toFixed(0);
                   const isSelected = selectedCategory === category;
+
+                  // Color palette for different categories
+                  const categoryColors = [
+                    { bg: 'from-blue-500 to-blue-600', text: '#007AFF', shadow: 'rgba(0, 122, 255, 0.3)' },
+                    { bg: 'from-orange-500 to-orange-600', text: '#FF8732', shadow: 'rgba(255, 135, 50, 0.3)' },
+                    { bg: 'from-purple-500 to-purple-600', text: '#9333EA', shadow: 'rgba(147, 51, 234, 0.3)' },
+                    { bg: 'from-green-500 to-green-600', text: '#34C759', shadow: 'rgba(52, 199, 89, 0.3)' },
+                    { bg: 'from-red-500 to-red-600', text: '#FF3B30', shadow: 'rgba(255, 59, 48, 0.3)' },
+                    { bg: 'from-pink-500 to-pink-600', text: '#EC4899', shadow: 'rgba(236, 72, 153, 0.3)' },
+                    { bg: 'from-indigo-500 to-indigo-600', text: '#6366F1', shadow: 'rgba(99, 102, 241, 0.3)' },
+                    { bg: 'from-teal-500 to-teal-600', text: '#14B8A6', shadow: 'rgba(20, 184, 166, 0.3)' },
+                  ];
+                  const colorScheme = categoryColors[index % categoryColors.length];
 
                   return (
                     <button
@@ -91,25 +104,38 @@ export function Sidebar({
                       onClick={() => onCategoryChange(isSelected ? null : category)}
                       className={`w-full text-left px-4 py-3 rounded-xl transition-all ${
                         isSelected
-                          ? 'bg-[#007AFF] text-white shadow-md'
-                          : 'hover:bg-[#F5F5F7]'
+                          ? 'bg-gradient-to-r ' + colorScheme.bg + ' text-white shadow-lg'
+                          : 'hover:bg-white hover:shadow-md'
                       }`}
+                      style={isSelected ? { boxShadow: `0 4px 20px ${colorScheme.shadow}` } : {}}
                     >
-                      <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center justify-between mb-2.5">
                         <div className="flex items-center gap-2.5">
-                          <span className="text-[18px]">{getCategoryEmoji(category)}</span>
-                          <span className={`text-[15px] font-medium ${isSelected ? 'text-white' : 'text-[#1D1D1F]'}`}>
+                          <span className="text-[20px]">{getCategoryEmoji(category)}</span>
+                          <span className={`text-[15px] font-semibold ${isSelected ? 'text-white' : 'text-[#1D1D1F]'}`}>
                             {category}
                           </span>
                         </div>
-                        <span className={`text-[15px] font-bold ${isSelected ? 'text-white' : 'text-[#007AFF]'}`}>
-                          {count}
-                        </span>
+                        <div className="flex flex-col items-end">
+                          <span className={`text-[16px] font-bold ${isSelected ? 'text-white' : 'text-[#1D1D1F]'}`}>
+                            {count}
+                          </span>
+                          <span className={`text-[11px] font-medium ${isSelected ? 'text-white/80' : 'text-[#86868B]'}`}>
+                            {percentage}%
+                          </span>
+                        </div>
                       </div>
-                      <div className="w-full h-1.5 bg-black/10 rounded-full overflow-hidden">
+                      <div className="w-full h-2.5 bg-black/10 rounded-full overflow-hidden shadow-inner">
                         <div
-                          className={`h-full rounded-full transition-all ${isSelected ? 'bg-white' : 'bg-[#007AFF]'}`}
-                          style={{ width: `${percentage}%` }}
+                          className={`h-full rounded-full transition-all duration-500 ease-out ${
+                            isSelected
+                              ? 'bg-white shadow-lg'
+                              : 'bg-gradient-to-r ' + colorScheme.bg
+                          }`}
+                          style={{
+                            width: `${percentage}%`,
+                            boxShadow: isSelected ? 'none' : `0 2px 8px ${colorScheme.shadow}`
+                          }}
                         />
                       </div>
                     </button>

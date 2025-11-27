@@ -109,8 +109,8 @@ export function ComplaintFeed({
       className="flex-1 bg-[#F5F5F7] flex flex-col overflow-hidden"
       onClick={() => onFocusChange(true)}
     >
-      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
-        <div className="px-6 pt-6 pb-4">
+      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col min-h-0">
+        <div className="flex-shrink-0 px-6 pt-6 pb-4">
           <div className="flex items-baseline gap-3 mb-2">
             <h2 className="text-[32px] font-black text-[#1D1D1F] leading-none tracking-tight">
               Messages
@@ -134,7 +134,7 @@ export function ComplaintFeed({
             </div>
           </div>
         ) : (
-          <div className="flex-1 overflow-y-auto scrollbar-thin px-6 space-y-2 pb-6">
+          <div className="flex-1 min-h-0 overflow-y-auto scroll-smooth-container px-6 space-y-2 pb-6">
             {renderedCards}
           </div>
         )}

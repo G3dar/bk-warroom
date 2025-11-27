@@ -87,14 +87,14 @@ export function Sidebar({
 
                   // Color palette for different categories
                   const categoryColors = [
-                    { bg: 'from-blue-500 to-blue-600', text: '#007AFF', shadow: 'rgba(0, 122, 255, 0.3)' },
-                    { bg: 'from-orange-500 to-orange-600', text: '#FF8732', shadow: 'rgba(255, 135, 50, 0.3)' },
-                    { bg: 'from-purple-500 to-purple-600', text: '#9333EA', shadow: 'rgba(147, 51, 234, 0.3)' },
-                    { bg: 'from-green-500 to-green-600', text: '#34C759', shadow: 'rgba(52, 199, 89, 0.3)' },
-                    { bg: 'from-red-500 to-red-600', text: '#FF3B30', shadow: 'rgba(255, 59, 48, 0.3)' },
-                    { bg: 'from-pink-500 to-pink-600', text: '#EC4899', shadow: 'rgba(236, 72, 153, 0.3)' },
-                    { bg: 'from-indigo-500 to-indigo-600', text: '#6366F1', shadow: 'rgba(99, 102, 241, 0.3)' },
-                    { bg: 'from-teal-500 to-teal-600', text: '#14B8A6', shadow: 'rgba(20, 184, 166, 0.3)' },
+                    { bg: 'from-blue-500 to-blue-600', text: '#007AFF', shadow: 'rgba(0, 122, 255, 0.3)', lightBg: 'rgba(0, 122, 255, 0.08)' },
+                    { bg: 'from-orange-500 to-orange-600', text: '#FF8732', shadow: 'rgba(255, 135, 50, 0.3)', lightBg: 'rgba(255, 135, 50, 0.08)' },
+                    { bg: 'from-purple-500 to-purple-600', text: '#9333EA', shadow: 'rgba(147, 51, 234, 0.3)', lightBg: 'rgba(147, 51, 234, 0.08)' },
+                    { bg: 'from-green-500 to-green-600', text: '#34C759', shadow: 'rgba(52, 199, 89, 0.3)', lightBg: 'rgba(52, 199, 89, 0.08)' },
+                    { bg: 'from-red-500 to-red-600', text: '#FF3B30', shadow: 'rgba(255, 59, 48, 0.3)', lightBg: 'rgba(255, 59, 48, 0.08)' },
+                    { bg: 'from-pink-500 to-pink-600', text: '#EC4899', shadow: 'rgba(236, 72, 153, 0.3)', lightBg: 'rgba(236, 72, 153, 0.08)' },
+                    { bg: 'from-indigo-500 to-indigo-600', text: '#6366F1', shadow: 'rgba(99, 102, 241, 0.3)', lightBg: 'rgba(99, 102, 241, 0.08)' },
+                    { bg: 'from-teal-500 to-teal-600', text: '#14B8A6', shadow: 'rgba(20, 184, 166, 0.3)', lightBg: 'rgba(20, 184, 166, 0.08)' },
                   ];
                   const colorScheme = categoryColors[index % categoryColors.length];
 
@@ -107,7 +107,11 @@ export function Sidebar({
                           ? 'bg-gradient-to-r ' + colorScheme.bg + ' text-white shadow-lg'
                           : 'hover:bg-white hover:shadow-md'
                       }`}
-                      style={isSelected ? { boxShadow: `0 4px 20px ${colorScheme.shadow}` } : {}}
+                      style={
+                        isSelected
+                          ? { boxShadow: `0 4px 20px ${colorScheme.shadow}` }
+                          : { backgroundColor: colorScheme.lightBg }
+                      }
                     >
                       <div className="flex items-center justify-between mb-2.5">
                         <div className="flex items-center gap-2.5">

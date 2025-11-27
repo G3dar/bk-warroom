@@ -47,7 +47,7 @@ export function Header({ complaints }: HeaderProps) {
                   src="/bk-logo.png"
                   alt="Burger King"
                   className="w-[160px] h-[160px] object-contain drop-shadow-xl"
-                  style={{ objectPosition: 'center' }}
+                  style={{ objectPosition: 'center', transform: 'scale(1.15)' }}
                 />
               </div>
               <div className="flex items-center gap-3">

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo, useCallback } from 'react';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
 import type { ComplaintWithMetadata } from '../types/complaints';
@@ -75,6 +75,34 @@ export function ComplaintFeed({
     }
   }, [selectedComplaint]);
 
+  // Memoize the card click handler
+  const handleCardClick = useCallback((complaint: ComplaintWithMetadata) => {
+    onSelectComplaint(complaint);
+  }, [onSelectComplaint]);
+
+  // Memoize the rendered cards list
+  const renderedCards = useMemo(() => {
+    return complaints.map((complaint) => {
+      const isSelected = selectedComplaint?.id === complaint.id;
+      const isFocused = isFeedFocused && isSelected;
+
+      return (
+        <div
+          key={complaint.id}
+          ref={isSelected ? selectedCardRef : null}
+          style={{ contentVisibility: 'auto' }}
+        >
+          <ComplaintCard
+            complaint={complaint}
+            isSelected={isSelected}
+            onClick={() => handleCardClick(complaint)}
+            isFocused={isFocused}
+          />
+        </div>
+      );
+    });
+  }, [complaints, selectedComplaint, isFeedFocused, handleCardClick]);
+
   return (
     <div
       ref={containerRef}
@@ -107,19 +135,7 @@ export function ComplaintFeed({
           </div>
         ) : (
           <div className="flex-1 overflow-y-auto scrollbar-thin px-6 space-y-2 pb-6">
-            {complaints.map((complaint) => (
-              <div
-                key={complaint.id}
-                ref={selectedComplaint?.id === complaint.id ? selectedCardRef : null}
-              >
-                <ComplaintCard
-                  complaint={complaint}
-                  isSelected={selectedComplaint?.id === complaint.id}
-                  onClick={() => onSelectComplaint(complaint)}
-                  isFocused={isFeedFocused && selectedComplaint?.id === complaint.id}
-                />
-              </div>
-            ))}
+            {renderedCards}
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { List, ListImperativeAPI } from 'react-window';
+import { List, type ListImperativeAPI } from 'react-window';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
 import type { ComplaintWithMetadata } from '../types/complaints';

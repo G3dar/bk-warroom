@@ -2,6 +2,7 @@ export interface Complaint {
   id: number;
   category: string;
   tone: string;
+  keywords: string[];
   priority?: 'high' | 'medium';
   has_typos?: boolean;
   thread: ThreadMessage[];
@@ -18,6 +19,8 @@ export interface ThreadMessage {
 
 export interface ExtractedData {
   location?: string;
+  city?: string;
+  state?: string;
   issue?: string;
   time?: string;
   order_details?: string;

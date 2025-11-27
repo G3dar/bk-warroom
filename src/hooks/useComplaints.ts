@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import complaintsData from '../data/bk_complaint_flows.json';
+import complaintsData from '../data/bk_complaints_1000.json';
 import type { Complaint, ComplaintWithMetadata } from '../types/complaints';
 import { parseLocation } from '../utils/parseLocation';
 import { generateCustomer } from '../utils/generateCustomerData';
@@ -13,8 +13,15 @@ export function useComplaints() {
       : (complaintsData as any).complaints || [];
 
     return (complaints as Complaint[]).map((complaint) => {
-      // Parse location
-      const location = parseLocation(complaint.extracted_data.location);
+      // Parse location - use city/state from extracted_data if available
+      const location = complaint.extracted_data.city && complaint.extracted_data.state
+        ? {
+            city: complaint.extracted_data.city,
+            state: complaint.extracted_data.state,
+            stateAbbr: complaint.extracted_data.state,
+            raw: complaint.extracted_data.location || `${complaint.extracted_data.city}, ${complaint.extracted_data.state}`,
+          }
+        : parseLocation(complaint.extracted_data.location);
 
       // Generate customer data
       const customer = generateCustomer(complaint.id, location.state, location.stateAbbr, location.city);
@@ -37,7 +44,13 @@ export function useComplaints() {
     });
   }, []);
 
+  // Extract keywords_index from the data
+  const keywordsIndex = useMemo<string[]>(() => {
+    return (complaintsData as any).keywords_index || [];
+  }, []);
+
   return {
     complaints: enrichedComplaints,
+    keywordsIndex,
   };
 }

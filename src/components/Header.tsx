@@ -36,6 +36,15 @@ export function Header({ complaints }: HeaderProps) {
   });
   const topCategory = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'N/A';
 
+  // Get top keyword
+  const keywordCounts: Record<string, number> = {};
+  complaints.forEach((c) => {
+    c.keywords?.forEach((keyword) => {
+      keywordCounts[keyword] = (keywordCounts[keyword] || 0) + 1;
+    });
+  });
+  const topKeyword = Object.entries(keywordCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'N/A';
+
   return (
     <header className="bg-gradient-to-br from-orange-50/60 via-white to-red-50/40 border-b-2 border-[#FF8732]/30 shadow-lg">
       <div className="px-6 py-1">
@@ -130,6 +139,13 @@ export function Header({ complaints }: HeaderProps) {
               <div className="text-[9px] text-[#86868B] uppercase tracking-widest font-bold mb-1">Top Issue</div>
               <div className="text-[15px] font-black text-[#9333EA] capitalize truncate leading-none mb-0.5">{topCategory}</div>
               <div className="text-[10px] text-[#86868B] font-semibold">most common</div>
+            </div>
+
+            {/* Top Keyword */}
+            <div className="stat-card min-w-[120px] px-3 py-2 border-2 border-indigo-200 shadow-md" style={{ backgroundColor: 'rgba(99, 102, 241, 0.15)' }}>
+              <div className="text-[9px] text-[#86868B] uppercase tracking-widest font-bold mb-1">Top Keyword</div>
+              <div className="text-[15px] font-black text-[#6366F1] capitalize truncate leading-none mb-0.5">{topKeyword}</div>
+              <div className="text-[10px] text-[#86868B] font-semibold">trending</div>
             </div>
           </div>
         </div>

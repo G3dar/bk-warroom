@@ -206,6 +206,22 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
                 />
               </div>
             )}
+
+            {/* Keywords */}
+            {complaint.keywords && complaint.keywords.length > 0 && (
+              <div className="pt-2 border-t border-[#E5E5E5] mt-2">
+                <div className="text-sm">
+                  <span className="text-[#86868B] font-medium">Keywords</span>
+                  <div className="flex flex-wrap gap-1.5 mt-1.5">
+                    {complaint.keywords.map((keyword, idx) => (
+                      <span key={idx} className="badge badge-blue text-[11px]">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </motion.div>

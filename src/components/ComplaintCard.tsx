@@ -73,6 +73,12 @@ export function ComplaintCard({ complaint, isSelected, onClick, isFocused }: Com
             🔴 Priority
           </span>
         )}
+        {/* Display first 2-3 keywords */}
+        {complaint.keywords?.slice(0, 3).map((keyword, idx) => (
+          <span key={idx} className="badge badge-blue text-[11px]">
+            {keyword}
+          </span>
+        ))}
       </div>
     </motion.button>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { FixedSizeList as List } from 'react-window';
 import { ComplaintCard } from './ComplaintCard';
 import { SearchBar } from './SearchBar';
 import type { ComplaintWithMetadata } from '../types/complaints';
@@ -24,6 +25,7 @@ export function ComplaintFeed({
 }: ComplaintFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedCardRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<List>(null);
 
   useEffect(() => {
     if (!isFeedFocused) return;
@@ -67,22 +69,39 @@ export function ComplaintFeed({
 
   // Scroll selected card into view
   useEffect(() => {
-    if (selectedCardRef.current && isFeedFocused) {
-      selectedCardRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-      });
+    if (selectedComplaint && isFeedFocused && listRef.current) {
+      const index = complaints.findIndex((c) => c.id === selectedComplaint.id);
+      if (index !== -1) {
+        listRef.current.scrollToItem(index, 'smart');
+      }
     }
-  }, [selectedComplaint, isFeedFocused]);
+  }, [selectedComplaint, isFeedFocused, complaints]);
+
+  // Row renderer for virtualized list
+  const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => {
+    const complaint = complaints[index];
+    return (
+      <div style={{ ...style, paddingBottom: '8px' }}>
+        <div className="px-6">
+          <ComplaintCard
+            complaint={complaint}
+            isSelected={selectedComplaint?.id === complaint.id}
+            onClick={() => onSelectComplaint(complaint)}
+            isFocused={isFeedFocused && selectedComplaint?.id === complaint.id}
+          />
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div
       ref={containerRef}
-      className="flex-1 bg-[#F5F5F7] p-6 overflow-y-auto"
+      className="flex-1 bg-[#F5F5F7] flex flex-col overflow-hidden"
       onClick={() => onFocusChange(true)}
     >
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-6">
+      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
+        <div className="px-6 pt-6 pb-4">
           <div className="flex items-baseline gap-3 mb-2">
             <h2 className="text-[32px] font-black text-[#1D1D1F] leading-none tracking-tight">
               Messages
@@ -98,27 +117,24 @@ export function ComplaintFeed({
         </div>
 
         {complaints.length === 0 ? (
-          <div className="card p-12 text-center rounded-2xl">
-            <div className="text-6xl mb-4">💬</div>
-            <div className="text-[20px] text-[#1D1D1F] mb-2 font-semibold">No messages found</div>
-            <div className="text-[15px] text-[#86868B]">Try adjusting your filters or search</div>
+          <div className="px-6">
+            <div className="card p-12 text-center rounded-2xl">
+              <div className="text-6xl mb-4">💬</div>
+              <div className="text-[20px] text-[#1D1D1F] mb-2 font-semibold">No messages found</div>
+              <div className="text-[15px] text-[#86868B]">Try adjusting your filters or search</div>
+            </div>
           </div>
         ) : (
-          <div className="space-y-2">
-            {complaints.map((complaint, index) => (
-              <div
-                key={complaint.id}
-                ref={selectedComplaint?.id === complaint.id ? selectedCardRef : null}
-              >
-                <ComplaintCard
-                  complaint={complaint}
-                  isSelected={selectedComplaint?.id === complaint.id}
-                  onClick={() => onSelectComplaint(complaint)}
-                  isFocused={isFeedFocused && selectedComplaint?.id === complaint.id}
-                />
-              </div>
-            ))}
-          </div>
+          <List
+            ref={listRef}
+            height={window.innerHeight - 250}
+            itemCount={complaints.length}
+            itemSize={140}
+            width="100%"
+            className="scrollbar-thin"
+          >
+            {Row}
+          </List>
         )}
       </div>
     </div>

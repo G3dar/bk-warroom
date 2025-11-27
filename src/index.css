@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Apple-inspired Colors */
+  --color-primary-blue: #007AFF;
+  --color-bg-light: #FFFFFF;
+  --color-bg-gray: #F5F5F7;
+  --color-card: #FFFFFF;
+  --color-border: #E5E5E5;
+  --color-text-primary: #1D1D1F;
+  --color-text-secondary: #86868B;
+  --color-text-tertiary: #C7C7CC;
+
+  /* BK Accent Colors (used sparingly) */
+  --color-bk-orange: #FF8732;
+  --color-bk-red: #D62300;
+
+  /* Status Colors */
+  --color-success: #34C759;
+  --color-warning: #FF9500;
+  --color-error: #FF3B30;
+
+  /* Message Bubbles */
+  --color-bubble-sent: #007AFF;
+  --color-bubble-received: #E9E9EB;
+
+  /* Apple SF Pro font stack */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg-gray);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Clean card style */
+.card {
+  background: var(--color-card);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  border-color: rgba(0, 122, 255, 0.3);
+}
+
+.card-selected {
+  border: 2px solid var(--color-primary-blue);
+  box-shadow: 0 8px 32px rgba(0, 122, 255, 0.25), 0 2px 8px rgba(0, 122, 255, 0.15);
+}
+
+/* Apple-style divider */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Message bubbles - iMessage style */
+.bubble-sent {
+  background: var(--color-bubble-sent);
+  color: white;
+  border-radius: 16px;
+  border-bottom-right-radius: 4px;
+  padding: 8px 14px;
+  max-width: 80%;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 3px 0;
+}
+
+.bubble-received {
+  background: var(--color-bubble-received);
+  color: var(--color-text-primary);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  padding: 8px 14px;
+  max-width: 80%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  margin: 3px 0;
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.badge-blue {
+  background: rgba(0, 122, 255, 0.1);
+  color: var(--color-primary-blue);
+}
+
+.badge-orange {
+  background: rgba(255, 135, 50, 0.1);
+  color: var(--color-bk-orange);
+}
+
+.badge-red {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--color-error);
+}
+
+.badge-green {
+  background: rgba(52, 199, 89, 0.1);
+  color: var(--color-success);
+}
+
+.badge-gray {
+  background: rgba(142, 142, 147, 0.1);
+  color: var(--color-text-secondary);
+}
+
+/* Smooth pulse for notifications */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--color-primary-blue);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0066DD;
+}
+
+.btn-secondary {
+  background: var(--color-bg-gray);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover {
+  background: #E8E8ED;
+}
+
+/* Input styles */
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: white;
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-family: var(--font-sans);
+  transition: all 0.15s ease;
+  line-height: 1.4;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary-blue);
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.08);
+}
+
+.input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Stat card */
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Status indicators */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-live {
+  background: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2);
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text utilities */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-text-tertiary);
+}
+
+/* Backdrop blur for modals/overlays */
+.backdrop-blur {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}

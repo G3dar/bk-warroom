@@ -1,0 +1,201 @@
+import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, MapPin, X, Info } from 'lucide-react';
+import { SMSBubble } from './SMSBubble';
+import type { ComplaintWithMetadata } from '../types/complaints';
+import { getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
+
+interface ConversationPanelProps {
+  complaint: ComplaintWithMetadata | null;
+  onClose: () => void;
+}
+
+export function ConversationPanel({ complaint, onClose }: ConversationPanelProps) {
+  if (!complaint) {
+    return (
+      <div className="w-[600px] bg-white border-l border-[#E5E5E5] flex items-center justify-center">
+        <div className="text-center p-8">
+          <div className="text-7xl mb-4">💬</div>
+          <div className="text-xl font-medium text-[#1D1D1F] mb-2">Select a Message</div>
+          <div className="text-sm text-[#86868B]">Choose a conversation from the list to view details</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Generate fake timestamps for messages (spaced 1-3 min apart)
+  const timestamps = complaint.thread.map((_, i) => {
+    const minutesAgo = (complaint.thread.length - i) * 2;
+    const messageTime = new Date(complaint.timestamp.getTime() + minutesAgo * 60 * 1000);
+    return messageTime.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+  });
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 100, opacity: 0 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className="w-[600px] bg-white border-l border-[#E5E5E5] flex flex-col"
+      >
+        {/* Header */}
+        <div className="px-4 py-3 border-b border-[#E5E5E5] bg-white shadow-sm">
+          <div className="flex items-start justify-between mb-2">
+            <div className="flex-1">
+              <h2 className="text-xl font-semibold text-[#1D1D1F] mb-1">
+                {complaint.customer.name}
+              </h2>
+              <div className="flex flex-col gap-1 text-sm text-[#86868B]">
+                <div className="flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>{complaint.customer.phone}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>
+                    {complaint.location.city}, {complaint.location.stateAbbr}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={onClose}
+              className="p-2 rounded-lg hover:bg-[#F5F5F7] transition-colors"
+            >
+              <X className="w-5 h-5 text-[#86868B]" />
+            </button>
+          </div>
+
+          {/* Meta badges */}
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span
+              className={`badge ${
+                complaint.anger.category === 'furious'
+                  ? 'badge-red'
+                  : complaint.anger.category === 'angry'
+                  ? 'badge-orange'
+                  : complaint.anger.category === 'annoyed'
+                  ? 'badge-orange'
+                  : 'badge-green'
+              }`}
+            >
+              {complaint.anger.emoji} {complaint.anger.label}
+            </span>
+
+            <span className="badge badge-gray">
+              {getCategoryEmoji(complaint.category)} {normalizeCategoryName(complaint.category)}
+            </span>
+
+            <span className="badge badge-blue">#{complaint.id}</span>
+
+            {(complaint.priority === 'high' || complaint.anger.category === 'furious') && (
+              <span className="badge badge-red pulse-subtle">🔴 Priority</span>
+            )}
+          </div>
+        </div>
+
+        {/* Conversation Thread */}
+        <div className="flex-1 overflow-y-auto px-4 py-4 bg-[#FAFAFA]">
+          <div className="mb-4 text-center">
+            <div className="inline-block px-3 py-1 rounded-full bg-white text-xs text-[#86868B] shadow-sm">
+              {complaint.timestamp.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+              })}
+            </div>
+          </div>
+
+          {complaint.thread.map((message, index) => (
+            <SMSBubble key={index} message={message} timestamp={timestamps[index]} index={index} />
+          ))}
+        </div>
+
+        {/* Extracted Data Card */}
+        <div className="px-4 py-3 border-t border-[#E5E5E5] bg-white shadow-sm">
+          <div className="flex items-center gap-2 mb-2">
+            <Info className="w-4 h-4 text-[#86868B]" />
+            <h3 className="text-sm font-semibold text-[#1D1D1F] uppercase tracking-wide">
+              Details
+            </h3>
+          </div>
+
+          <div className="card p-3 space-y-2">
+            {complaint.extracted_data.location && (
+              <DataRow label="Location" value={complaint.extracted_data.location} />
+            )}
+            {complaint.extracted_data.issue && (
+              <DataRow label="Issue" value={complaint.extracted_data.issue} />
+            )}
+            {complaint.extracted_data.time && (
+              <DataRow label="Time" value={complaint.extracted_data.time} />
+            )}
+            {complaint.extracted_data.order_details && (
+              <DataRow label="Order" value={complaint.extracted_data.order_details} />
+            )}
+            {complaint.extracted_data.employee_name && (
+              <DataRow label="Employee" value={complaint.extracted_data.employee_name} />
+            )}
+            {complaint.extracted_data.manager_name && (
+              <DataRow label="Manager" value={complaint.extracted_data.manager_name} />
+            )}
+            {complaint.extracted_data.resolution_requested && (
+              <DataRow label="Resolution" value={complaint.extracted_data.resolution_requested} />
+            )}
+            {complaint.extracted_data.frequency && (
+              <DataRow label="Frequency" value={complaint.extracted_data.frequency} />
+            )}
+
+            {/* Priority flags */}
+            {complaint.extracted_data.health_concern && (
+              <div className="badge badge-red w-full justify-start">⚠️ Health Concern</div>
+            )}
+            {complaint.extracted_data.discrimination_complaint && (
+              <div className="badge badge-red w-full justify-start">⚠️ Discrimination</div>
+            )}
+
+            {/* Status */}
+            {complaint.extracted_data.status && (
+              <div className="pt-2 border-t border-[#E5E5E5] mt-2">
+                <DataRow
+                  label="Status"
+                  value={complaint.extracted_data.status}
+                  highlight
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+function DataRow({
+  label,
+  value,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div className="flex justify-between items-start gap-4 text-sm">
+      <span className="text-[#86868B] font-medium min-w-[80px]">{label}</span>
+      <span
+        className={`text-right flex-1 ${
+          highlight ? 'font-semibold text-[#007AFF]' : 'text-[#1D1D1F]'
+        }`}
+      >
+        {value}
+      </span>
+    </div>
+  );
+}

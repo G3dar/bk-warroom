@@ -1,0 +1,1548 @@
+{
+  "metadata": {
+    "title": "Burger King Elevation - SMS Conversation Flows",
+    "version": "1.0",
+    "total_complaints": 85,
+    "animation_spec": {
+      "trigger": "final_thank_you",
+      "elements": ["BK Crown icon (bounce/spin)", "Text: Message delivered to CEO", "Subtle flame/grill background"],
+      "duration_seconds": 3,
+      "format": "GIF or APNG",
+      "fallback_text": "🍔👑 Message delivered to CEO"
+    }
+  },
+  "categories": [
+    {
+      "id": "fries",
+      "name": "Fries",
+      "emoji": "🍟",
+      "complaints": [1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    {
+      "id": "burgers",
+      "name": "Burgers",
+      "emoji": "🍔",
+      "complaints": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    },
+    {
+      "id": "wrong_orders",
+      "name": "Wrong Orders",
+      "emoji": "📦",
+      "complaints": [21, 22, 23, 24, 25, 26, 27]
+    },
+    {
+      "id": "wait_times",
+      "name": "Wait Times / Service",
+      "emoji": "⏱️",
+      "complaints": [28, 29, 30, 31, 32, 33, 34, 35]
+    },
+    {
+      "id": "customer_service",
+      "name": "Customer Service / Employees",
+      "emoji": "😤",
+      "complaints": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
+    },
+    {
+      "id": "cleanliness",
+      "name": "Store / Cleanliness",
+      "emoji": "🏪",
+      "complaints": [56, 57, 58, 59, 60, 61, 62]
+    },
+    {
+      "id": "app_tech",
+      "name": "App / Technology",
+      "emoji": "📱",
+      "complaints": [63, 64, 65, 66, 67]
+    },
+    {
+      "id": "miscellaneous",
+      "name": "Miscellaneous / Hot Takes",
+      "emoji": "🌶️",
+      "complaints": [68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85]
+    }
+  ],
+  "complaints": [
+    {
+      "id": 1,
+      "category": "fries",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "my fries were cold. again. this is the 3rd time this month"},
+        {"role": "bk", "message": "ugh, 3 times is a pattern. which location is this happening at?"},
+        {"role": "customer", "message": "the one on main street in orlando"},
+        {"role": "bk", "message": "got it. around what time do you usually go? trying to figure out if it's a specific shift"},
+        {"role": "customer", "message": "usually around 7pm after work"},
+        {"role": "bk", "message": "this is going straight to Tom. you'll hear back within 7 days. seriously, thank you for not giving up on us 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "main street, orlando",
+        "time": "7pm",
+        "issue": "cold fries",
+        "frequency": "3 times this month"
+      }
+    },
+    {
+      "id": 2,
+      "category": "fries",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "SOGGY FRIES ARE NOT FRIES THEYRE JUST SAD POTATO STICKS"},
+        {"role": "bk", "message": "lol sad potato sticks 😭 ok but real talk— which store did this to you?"},
+        {"role": "customer", "message": "the bk on westheimer in houston. every single time"},
+        {"role": "bk", "message": "noted. we're flagging this location specifically. Tom's gonna see this. expect to hear back within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "westheimer, houston",
+        "issue": "soggy fries",
+        "frequency": "every time"
+      }
+    },
+    {
+      "id": 3,
+      "category": "fries",
+      "tone": "neutral",
+      "thread": [
+        {"role": "customer", "message": "wayyy too much salt on the fries i literally cant eat them"},
+        {"role": "bk", "message": "ooof that's rough. do you remember which location?"},
+        {"role": "customer", "message": "um i think the one near the mall? in tampa"},
+        {"role": "bk", "message": "the one on dale mabry or the other one?"},
+        {"role": "customer", "message": "dale mabry yes"},
+        {"role": "bk", "message": "got it, dale mabry tampa. this is going to Tom directly. you'll hear from us within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "dale mabry, tampa",
+        "issue": "too much salt"
+      }
+    },
+    {
+      "id": 4,
+      "category": "fries",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "no salt on fries??? hello??? did someone forget how to season"},
+        {"role": "bk", "message": "lol seasoning is not optional!! which location forgot the basics?"},
+        {"role": "customer", "message": "downtown chicago on state street"},
+        {"role": "bk", "message": "flagged. Tom's seeing this one. expect a response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "state street, downtown chicago",
+        "issue": "no salt on fries"
+      }
+    },
+    {
+      "id": 5,
+      "category": "fries",
+      "tone": "genz",
+      "thread": [
+        {"role": "customer", "message": "bro the fry container was like half empty lmaooo u guys are scamming"},
+        {"role": "bk", "message": "half empty is not ok. which store is being stingy?"},
+        {"role": "customer", "message": "the one by ucf in orlando"},
+        {"role": "bk", "message": "was this a regular fry or a large?"},
+        {"role": "customer", "message": "large!! paid for large got a small basically"},
+        {"role": "bk", "message": "that's not right. sending this to Tom now. you'll hear back within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "UCF area, orlando",
+        "issue": "half-empty fry container",
+        "size": "large"
+      }
+    },
+    {
+      "id": 6,
+      "category": "fries",
+      "tone": "concerned",
+      "thread": [
+        {"role": "customer", "message": "fries tasted like old grease. actually made me nauseous"},
+        {"role": "bk", "message": "that's a health concern— which location was this? we need to check their oil"},
+        {"role": "customer", "message": "brooklyn on flatbush ave"},
+        {"role": "bk", "message": "do you remember what day/time roughly?"},
+        {"role": "customer", "message": "saturday around 2pm"},
+        {"role": "bk", "message": "this is serious and we're taking it seriously. Tom will see this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "flatbush ave, brooklyn",
+        "time": "saturday 2pm",
+        "issue": "old grease taste",
+        "health_concern": true
+      }
+    },
+    {
+      "id": 7,
+      "category": "fries",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "why are my fries burnt to a crisp this aint cajun style"},
+        {"role": "bk", "message": "cajun style 😂 we don't do that on purpose i promise. which store burned them?"},
+        {"role": "customer", "message": "phoenix on camelback road"},
+        {"role": "bk", "message": "noted. sending this to Tom. you'll get a response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "camelback road, phoenix",
+        "issue": "burnt fries"
+      }
+    },
+    {
+      "id": 8,
+      "category": "fries",
+      "tone": "suggestion",
+      "thread": [
+        {"role": "customer", "message": "yall need curly fries. regular fries are mid. do better"},
+        {"role": "bk", "message": "curly fries huh? noted. is this a 'would be nice' or a 'dealbreaker i'm going to arby's' situation?"},
+        {"role": "customer", "message": "i mean i still come but i think about it every time lol"},
+        {"role": "bk", "message": "lol fair enough. passing this to Tom— menu feedback goes straight to the top. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu suggestion",
+        "suggestion": "add curly fries"
+      }
+    },
+    {
+      "id": 9,
+      "category": "burgers",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "burger was cold in the middle. do u guys even have heat lamps"},
+        {"role": "bk", "message": "cold burger = unacceptable. which location was this?"},
+        {"role": "customer", "message": "san diego, the one on el cajon blvd"},
+        {"role": "bk", "message": "got it. was this dine-in, drive-thru, or delivery?"},
+        {"role": "customer", "message": "drive thru"},
+        {"role": "bk", "message": "noted— drive-thru at el cajon blvd san diego. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "el cajon blvd, san diego",
+        "order_type": "drive-thru",
+        "issue": "cold burger"
+      }
+    },
+    {
+      "id": 10,
+      "category": "burgers",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "the bun looked like someone sat on it. literally flat as a pancake"},
+        {"role": "bk", "message": "pancake bun is not the vibe. which store served you this?"},
+        {"role": "customer", "message": "miami, the one on biscayne"},
+        {"role": "bk", "message": "biscayne miami, noted. Tom's gonna see this. you'll hear back within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "biscayne, miami",
+        "issue": "flat/crushed bun"
+      }
+    },
+    {
+      "id": 11,
+      "category": "burgers",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "meat was so dry i thought i was eating cardboard no joke"},
+        {"role": "bk", "message": "cardboard is not on the menu last i checked. which location?"},
+        {"role": "customer", "message": "atlanta on peachtree"},
+        {"role": "bk", "message": "was this a whopper or a different burger?"},
+        {"role": "customer", "message": "whopper. the flagship burger and it was trash"},
+        {"role": "bk", "message": "ouch. that hits different. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "peachtree, atlanta",
+        "product": "whopper",
+        "issue": "dry meat"
+      }
+    },
+    {
+      "id": 12,
+      "category": "burgers",
+      "tone": "concerned",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "uhhh the patty was PINK inside?? im scared to eat this"},
+        {"role": "bk", "message": "that's a food safety issue— which store was this? we need to check this immediately"},
+        {"role": "customer", "message": "denver on colfax ave"},
+        {"role": "bk", "message": "do you still have the burger or a photo? totally understand if you tossed it"},
+        {"role": "customer", "message": "i took a pic before i threw it out. can i send it?"},
+        {"role": "bk", "message": "yes please send it"},
+        {"role": "customer", "message": "[sends photo]", "attachment": true},
+        {"role": "bk", "message": "got it. this is being escalated immediately. Tom will see this personally. response within 7 days but likely sooner 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "colfax ave, denver",
+        "issue": "undercooked patty",
+        "health_concern": true,
+        "has_photo": true
+      }
+    },
+    {
+      "id": 13,
+      "category": "burgers",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "cheese wasnt even melted. just a cold square of sadness on my burger"},
+        {"role": "bk", "message": "cold square of sadness 💀 which store is serving unmelted cheese?"},
+        {"role": "customer", "message": "las vegas on the strip, the one near planet hollywood"},
+        {"role": "bk", "message": "strip location, noted. sending this to Tom. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "the strip near planet hollywood, las vegas",
+        "issue": "unmelted cheese"
+      }
+    },
+    {
+      "id": 14,
+      "category": "burgers",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "i said LIGHT mayo not SWIM IN MAYO. this is disgusting"},
+        {"role": "bk", "message": "mayo swimming pool is not what we're going for. which location drowned your burger?"},
+        {"role": "customer", "message": "dallas on greenville ave"},
+        {"role": "bk", "message": "greenville ave dallas, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "greenville ave, dallas",
+        "issue": "too much mayo",
+        "customization_ignored": true
+      }
+    },
+    {
+      "id": 15,
+      "category": "burgers",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "ASKED FOR MAYO. NO MAYO. HOW HARD IS THIS"},
+        {"role": "bk", "message": "not hard at all, we messed up. which store?"},
+        {"role": "customer", "message": "SEATTLE ON AURORA"},
+        {"role": "bk", "message": "was this in the app/receipt or did you ask verbally at the window?"},
+        {"role": "customer", "message": "IN THE APP. IT SAID MAYO. NO MAYO."},
+        {"role": "bk", "message": "got it— app order, aurora seattle. Tom's gonna see this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "aurora, seattle",
+        "order_type": "app",
+        "issue": "missing mayo",
+        "customization_ignored": true
+      }
+    },
+    {
+      "id": 16,
+      "category": "burgers",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "i said NO pickles like 3 times and theres literally 6 pickles on here"},
+        {"role": "bk", "message": "6 pickles when you wanted 0 is impressive in the wrong way. which location?"},
+        {"role": "customer", "message": "the one in times square nyc"},
+        {"role": "bk", "message": "times square is chaos but that's not an excuse. was this verbal or in the app?"},
+        {"role": "customer", "message": "verbal, i said it at the counter AND at pickup"},
+        {"role": "bk", "message": "twice and still pickles. not ok. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "times square, nyc",
+        "order_type": "counter",
+        "issue": "pickles when requested none",
+        "customization_ignored": true
+      }
+    },
+    {
+      "id": 17,
+      "category": "burgers",
+      "tone": "neutral",
+      "thread": [
+        {"role": "customer", "message": "I specifically asked for extra pickles and got ZERO. None. Nada."},
+        {"role": "bk", "message": "the opposite problem but equally frustrating. which store forgot your pickles?"},
+        {"role": "customer", "message": "portland on burnside"},
+        {"role": "bk", "message": "burnside portland, noted. this is going to Tom. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "burnside, portland",
+        "issue": "missing extra pickles",
+        "customization_ignored": true
+      }
+    },
+    {
+      "id": 18,
+      "category": "burgers",
+      "tone": "humorous",
+      "thread": [
+        {"role": "customer", "message": "the raw onion is so strong my breath is gonna kill someone"},
+        {"role": "bk", "message": "lol we don't want to be responsible for that. is this a 'too much onion' complaint or 'onion quality' complaint?"},
+        {"role": "customer", "message": "too much. like why is there a whole onion slice on there"},
+        {"role": "bk", "message": "got it. which location is heavy-handed with the onions?"},
+        {"role": "customer", "message": "austin on congress ave"},
+        {"role": "bk", "message": "congress ave austin, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "congress ave, austin",
+        "issue": "too much onion"
+      }
+    },
+    {
+      "id": 19,
+      "category": "burgers",
+      "tone": "disgusted",
+      "thread": [
+        {"role": "customer", "message": "lettuce was brown and slimy. yall serving salad from last week?"},
+        {"role": "bk", "message": "brown lettuce is a freshness issue we take seriously. which location?"},
+        {"role": "customer", "message": "boston near fenway"},
+        {"role": "bk", "message": "do you remember what day this was?"},
+        {"role": "customer", "message": "yesterday, tuesday"},
+        {"role": "bk", "message": "tuesday fenway boston, noted. this is going directly to Tom. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "fenway, boston",
+        "time": "tuesday",
+        "issue": "brown/slimy lettuce",
+        "freshness_concern": true
+      }
+    },
+    {
+      "id": 20,
+      "category": "burgers",
+      "tone": "disgusted",
+      "thread": [
+        {"role": "customer", "message": "tomato was so watery it made the whole bun soggy. gross"},
+        {"role": "bk", "message": "soggy bun from watery tomato— which store was this?"},
+        {"role": "customer", "message": "philadelphia on market street"},
+        {"role": "bk", "message": "market street philly, noted. Tom's gonna see this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "market street, philadelphia",
+        "issue": "watery tomato, soggy bun"
+      }
+    },
+    {
+      "id": 21,
+      "category": "wrong_orders",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "got someone elses order. i dont even eat meat. this has 2 whoppers"},
+        {"role": "bk", "message": "oh no. vegetarian getting 2 whoppers is worst case scenario. which location mixed this up?"},
+        {"role": "customer", "message": "san francisco on market street"},
+        {"role": "bk", "message": "was this drive-thru, counter, or delivery?"},
+        {"role": "customer", "message": "drive thru. they didnt even check the name"},
+        {"role": "bk", "message": "market street sf drive-thru, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "market street, san francisco",
+        "order_type": "drive-thru",
+        "issue": "wrong order - received someone else's",
+        "dietary_concern": "vegetarian"
+      }
+    },
+    {
+      "id": 22,
+      "category": "wrong_orders",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "missing nuggets, missing fries, missing drink. wtf did i pay for"},
+        {"role": "bk", "message": "so basically you got... a bag? which store gave you an empty experience?"},
+        {"role": "customer", "message": "detroit on woodward"},
+        {"role": "bk", "message": "do you have your receipt? want to make sure we know exactly what was missing"},
+        {"role": "customer", "message": "yeah i got it. 10pc nugget, large fry, large coke. got none of it"},
+        {"role": "bk", "message": "that's a complete fail. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "woodward, detroit",
+        "issue": "multiple missing items",
+        "missing_items": ["10pc nuggets", "large fries", "large coke"]
+      }
+    },
+    {
+      "id": 23,
+      "category": "wrong_orders",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "ordered a whopper got a chicken sandwich. NOT THE SAME THING"},
+        {"role": "bk", "message": "definitely not the same thing. which location made the swap?"},
+        {"role": "customer", "message": "minneapolis downtown"},
+        {"role": "bk", "message": "downtown minneapolis, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "downtown, minneapolis",
+        "issue": "wrong item - whopper vs chicken sandwich"
+      }
+    },
+    {
+      "id": 24,
+      "category": "wrong_orders",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "paid $2 extra for bacon. no bacon. this is literally theft"},
+        {"role": "bk", "message": "paying for bacon and not getting it is not ok. which store owes you bacon?"},
+        {"role": "customer", "message": "nashville on broadway"},
+        {"role": "bk", "message": "was this an app order or at the counter?"},
+        {"role": "customer", "message": "app. it literally says add bacon on my receipt"},
+        {"role": "bk", "message": "app order, broadway nashville, bacon missing. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "broadway, nashville",
+        "order_type": "app",
+        "issue": "paid for bacon, no bacon"
+      }
+    },
+    {
+      "id": 25,
+      "category": "wrong_orders",
+      "tone": "genz",
+      "thread": [
+        {"role": "customer", "message": "no napkins no ketchup no straw. just vibes i guess"},
+        {"role": "bk", "message": "just vibes 😭 which location sent you off unprepared?"},
+        {"role": "customer", "message": "charlotte on tryon street"},
+        {"role": "bk", "message": "tryon street charlotte, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "tryon street, charlotte",
+        "issue": "missing supplies",
+        "missing_items": ["napkins", "ketchup", "straw"]
+      }
+    },
+    {
+      "id": 26,
+      "category": "wrong_orders",
+      "tone": "aggressive",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "u charged me twice for the same meal. fix this NOW"},
+        {"role": "bk", "message": "double charge is urgent. which location and do you have the receipts or bank statement showing both charges?"},
+        {"role": "customer", "message": "houston on westheimer. i have screenshots of my bank app showing 2 charges same amount same time"},
+        {"role": "bk", "message": "can you send those screenshots? we'll escalate this immediately"},
+        {"role": "customer", "message": "[sends screenshots]", "attachment": true},
+        {"role": "bk", "message": "got it. this is being escalated as a billing issue AND going to Tom. response within 7 days but billing should be faster 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "westheimer, houston",
+        "issue": "double charge",
+        "billing_issue": true,
+        "has_screenshot": true
+      }
+    },
+    {
+      "id": 27,
+      "category": "wrong_orders",
+      "tone": "confused",
+      "thread": [
+        {"role": "customer", "message": "receipt says one thing bag says another. which one is the lie"},
+        {"role": "bk", "message": "neither should be lying tbh. which location has a communication problem?"},
+        {"role": "customer", "message": "the bk in newark airport"},
+        {"role": "bk", "message": "airports are hectic but that's not an excuse. what was different between receipt and bag?"},
+        {"role": "customer", "message": "receipt says whopper meal, bag had chicken sandwich and small fry"},
+        {"role": "bk", "message": "newark airport, whopper ordered, chicken received. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "newark airport",
+        "issue": "receipt vs bag mismatch",
+        "ordered": "whopper meal",
+        "received": "chicken sandwich and small fry"
+      }
+    },
+    {
+      "id": 28,
+      "category": "wait_times",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "drive thru took 25 mins. TWENTY FIVE. i could have cooked at home"},
+        {"role": "bk", "message": "25 min drive-thru is insane. which location kept you waiting?"},
+        {"role": "customer", "message": "los angeles on sunset blvd"},
+        {"role": "bk", "message": "was there a specific issue or just slow?"},
+        {"role": "customer", "message": "they said they were waiting on fries. for 25 minutes. fries."},
+        {"role": "bk", "message": "25 min for fries on sunset. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "sunset blvd, los angeles",
+        "order_type": "drive-thru",
+        "issue": "25 minute wait",
+        "reason_given": "waiting on fries"
+      }
+    },
+    {
+      "id": 29,
+      "category": "wait_times",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "sat inside for 20 minutes watching employees do nothing"},
+        {"role": "bk", "message": "20 min watching nothing happen is frustrating. which location?"},
+        {"role": "customer", "message": "cleveland on euclid ave"},
+        {"role": "bk", "message": "was it busy or were you the only one waiting?"},
+        {"role": "customer", "message": "like 3 other people waiting too. nobody was helping anyone"},
+        {"role": "bk", "message": "euclid ave cleveland, multiple people waiting, no service. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "euclid ave, cleveland",
+        "issue": "20 minute wait, employees not helping",
+        "multiple_affected": true
+      }
+    },
+    {
+      "id": 30,
+      "category": "wait_times",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "they told me to park and wait. waited 15 min. had to go back in line"},
+        {"role": "bk", "message": "parking purgatory is the worst. which location forgot about you?"},
+        {"role": "customer", "message": "pittsburgh in oakland"},
+        {"role": "bk", "message": "oakland pittsburgh, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "oakland, pittsburgh",
+        "issue": "parked and forgotten"
+      }
+    },
+    {
+      "id": 31,
+      "category": "wait_times",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "app said ready for pickup. it was not ready. i waited 12 more min"},
+        {"role": "bk", "message": "app lying to you is a tech problem we need to fix. which location?"},
+        {"role": "customer", "message": "indianapolis on meridian"},
+        {"role": "bk", "message": "is this the first time or does this location do this regularly?"},
+        {"role": "customer", "message": "happened twice now at the same place"},
+        {"role": "bk", "message": "meridian indianapolis, repeat app timing issue. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "meridian, indianapolis",
+        "issue": "app said ready but wasn't",
+        "frequency": "twice at same location",
+        "tech_issue": true
+      }
+    },
+    {
+      "id": 32,
+      "category": "wait_times",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "delivery took over an hour. food was freezing. thanks for nothing"},
+        {"role": "bk", "message": "hour+ delivery with cold food is a fail. which location was the order from?"},
+        {"role": "customer", "message": "kansas city on main"},
+        {"role": "bk", "message": "was this through our app or a delivery service like doordash?"},
+        {"role": "customer", "message": "doordash but the restaurant took forever according to the driver"},
+        {"role": "bk", "message": "main street kansas city, doordash delay on restaurant side. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "main street, kansas city",
+        "order_type": "doordash delivery",
+        "issue": "1+ hour delivery, cold food",
+        "restaurant_delay": true
+      }
+    },
+    {
+      "id": 33,
+      "category": "wait_times",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "doordash driver said bk took forever. my food was ice cold"},
+        {"role": "bk", "message": "when the driver is calling us out, we messed up. which location?"},
+        {"role": "customer", "message": "baltimore inner harbor"},
+        {"role": "bk", "message": "inner harbor baltimore, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "inner harbor, baltimore",
+        "order_type": "doordash delivery",
+        "issue": "restaurant delay, cold food"
+      }
+    },
+    {
+      "id": 34,
+      "category": "wait_times",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "employees were literally having a full conversation ignoring customers"},
+        {"role": "bk", "message": "that's not ok. which location was prioritizing chat over customers?"},
+        {"role": "customer", "message": "st louis on grand"},
+        {"role": "bk", "message": "roughly what time was this?"},
+        {"role": "customer", "message": "like 1pm. lunch rush and they were just talking"},
+        {"role": "bk", "message": "grand st louis, 1pm lunch rush, staff ignoring customers. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "grand, st louis",
+        "time": "1pm lunch rush",
+        "issue": "staff ignoring customers"
+      }
+    },
+    {
+      "id": 35,
+      "category": "wait_times",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "had to yell HELLO 3 times before anyone acknowledged me at counter"},
+        {"role": "bk", "message": "you should never have to yell for service. which location?"},
+        {"role": "customer", "message": "milwaukee on water street"},
+        {"role": "bk", "message": "water street milwaukee, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "water street, milwaukee",
+        "issue": "ignored at counter"
+      }
+    },
+    {
+      "id": 36,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "the girl at the register rolled her eyes at me. ROLLED HER EYES. i want her name"},
+        {"role": "bk", "message": "eye rolling is unacceptable. which location? and do you remember what she looked like or any name tag?"},
+        {"role": "customer", "message": "phoenix on indian school rd. brunette, young, no name tag visible"},
+        {"role": "bk", "message": "what time roughly? we can check who was on register"},
+        {"role": "customer", "message": "around 6pm yesterday"},
+        {"role": "bk", "message": "indian school rd phoenix, 6pm, brunette at register. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "indian school rd, phoenix",
+        "time": "6pm yesterday",
+        "employee_description": "brunette, young, female",
+        "issue": "eye rolling at customer"
+      }
+    },
+    {
+      "id": 37,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "asked for a refund and the manager laughed at me. LAUGHED. im calling corporate"},
+        {"role": "bk", "message": "a manager laughing at a refund request is completely unacceptable. which location and do you remember the manager's name?"},
+        {"role": "customer", "message": "sacramento on j street. didnt catch his name but he was the only manager there. older guy"},
+        {"role": "bk", "message": "j street sacramento, manager laughed at refund request. this is a serious complaint. Tom's seeing this personally. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "j street, sacramento",
+        "employee_description": "older male manager",
+        "issue": "manager laughed at refund request"
+      }
+    },
+    {
+      "id": 38,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "employee told me to chill out when i asked where my food was. EXCUSE ME??"},
+        {"role": "bk", "message": "telling a customer to chill out is not how we do things. which location?"},
+        {"role": "customer", "message": "tucson on speedway"},
+        {"role": "bk", "message": "do you remember who said it? name tag or description?"},
+        {"role": "customer", "message": "guy at the window. had a beard. no name tag"},
+        {"role": "bk", "message": "speedway tucson, bearded employee at window. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "speedway, tucson",
+        "employee_description": "male with beard at window",
+        "issue": "told customer to chill out"
+      }
+    },
+    {
+      "id": 39,
+      "category": "customer_service",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "cashier was on her phone the ENTIRE time taking my order. didnt even look at me once"},
+        {"role": "bk", "message": "phone during service is not ok. which location?"},
+        {"role": "customer", "message": "albuquerque on central"},
+        {"role": "bk", "message": "central albuquerque, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "central, albuquerque",
+        "issue": "cashier on phone during service"
+      }
+    },
+    {
+      "id": 40,
+      "category": "customer_service",
+      "tone": "confused",
+      "thread": [
+        {"role": "customer", "message": "i asked for extra sauce and he said no. just NO. not we're out. just no. wtf"},
+        {"role": "bk", "message": "just 'no' with no explanation? which location?"},
+        {"role": "customer", "message": "new orleans on canal street"},
+        {"role": "bk", "message": "what sauce were you asking for?"},
+        {"role": "customer", "message": "zesty sauce. he literally just said no and moved to the next person"},
+        {"role": "bk", "message": "canal street new orleans, refused extra zesty sauce. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "canal street, new orleans",
+        "issue": "refused extra sauce with no explanation"
+      }
+    },
+    {
+      "id": 41,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "manager said its not his problem that my order was wrong. NOT HIS PROBLEM. then whose??"},
+        {"role": "bk", "message": "that is literally a manager's problem. which location and do you remember his name?"},
+        {"role": "customer", "message": "memphis on union ave. name was marcus or something"},
+        {"role": "bk", "message": "union ave memphis, manager possibly named marcus. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "union ave, memphis",
+        "employee_name": "marcus (possibly)",
+        "employee_role": "manager",
+        "issue": "manager refused responsibility for wrong order"
+      }
+    },
+    {
+      "id": 42,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "the way ur staff talks to customers is DISGUSTING. never coming back"},
+        {"role": "bk", "message": "we're sorry. can you tell us which location and what happened?"},
+        {"role": "customer", "message": "louisville on bardstown rd. the whole crew was rude from start to finish. eye rolls, sighing, attitude"},
+        {"role": "bk", "message": "bardstown rd louisville, overall crew attitude issue. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "bardstown rd, louisville",
+        "issue": "entire crew rude",
+        "behaviors": ["eye rolls", "sighing", "attitude"]
+      }
+    },
+    {
+      "id": 43,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "lady at window threw the bag at me. literally THREW it. i have it on dashcam"},
+        {"role": "bk", "message": "threw it?? which location? and if you're comfortable sharing that dashcam clip, please do"},
+        {"role": "customer", "message": "oklahoma city on reno ave. let me get the clip"},
+        {"role": "customer", "message": "[sends video]", "attachment": true},
+        {"role": "bk", "message": "video received. reno ave okc. this is being escalated immediately. Tom's seeing this personally. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "reno ave, oklahoma city",
+        "issue": "employee threw bag at customer",
+        "has_video": true
+      }
+    },
+    {
+      "id": 44,
+      "category": "customer_service",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "asked to speak to manager. employee said HE IS THE MANAGER. with that attitude??"},
+        {"role": "bk", "message": "a manager with attitude is a bigger problem. which location?"},
+        {"role": "customer", "message": "tulsa on 71st street"},
+        {"role": "bk", "message": "do you remember his name?"},
+        {"role": "customer", "message": "jamal or something like that. had a manager name tag"},
+        {"role": "bk", "message": "71st street tulsa, manager named jamal. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "71st street, tulsa",
+        "employee_name": "jamal (possibly)",
+        "employee_role": "manager",
+        "issue": "manager with attitude"
+      }
+    },
+    {
+      "id": 45,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "ur employee called me stupid under his breath. i heard it. i want him FIRED"},
+        {"role": "bk", "message": "that is absolutely unacceptable. which location and any details about who said it?"},
+        {"role": "customer", "message": "omaha on dodge street. young guy, blond, at the register"},
+        {"role": "bk", "message": "what time was this?"},
+        {"role": "customer", "message": "around 7:30pm"},
+        {"role": "bk", "message": "dodge street omaha, 7:30pm, blond male register. calling a customer stupid is a serious offense. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "dodge street, omaha",
+        "time": "7:30pm",
+        "employee_description": "young, blond male at register",
+        "issue": "called customer stupid"
+      }
+    },
+    {
+      "id": 46,
+      "category": "customer_service",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "complained about cold food and they just shrugged. SHRUGGED. thats the response??"},
+        {"role": "bk", "message": "a shrug is not a response. which location?"},
+        {"role": "customer", "message": "wichita on kellogg"},
+        {"role": "bk", "message": "kellogg wichita, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "kellogg, wichita",
+        "issue": "shrugged at complaint"
+      }
+    },
+    {
+      "id": 47,
+      "category": "customer_service",
+      "tone": "betrayed",
+      "thread": [
+        {"role": "customer", "message": "been a customer for 15 years and this is how u treat me?? done. absolutely done"},
+        {"role": "bk", "message": "15 years of loyalty matters. please tell us what happened and where"},
+        {"role": "customer", "message": "cincinnati on vine street. ordered my usual and they messed it up, asked for a remake, cashier rolled her eyes and slammed the new bag on the counter"},
+        {"role": "bk", "message": "vine street cincinnati, 15 year customer, eye roll and slamming. Tom needs to see this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "vine street, cincinnati",
+        "customer_tenure": "15 years",
+        "issue": "eye roll and bag slamming when asked for remake"
+      }
+    },
+    {
+      "id": 48,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "employee mocked my accent when i ordered. thats DISCRIMINATION and i will sue"},
+        {"role": "bk", "message": "mocking anyone's accent is discrimination and completely unacceptable. which location and any details you can share?"},
+        {"role": "customer", "message": "el paso on montana ave. it was the guy taking orders. repeated my order back in a fake accent and the other employees laughed"},
+        {"role": "bk", "message": "we are so sorry. do you remember the time or what he looked like?"},
+        {"role": "customer", "message": "saturday around noon. hispanic guy with glasses"},
+        {"role": "bk", "message": "montana ave el paso, saturday noon, employee with glasses mocked accent. this is a discrimination complaint and is being treated as such. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "montana ave, el paso",
+        "time": "saturday noon",
+        "employee_description": "hispanic male with glasses",
+        "issue": "mocked customer's accent",
+        "discrimination_complaint": true
+      }
+    },
+    {
+      "id": 49,
+      "category": "customer_service",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "asked for a replacement burger and they acted like i was asking for a kidney"},
+        {"role": "bk", "message": "replacing a wrong order should be easy. which location made it hard?"},
+        {"role": "customer", "message": "fresno on blackstone"},
+        {"role": "bk", "message": "blackstone fresno, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "blackstone, fresno",
+        "issue": "difficult about replacement"
+      }
+    },
+    {
+      "id": 50,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "THE DISRESPECT at the downtown location is unreal. who trains these people"},
+        {"role": "bk", "message": "which downtown? and what happened?"},
+        {"role": "customer", "message": "downtown denver. the whole vibe is rude. this time they literally ignored me for 5 minutes while chatting, then had attitude when i asked to order"},
+        {"role": "bk", "message": "downtown denver, ignored then attitude. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "downtown, denver",
+        "issue": "ignored then attitude"
+      }
+    },
+    {
+      "id": 51,
+      "category": "customer_service",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "ur staff needs customer service training ASAP. this is embarassing for a major brand"},
+        {"role": "bk", "message": "which location needs training? and what happened?"},
+        {"role": "customer", "message": "san antonio on broadway. the cashier literally sighed when i asked a question about the menu"},
+        {"role": "bk", "message": "broadway san antonio, cashier sighed at menu question. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "broadway, san antonio",
+        "issue": "cashier sighed at menu question"
+      }
+    },
+    {
+      "id": 52,
+      "category": "customer_service",
+      "tone": "confused",
+      "thread": [
+        {"role": "customer", "message": "i was polite and ur cashier had an attitude from second one. FOR WHAT"},
+        {"role": "bk", "message": "you shouldn't get attitude for being polite. which location?"},
+        {"role": "customer", "message": "jacksonville on beach blvd"},
+        {"role": "bk", "message": "beach blvd jacksonville, noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "beach blvd, jacksonville",
+        "issue": "cashier had attitude unprovoked"
+      }
+    },
+    {
+      "id": 53,
+      "category": "customer_service",
+      "tone": "aggressive",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "manager told me to leave when i asked for corporate number. kicked out for asking a question??"},
+        {"role": "bk", "message": "asking for corporate is your right. which location kicked you out?"},
+        {"role": "customer", "message": "columbus on high street. i just asked for a number to complain and he said if i dont like it i can leave"},
+        {"role": "bk", "message": "high street columbus, manager told customer to leave for asking for corporate number. this is serious. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "high street, columbus",
+        "employee_role": "manager",
+        "issue": "told customer to leave for asking for corporate number"
+      }
+    },
+    {
+      "id": 54,
+      "category": "customer_service",
+      "tone": "confused",
+      "thread": [
+        {"role": "customer", "message": "drive thru guy was screaming into the speaker. WHY ARE U YELLING AT ME BRO"},
+        {"role": "bk", "message": "screaming into the speaker is wild. which location?"},
+        {"role": "customer", "message": "raleigh on capital blvd"},
+        {"role": "bk", "message": "capital blvd raleigh, screaming at drive-thru. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "capital blvd, raleigh",
+        "issue": "employee screaming at drive-thru speaker"
+      }
+    },
+    {
+      "id": 55,
+      "category": "customer_service",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "employee sneered at me when i used a coupon. sorry for using ur own promotions??"},
+        {"role": "bk", "message": "coupons exist to be used. which location has a problem with that?"},
+        {"role": "customer", "message": "richmond on broad street"},
+        {"role": "bk", "message": "broad street richmond, sneered at coupon use. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "broad street, richmond",
+        "issue": "sneered at customer using coupon"
+      }
+    },
+    {
+      "id": 56,
+      "category": "cleanliness",
+      "tone": "disgusted",
+      "thread": [
+        {"role": "customer", "message": "bathroom looked like a crime scene. im not exaggerating"},
+        {"role": "bk", "message": "crime scene is alarming. which location?"},
+        {"role": "customer", "message": "newark on market street"},
+        {"role": "bk", "message": "do you have photos? no pressure if you didnt want to document that"},
+        {"role": "customer", "message": "i do actually. its bad", "attachment": true},
+        {"role": "bk", "message": "photos received. market street newark bathroom. this is being escalated. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "market street, newark",
+        "issue": "extremely dirty bathroom",
+        "has_photo": true
+      }
+    },
+    {
+      "id": 57,
+      "category": "cleanliness",
+      "tone": "disgusted",
+      "thread": [
+        {"role": "customer", "message": "tables were sticky. had to wipe with my own napkins. disgusting"},
+        {"role": "bk", "message": "sticky tables = not cleaned. which location?"},
+        {"role": "customer", "message": "jersey city on kennedy blvd"},
+        {"role": "bk", "message": "kennedy blvd jersey city, cleanliness issue. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "kennedy blvd, jersey city",
+        "issue": "sticky tables"
+      }
+    },
+    {
+      "id": 58,
+      "category": "cleanliness",
+      "tone": "disgusted",
+      "thread": [
+        {"role": "customer", "message": "floor was so sticky my shoes made sounds walking"},
+        {"role": "bk", "message": "sticky floor is a slip hazard too. which location?"},
+        {"role": "customer", "message": "buffalo on delaware ave"},
+        {"role": "bk", "message": "delaware ave buffalo, sticky floor. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "delaware ave, buffalo",
+        "issue": "sticky floor"
+      }
+    },
+    {
+      "id": 59,
+      "category": "cleanliness",
+      "tone": "disgusted",
+      "thread": [
+        {"role": "customer", "message": "whole restaurant smelled weird. like old mop water"},
+        {"role": "bk", "message": "mop water smell is not appetizing. which location?"},
+        {"role": "customer", "message": "rochester on east main"},
+        {"role": "bk", "message": "east main rochester, smell issue. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "east main, rochester",
+        "issue": "bad smell"
+      }
+    },
+    {
+      "id": 60,
+      "category": "cleanliness",
+      "tone": "frustrated",
+      "priority": "high",
+      "thread": [
+        {"role": "customer", "message": "AC broken in the middle of summer. it was like eating in a sauna"},
+        {"role": "bk", "message": "sauna dining is not the experience we want. which location?"},
+        {"role": "customer", "message": "tampa on dale mabry"},
+        {"role": "bk", "message": "was this recent? want to make sure its flagged as urgent if its still broken"},
+        {"role": "customer", "message": "yesterday"},
+        {"role": "bk", "message": "dale mabry tampa, AC broken as of yesterday. Tom's seeing this and flagging as urgent. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "dale mabry, tampa",
+        "issue": "AC broken",
+        "recency": "yesterday",
+        "urgent": true
+      }
+    },
+    {
+      "id": 61,
+      "category": "cleanliness",
+      "tone": "neutral",
+      "thread": [
+        {"role": "customer", "message": "tried to sit down and the chair was literally broken"},
+        {"role": "bk", "message": "broken furniture is a safety issue. which location?"},
+        {"role": "customer", "message": "orlando on colonial"},
+        {"role": "bk", "message": "colonial orlando, broken chair. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "colonial, orlando",
+        "issue": "broken chair"
+      }
+    },
+    {
+      "id": 62,
+      "category": "cleanliness",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "soda machine was empty. ice machine was empty. why am i here"},
+        {"role": "bk", "message": "valid question. which location has nothing to drink?"},
+        {"role": "customer", "message": "fort lauderdale on sunrise blvd"},
+        {"role": "bk", "message": "sunrise blvd fort lauderdale, empty machines. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "sunrise blvd, fort lauderdale",
+        "issue": "empty soda and ice machines"
+      }
+    },
+    {
+      "id": 63,
+      "category": "app_tech",
+      "tone": "aggressive",
+      "thread": [
+        {"role": "customer", "message": "app crashes every time i try to checkout. FIX YOUR APP"},
+        {"role": "bk", "message": "app crashing is frustrating. are you on iphone or android? and what version?"},
+        {"role": "customer", "message": "iphone 14 latest ios"},
+        {"role": "bk", "message": "got it. does it crash at a specific step or random?"},
+        {"role": "customer", "message": "always when i hit pay. every single time"},
+        {"role": "bk", "message": "iphone 14, crashes at payment. this is going to Tom AND our tech team. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "app crashes at checkout",
+        "device": "iphone 14",
+        "os": "latest ios",
+        "crash_point": "payment",
+        "tech_issue": true
+      }
+    },
+    {
+      "id": 64,
+      "category": "app_tech",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "coupon code didnt work. expired yesterday. thats predatory"},
+        {"role": "bk", "message": "expired by a day is frustrating. which coupon was it?"},
+        {"role": "customer", "message": "the $5 whopper meal one. literally tried at 12:01am and it was already dead"},
+        {"role": "bk", "message": "noted— coupon expiration timing feedback. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "coupon expired",
+        "coupon": "$5 whopper meal",
+        "feedback_type": "coupon timing"
+      }
+    },
+    {
+      "id": 65,
+      "category": "app_tech",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "QR code wouldnt scan. employee didnt know what to do. chaos"},
+        {"role": "bk", "message": "QR chaos is a training issue. which location?"},
+        {"role": "customer", "message": "miami beach on collins"},
+        {"role": "bk", "message": "collins miami beach, QR scanning issue. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "collins, miami beach",
+        "issue": "QR code wouldn't scan, staff untrained",
+        "tech_issue": true
+      }
+    },
+    {
+      "id": 66,
+      "category": "app_tech",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "mobile order disappeared. no one could find it. had to reorder"},
+        {"role": "bk", "message": "disappearing orders are a system problem. which location and do you have the order confirmation?"},
+        {"role": "customer", "message": "chicago on michigan ave. yeah i have the confirmation email"},
+        {"role": "bk", "message": "can you send a screenshot? we'll track down what happened"},
+        {"role": "customer", "message": "[sends screenshot]", "attachment": true},
+        {"role": "bk", "message": "got it. michigan ave chicago, order disappeared. Tom's seeing this and so is tech team. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "michigan ave, chicago",
+        "issue": "mobile order disappeared",
+        "has_screenshot": true,
+        "tech_issue": true
+      }
+    },
+    {
+      "id": 67,
+      "category": "app_tech",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "wheres my crown points?? i spent $40 last week and got nothing"},
+        {"role": "bk", "message": "missing points is annoying. do you remember which location and was this through the app?"},
+        {"role": "customer", "message": "yes through the app. brooklyn on fulton street"},
+        {"role": "bk", "message": "can you check if the receipt shows your rewards account was linked?"},
+        {"role": "customer", "message": "it says member but no points showed up"},
+        {"role": "bk", "message": "fulton street brooklyn, app order, rewards linked but no points. Tom's seeing this + loyalty team. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "fulton street, brooklyn",
+        "issue": "missing rewards points",
+        "amount_spent": "$40",
+        "rewards_linked": true,
+        "tech_issue": true
+      }
+    },
+    {
+      "id": 68,
+      "category": "miscellaneous",
+      "tone": "passionate",
+      "thread": [
+        {"role": "customer", "message": "why did u discontinue the chicken fries they were the only reason i came"},
+        {"role": "bk", "message": "chicken fries have passionate fans. is this a 'bring them back' vote or a 'goodbye forever' message?"},
+        {"role": "customer", "message": "BRING THEM BACK. i will literally go weekly if you do"},
+        {"role": "bk", "message": "noted— chicken fries demand logged. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu feedback",
+        "request": "bring back chicken fries",
+        "customer_promise": "weekly visits if returned"
+      }
+    },
+    {
+      "id": 69,
+      "category": "miscellaneous",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "breakfast ends at 10:30?? its 10:32. ur telling me the eggs evaporated?"},
+        {"role": "bk", "message": "lol eggs dont evaporate but the cutoff is rough. is this a 'please extend breakfast' request?"},
+        {"role": "customer", "message": "YES extend it to at least 11. who eats breakfast at 10:30 anyway"},
+        {"role": "bk", "message": "breakfast hours feedback logged. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "hours feedback",
+        "request": "extend breakfast to 11am"
+      }
+    },
+    {
+      "id": 70,
+      "category": "miscellaneous",
+      "tone": "competitive",
+      "thread": [
+        {"role": "customer", "message": "whopper costs more than big mac and its not even better. explain"},
+        {"role": "bk", "message": "spicy take. is this a price complaint or a quality complaint?"},
+        {"role": "customer", "message": "both tbh. if youre gonna charge more it should BE more"},
+        {"role": "bk", "message": "price vs quality feedback noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "price and quality comparison",
+        "competitor_mentioned": "mcdonalds big mac"
+      }
+    },
+    {
+      "id": 71,
+      "category": "miscellaneous",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "why is the ice cream machine always working at mcdonalds but ur shakes r always broken"},
+        {"role": "bk", "message": "the shake machine question. which location always has broken shakes?"},
+        {"role": "customer", "message": "honestly? most of them. but specifically atlanta on ponce"},
+        {"role": "bk", "message": "ponce atlanta, shake machine. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "ponce, atlanta",
+        "issue": "shake machine frequently broken",
+        "competitor_mentioned": "mcdonalds"
+      }
+    },
+    {
+      "id": 72,
+      "category": "miscellaneous",
+      "tone": "concerned",
+      "thread": [
+        {"role": "customer", "message": "ur impossible whopper gave me the worst stomach ache of my life"},
+        {"role": "bk", "message": "sorry to hear that. which location? and do you have any food allergies we should note?"},
+        {"role": "customer", "message": "no allergies. new york on 34th street. maybe it was sitting too long?"},
+        {"role": "bk", "message": "34th street nyc, impossible whopper stomach issue. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "34th street, new york",
+        "product": "impossible whopper",
+        "issue": "stomach ache",
+        "health_concern": true
+      }
+    },
+    {
+      "id": 73,
+      "category": "miscellaneous",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "the crowns on the kids meal are cheap garbage. my kid cried"},
+        {"role": "bk", "message": "a crying kid over a broken crown is not the goal. which location and what happened to the crown?"},
+        {"role": "customer", "message": "it ripped the second she put it on. houston on kirby"},
+        {"role": "bk", "message": "kirby houston, kids crown quality issue. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "kirby, houston",
+        "issue": "kids crown ripped immediately"
+      }
+    },
+    {
+      "id": 74,
+      "category": "miscellaneous",
+      "tone": "humorous",
+      "thread": [
+        {"role": "customer", "message": "why cant i get a whopper with big mac sauce. cowards"},
+        {"role": "bk", "message": "lol we have our own sauces. is this a 'create a new signature sauce' suggestion?"},
+        {"role": "customer", "message": "yes actually. something that competes. stacker sauce was close but its gone"},
+        {"role": "bk", "message": "sauce innovation feedback noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu suggestion",
+        "request": "new signature sauce",
+        "reference": "stacker sauce"
+      }
+    },
+    {
+      "id": 75,
+      "category": "miscellaneous",
+      "tone": "passionate",
+      "thread": [
+        {"role": "customer", "message": "yall got rid of the satisfries and i will NEVER forgive u"},
+        {"role": "bk", "message": "satisfries had fans. is this an official bring-them-back vote?"},
+        {"role": "customer", "message": "YES. healthier option that actually tasted good. why would you kill that"},
+        {"role": "bk", "message": "satisfries demand logged. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu feedback",
+        "request": "bring back satisfries"
+      }
+    },
+    {
+      "id": 76,
+      "category": "miscellaneous",
+      "tone": "threatening",
+      "thread": [
+        {"role": "customer", "message": "bring back the angry whopper or i swear ill go to wendys forever"},
+        {"role": "bk", "message": "angry whopper ultimatum received. noted as a formal menu request"},
+        {"role": "customer", "message": "good. that jalapeño situation was perfect"},
+        {"role": "bk", "message": "angry whopper demand logged. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu feedback",
+        "request": "bring back angry whopper",
+        "competitor_threat": "wendys"
+      }
+    },
+    {
+      "id": 77,
+      "category": "miscellaneous",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "why is there no spicy option for anything. this menu is for babies"},
+        {"role": "bk", "message": "menu for babies 😂 fair point. what would you want to see spicy?"},
+        {"role": "customer", "message": "spicy chicken sandwich that actually has heat. spicy whopper. spicy fries. ANYTHING"},
+        {"role": "bk", "message": "spicy menu expansion feedback noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu feedback",
+        "request": "more spicy options",
+        "suggestions": ["spicy chicken sandwich", "spicy whopper", "spicy fries"]
+      }
+    },
+    {
+      "id": 78,
+      "category": "miscellaneous",
+      "tone": "frustrated",
+      "has_typos": true,
+      "thread": [
+        {"role": "customer", "message": "i rember when whoper was $2 now its $8??? ur JOKING right"},
+        {"role": "bk", "message": "inflation is real. is this about the base price or the meal price?"},
+        {"role": "customer", "message": "both! its crazy. i used to get 2 whoppers for what 1 costs now"},
+        {"role": "bk", "message": "pricing feedback noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "pricing complaint"
+      }
+    },
+    {
+      "id": 79,
+      "category": "miscellaneous",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "menu is confusing af. too many options. i just want food not a puzzle"},
+        {"role": "bk", "message": "menu simplification feedback. is it the physical menu board or the app thats confusing?"},
+        {"role": "customer", "message": "the board in store. too many combos and numbers. just tell me what to eat"},
+        {"role": "bk", "message": "in-store menu clarity feedback noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu design feedback",
+        "target": "in-store menu board"
+      }
+    },
+    {
+      "id": 80,
+      "category": "miscellaneous",
+      "tone": "aggressive",
+      "has_typos": true,
+      "thread": [
+        {"role": "customer", "message": "Y DO U EVEN HAVE FISH SANDWICH NOONE ORDERS THAT"},
+        {"role": "bk", "message": "fish sandwich has a small but loyal fanbase. is this a 'get rid of it' vote or a 'make it better' vote?"},
+        {"role": "customer", "message": "GET RID OF IT and use the space for something good"},
+        {"role": "bk", "message": "fish sandwich removal vote logged. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "menu feedback",
+        "request": "remove fish sandwich"
+      }
+    },
+    {
+      "id": 81,
+      "category": "miscellaneous",
+      "tone": "sarcastic",
+      "thread": [
+        {"role": "customer", "message": "ur commercials r cringe. fire whoever makes them plz"},
+        {"role": "bk", "message": "marketing feedback received lol. any specific commercial that made you text us?"},
+        {"role": "customer", "message": "the one with the singing. you know the one. horrible"},
+        {"role": "bk", "message": "commercial feedback noted. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "issue": "marketing feedback",
+        "complaint": "cringe commercials"
+      }
+    },
+    {
+      "id": 82,
+      "category": "miscellaneous",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "the bk lounge near me closes at 9pm thats not even late"},
+        {"role": "bk", "message": "9pm is early. which location closes too soon?"},
+        {"role": "customer", "message": "austin on lamar. its a college area and closes at 9?? make it make sense"},
+        {"role": "bk", "message": "lamar austin, hours too early for college area. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "lamar, austin",
+        "issue": "hours feedback",
+        "request": "extend closing time",
+        "context": "college area"
+      }
+    },
+    {
+      "id": 83,
+      "category": "miscellaneous",
+      "tone": "frustrated",
+      "thread": [
+        {"role": "customer", "message": "wifi in store doesnt work. false advertising"},
+        {"role": "bk", "message": "wifi that doesnt work is annoying. which location?"},
+        {"role": "customer", "message": "seattle on pike street"},
+        {"role": "bk", "message": "pike street seattle, wifi not working. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "pike street, seattle",
+        "issue": "wifi not working"
+      }
+    },
+    {
+      "id": 84,
+      "category": "miscellaneous",
+      "tone": "sad",
+      "has_typos": true,
+      "thread": [
+        {"role": "customer", "message": "told employee it was my bday. didnt even say happy birthday. wow"},
+        {"role": "bk", "message": "happy belated birthday from us at least 🎂 which location missed the moment?"},
+        {"role": "customer", "message": "haha thanks. it was the one in denver on 16th street"},
+        {"role": "bk", "message": "16th street denver, birthday not acknowledged. Tom's seeing this. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "16th street, denver",
+        "issue": "birthday not acknowledged"
+      }
+    },
+    {
+      "id": 85,
+      "category": "miscellaneous",
+      "tone": "humorous",
+      "priority": "medium",
+      "thread": [
+        {"role": "customer", "message": "im writing this from the toilet. thanks alot burger king 💀"},
+        {"role": "bk", "message": "oh no 😭 which location and what did you eat?"},
+        {"role": "customer", "message": "double whopper from the bk on sunset in LA. something was off"},
+        {"role": "bk", "message": "how long ago did you eat it? this could be a food safety issue"},
+        {"role": "customer", "message": "like 2 hours ago. im still here 💀"},
+        {"role": "bk", "message": "sunset LA, double whopper, possible food issue. feel better and please let us know if it gets worse. Tom's seeing this as a priority. response within 7 days 🍔👑", "type": "final", "animation": true}
+      ],
+      "extracted_data": {
+        "location": "sunset, los angeles",
+        "product": "double whopper",
+        "issue": "food made customer sick",
+        "time_since_eating": "2 hours",
+        "health_concern": true
+      }
+    }
+  ],
+  "response_templates": {
+    "ask_location": [
+      "which location was this?",
+      "which store did this to you?",
+      "which location?",
+      "which store?"
+    ],
+    "ask_time": [
+      "around what time was this?",
+      "do you remember what day/time roughly?",
+      "what time roughly?",
+      "roughly what time was this?"
+    ],
+    "ask_employee": [
+      "do you remember who said it? name tag or description?",
+      "any details about who said it?",
+      "do you remember the manager's name?",
+      "do you remember what she looked like or any name tag?"
+    ],
+    "ask_photo": [
+      "do you have photos?",
+      "do you still have the burger or a photo?",
+      "can you send a screenshot?",
+      "if you're comfortable sharing that clip, please do"
+    ],
+    "final_standard": "Tom's seeing this. response within 7 days 🍔👑",
+    "final_serious": "this is a serious complaint. Tom's seeing this personally. response within 7 days 🍔👑",
+    "final_urgent": "this is being escalated immediately. Tom's seeing this. response within 7 days but likely sooner 🍔👑"
+  },
+  "tone_categories": [
+    "neutral",
+    "frustrated",
+    "aggressive",
+    "sarcastic",
+    "genz",
+    "concerned",
+    "disgusted",
+    "confused",
+    "betrayed",
+    "humorous",
+    "passionate",
+    "threatening",
+    "sad"
+  ],
+  "priority_levels": {
+    "high": "Discrimination, food safety, physical incidents, billing fraud",
+    "medium": "Health concerns, repeated issues at same location",
+    "standard": "General complaints and feedback"
+  }
+}

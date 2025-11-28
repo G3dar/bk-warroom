@@ -138,6 +138,7 @@ export function Dashboard({ complaints }: DashboardProps) {
         onKeywordClick={handleKeywordClick}
         starredIds={starredIds}
         onStarToggle={handleStarToggle}
+        selectedKeywords={selectedKeywords}
       />
 
       <ConversationPanel

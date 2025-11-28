@@ -11,9 +11,31 @@ interface ComplaintCardProps {
   onKeywordClick?: (keyword: string) => void;
   isStarred?: boolean;
   onStarToggle?: (id: number) => void;
+  selectedKeywords?: string[];
 }
 
-export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected, onClick, isFocused, onKeywordClick, isStarred, onStarToggle }: ComplaintCardProps) {
+// Color palette for keywords
+const keywordColors = [
+  { bg: '#007AFF', bgLight: 'rgba(0, 122, 255, 0.1)', border: '#007AFF' }, // blue
+  { bg: '#FF8732', bgLight: 'rgba(255, 135, 50, 0.1)', border: '#FF8732' }, // orange
+  { bg: '#9333EA', bgLight: 'rgba(147, 51, 234, 0.1)', border: '#9333EA' }, // purple
+  { bg: '#34C759', bgLight: 'rgba(52, 199, 89, 0.1)', border: '#34C759' }, // green
+  { bg: '#FF3B30', bgLight: 'rgba(255, 59, 48, 0.1)', border: '#FF3B30' }, // red
+  { bg: '#EC4899', bgLight: 'rgba(236, 72, 153, 0.1)', border: '#EC4899' }, // pink
+  { bg: '#6366F1', bgLight: 'rgba(99, 102, 241, 0.1)', border: '#6366F1' }, // indigo
+  { bg: '#14B8A6', bgLight: 'rgba(20, 184, 166, 0.1)', border: '#14B8A6' }, // teal
+];
+
+// Generate consistent color for keyword based on its text
+const getKeywordColor = (keyword: string) => {
+  let hash = 0;
+  for (let i = 0; i < keyword.length; i++) {
+    hash = keyword.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return keywordColors[Math.abs(hash) % keywordColors.length];
+};
+
+export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected, onClick, isFocused, onKeywordClick, isStarred, onStarToggle, selectedKeywords = [] }: ComplaintCardProps) {
   // Get first customer message for preview
   const firstMessage = complaint.thread.find((m) => m.role === 'customer')?.message || '';
   const preview = firstMessage.length > 85 ? firstMessage.slice(0, 85) + '...' : firstMessage;
@@ -92,18 +114,32 @@ export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected
           </span>
         )}
         {/* Display first 2-3 keywords */}
-        {complaint.keywords?.slice(0, 3).map((keyword, idx) => (
-          <button
-            key={idx}
-            onClick={(e) => {
-              e.stopPropagation();
-              onKeywordClick?.(keyword);
-            }}
-            className="badge badge-blue text-[11px] hover:bg-[#007AFF] hover:text-white transition-colors cursor-pointer"
-          >
-            {keyword}
-          </button>
-        ))}
+        {complaint.keywords?.slice(0, 3).map((keyword, idx) => {
+          const color = getKeywordColor(keyword);
+          const isKeywordSelected = selectedKeywords.includes(keyword);
+
+          return (
+            <button
+              key={idx}
+              onClick={(e) => {
+                e.stopPropagation();
+                onKeywordClick?.(keyword);
+              }}
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer border-2 ${
+                isKeywordSelected
+                  ? 'text-white shadow-md scale-105'
+                  : 'hover:scale-105 shadow-sm'
+              }`}
+              style={
+                isKeywordSelected
+                  ? { backgroundColor: color.bg, borderColor: color.bg }
+                  : { backgroundColor: color.bgLight, borderColor: color.border, color: color.bg }
+              }
+            >
+              {keyword}
+            </button>
+          );
+        })}
       </div>
     </button>
   );

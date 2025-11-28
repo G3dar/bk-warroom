@@ -14,6 +14,7 @@ interface ComplaintFeedProps {
   onKeywordClick: (keyword: string) => void;
   starredIds: Set<number>;
   onStarToggle: (id: number) => void;
+  selectedKeywords: string[];
 }
 
 export function ComplaintFeed({
@@ -27,6 +28,7 @@ export function ComplaintFeed({
   onKeywordClick,
   starredIds,
   onStarToggle,
+  selectedKeywords,
 }: ComplaintFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedCardRef = useRef<HTMLDivElement>(null);
@@ -107,11 +109,12 @@ export function ComplaintFeed({
             onKeywordClick={onKeywordClick}
             isStarred={isStarred}
             onStarToggle={onStarToggle}
+            selectedKeywords={selectedKeywords}
           />
         </div>
       );
     });
-  }, [complaints, selectedComplaint, isFeedFocused, handleCardClick, onKeywordClick, starredIds, onStarToggle]);
+  }, [complaints, selectedComplaint, isFeedFocused, handleCardClick, onKeywordClick, starredIds, onStarToggle, selectedKeywords]);
 
   return (
     <div

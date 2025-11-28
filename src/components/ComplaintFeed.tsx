@@ -12,6 +12,8 @@ interface ComplaintFeedProps {
   isFeedFocused: boolean;
   onFocusChange: (focused: boolean) => void;
   onKeywordClick: (keyword: string) => void;
+  starredIds: Set<number>;
+  onStarToggle: (id: number) => void;
 }
 
 export function ComplaintFeed({
@@ -23,6 +25,8 @@ export function ComplaintFeed({
   isFeedFocused,
   onFocusChange,
   onKeywordClick,
+  starredIds,
+  onStarToggle,
 }: ComplaintFeedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedCardRef = useRef<HTMLDivElement>(null);
@@ -87,6 +91,7 @@ export function ComplaintFeed({
     return complaints.map((complaint) => {
       const isSelected = selectedComplaint?.id === complaint.id;
       const isFocused = isFeedFocused && isSelected;
+      const isStarred = starredIds.has(complaint.id);
 
       return (
         <div
@@ -100,11 +105,13 @@ export function ComplaintFeed({
             onClick={() => handleCardClick(complaint)}
             isFocused={isFocused}
             onKeywordClick={onKeywordClick}
+            isStarred={isStarred}
+            onStarToggle={onStarToggle}
           />
         </div>
       );
     });
-  }, [complaints, selectedComplaint, isFeedFocused, handleCardClick, onKeywordClick]);
+  }, [complaints, selectedComplaint, isFeedFocused, handleCardClick, onKeywordClick, starredIds, onStarToggle]);
 
   return (
     <div

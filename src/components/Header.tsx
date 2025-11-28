@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { BarChart3 } from 'lucide-react';
 import type { ComplaintWithMetadata } from '../types/complaints';
 
 interface HeaderProps {
@@ -7,6 +9,7 @@ interface HeaderProps {
 
 export function Header({ complaints }: HeaderProps) {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const location = useLocation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,22 +31,6 @@ export function Header({ complaints }: HeaderProps) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const todayCount = complaints.filter((c) => c.timestamp >= today).length;
-
-  // Get top issue category
-  const categoryCounts: Record<string, number> = {};
-  complaints.forEach((c) => {
-    categoryCounts[c.category] = (categoryCounts[c.category] || 0) + 1;
-  });
-  const topCategory = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'N/A';
-
-  // Get top keyword
-  const keywordCounts: Record<string, number> = {};
-  complaints.forEach((c) => {
-    c.keywords?.forEach((keyword) => {
-      keywordCounts[keyword] = (keywordCounts[keyword] || 0) + 1;
-    });
-  });
-  const topKeyword = Object.entries(keywordCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'N/A';
 
   return (
     <header className="bg-gradient-to-br from-orange-50/60 via-white to-red-50/40 border-b-2 border-[#FF8732]/30 shadow-lg">
@@ -134,19 +121,22 @@ export function Header({ complaints }: HeaderProps) {
               <div className="text-[10px] text-[#86868B] font-semibold">out of 10</div>
             </div>
 
-            {/* Top Issue */}
-            <div className="stat-card min-w-[120px] px-3 py-2 border-2 border-purple-200 shadow-md" style={{ backgroundColor: 'rgba(147, 51, 234, 0.15)' }}>
-              <div className="text-[9px] text-[#86868B] uppercase tracking-widest font-bold mb-1">Top Issue</div>
-              <div className="text-[15px] font-black text-[#9333EA] capitalize truncate leading-none mb-0.5">{topCategory}</div>
-              <div className="text-[10px] text-[#86868B] font-semibold">most common</div>
-            </div>
-
-            {/* Top Keyword */}
-            <div className="stat-card min-w-[120px] px-3 py-2 border-2 border-indigo-200 shadow-md" style={{ backgroundColor: 'rgba(99, 102, 241, 0.15)' }}>
-              <div className="text-[9px] text-[#86868B] uppercase tracking-widest font-bold mb-1">Top Keyword</div>
-              <div className="text-[15px] font-black text-[#6366F1] capitalize truncate leading-none mb-0.5">{topKeyword}</div>
-              <div className="text-[10px] text-[#86868B] font-semibold">trending</div>
-            </div>
+            {/* Analytics Link */}
+            {location.pathname === '/' && (
+              <Link
+                to="/analytics"
+                className="stat-card min-w-[120px] px-4 py-2 border-2 border-[#007AFF] shadow-md hover:shadow-xl transition-all cursor-pointer group"
+                style={{ backgroundColor: 'rgba(0, 122, 255, 0.15)' }}
+              >
+                <div className="flex items-center justify-center gap-2 h-full">
+                  <BarChart3 className="w-6 h-6 text-[#007AFF] group-hover:scale-110 transition-transform" />
+                  <div>
+                    <div className="text-[13px] font-black text-[#007AFF] leading-none">Keyword</div>
+                    <div className="text-[13px] font-black text-[#007AFF] leading-none">Analytics</div>
+                  </div>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </div>

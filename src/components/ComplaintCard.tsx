@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { MapPin, Clock } from 'lucide-react';
+import { MapPin, Clock, Star } from 'lucide-react';
 import type { ComplaintWithMetadata } from '../types/complaints';
 import { formatRelativeTime, getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
 
@@ -9,9 +9,11 @@ interface ComplaintCardProps {
   onClick: () => void;
   isFocused?: boolean;
   onKeywordClick?: (keyword: string) => void;
+  isStarred?: boolean;
+  onStarToggle?: (id: number) => void;
 }
 
-export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected, onClick, isFocused, onKeywordClick }: ComplaintCardProps) {
+export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected, onClick, isFocused, onKeywordClick, isStarred, onStarToggle }: ComplaintCardProps) {
   // Get first customer message for preview
   const firstMessage = complaint.thread.find((m) => m.role === 'customer')?.message || '';
   const preview = firstMessage.length > 85 ? firstMessage.slice(0, 85) + '...' : firstMessage;
@@ -46,9 +48,27 @@ export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected
         </div>
 
         <div className="flex flex-col items-end gap-1.5 ml-3 flex-shrink-0">
-          <div className="flex items-center gap-1.5 text-[12px] text-[#86868B]">
-            <Clock className="w-3.5 h-3.5" />
-            <span>{formatRelativeTime(complaint.timestamp)}</span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onStarToggle?.(complaint.id);
+              }}
+              className="group p-1 rounded-lg hover:bg-yellow-100 transition-all"
+              title={isStarred ? "Unstar message" : "Star message"}
+            >
+              <Star
+                className={`w-5 h-5 transition-all ${
+                  isStarred
+                    ? 'fill-yellow-400 stroke-yellow-500'
+                    : 'stroke-[#86868B] group-hover:stroke-yellow-500 group-hover:fill-yellow-100'
+                }`}
+              />
+            </button>
+            <div className="flex items-center gap-1.5 text-[12px] text-[#86868B]">
+              <Clock className="w-3.5 h-3.5" />
+              <span>{formatRelativeTime(complaint.timestamp)}</span>
+            </div>
           </div>
           <span className="text-[13px] font-semibold text-[#007AFF]">#{complaint.id}</span>
         </div>

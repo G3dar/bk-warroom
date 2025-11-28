@@ -5,7 +5,6 @@ import { getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
 
 interface SidebarProps {
   complaints: ComplaintWithMetadata[];
-  keywordsIndex: string[];
   selectedCategory: string | null;
   selectedAnger: string | null;
   selectedState: string | null;
@@ -18,7 +17,6 @@ interface SidebarProps {
 
 export function Sidebar({
   complaints,
-  keywordsIndex,
   selectedCategory,
   selectedAnger,
   selectedState,

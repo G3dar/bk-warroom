@@ -97,7 +97,7 @@ export function KeywordAnalytics({ complaints }: KeywordAnalyticsProps) {
                   labelStyle={{ fontWeight: 'bold', color: '#1D1D1F' }}
                 />
                 <Bar dataKey="count" radius={[8, 8, 0, 0]}>
-                  {keywordData.map((entry, index) => (
+                  {keywordData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                   ))}
                 </Bar>

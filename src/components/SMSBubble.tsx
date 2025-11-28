@@ -39,11 +39,11 @@ export function SMSBubble({ message, timestamp, index }: SMSBubbleProps) {
             </div>
           )}
 
-          {/* CEO Badge */}
+          {/* President Badge */}
           {message.animation && (
             <div className="mt-2 flex items-center gap-1 px-2 py-1 rounded bg-white/20 border border-white/30">
               <Crown className="w-3.5 h-3.5" fill="white" />
-              <span className="text-xs font-semibold">Sent to CEO</span>
+              <span className="text-xs font-semibold">Sent to President</span>
             </div>
           )}
         </div>

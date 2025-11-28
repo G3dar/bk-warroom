@@ -1,6 +1,6 @@
 # 🍔👑 Burger King Elevation War Room Dashboard
 
-A stunning, real-time "War Room" dashboard for the Burger King Elevation campaign. This dashboard displays customer SMS complaints sent to CEO Tom Curtis's hotline with a premium command center aesthetic.
+A stunning, real-time "War Room" dashboard for the Burger King Elevation campaign. This dashboard displays customer SMS complaints sent to President Tom Curtis's hotline with a premium command center aesthetic.
 
 ## Features
 
@@ -129,7 +129,7 @@ npm run preview
 - Live clock updating every second
 - Real-time stats: Total, Today, High Priority, Avg Anger, Top Issue
 - "LIVE" indicator with pulse animation
-- CEO routing badge
+- President routing badge
 
 #### Sidebar Filters
 - **By Complaint Type**: Fries, Burgers, Wrong Orders, Wait Times, etc.
@@ -153,7 +153,7 @@ npm run preview
   - BK messages (orange gradient, right-aligned)
   - Timestamps
   - Read receipts
-  - CEO routing badge for final messages
+  - President routing badge for final messages
 - Customer info header
 - Extracted data summary card
 

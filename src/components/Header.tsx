@@ -84,7 +84,7 @@ export function Header({ complaints }: HeaderProps) {
 
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-100 to-indigo-100 border-2 border-blue-200 shadow-md">
                 <span className="text-[11px] text-[#86868B] font-medium">Routing to</span>
-                <span className="text-[11px] font-bold text-[#1D1D1F]">Tom Curtis, CEO</span>
+                <span className="text-[11px] font-bold text-[#1D1D1F]">Tom Curtis, President</span>
               </div>
             </div>
           </div>

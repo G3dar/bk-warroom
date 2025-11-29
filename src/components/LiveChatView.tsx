@@ -62,15 +62,53 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
     }
   };
 
+  // Get theme colors based on anger level
+  const getTheme = (category: string) => {
+    switch (category) {
+      case 'furious':
+        return {
+          bg: 'from-[#FFE5E5] via-[#FFF0F0] to-[#FFDBDB]', // Light red/pink background
+          header: 'from-[#DC2626] via-[#EF4444] to-[#DC2626]', // Deep red header
+          accent: '#DC2626',
+        };
+      case 'angry':
+        return {
+          bg: 'from-[#FFF4E5] via-[#FFF8F0] to-[#FFEDD5]', // Light orange background
+          header: 'from-[#EA580C] via-[#F97316] to-[#EA580C]', // Orange header
+          accent: '#EA580C',
+        };
+      case 'annoyed':
+        return {
+          bg: 'from-[#FEFCE8] via-[#FFF9E6] to-[#FEF3C7]', // Light yellow background
+          header: 'from-[#CA8A04] via-[#EAB308] to-[#CA8A04]', // Yellow/gold header
+          accent: '#CA8A04',
+        };
+      case 'calm':
+        return {
+          bg: 'from-[#ECFDF5] via-[#F0FDF4] to-[#D1FAE5]', // Light green background
+          header: 'from-[#059669] via-[#10B981] to-[#059669]', // Green header
+          accent: '#059669',
+        };
+      default:
+        return {
+          bg: 'from-[#F5E6D3] via-[#FFF8F0] to-[#FFE5CC]',
+          header: 'from-[#D62300] via-[#FF8732] to-[#D62300]',
+          accent: '#FF8732',
+        };
+    }
+  };
+
+  const theme = getTheme(complaint.anger.category);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 bg-gradient-to-br from-[#F5E6D3] via-[#FFF8F0] to-[#FFE5CC] flex flex-col"
+      className={`fixed inset-0 z-50 bg-gradient-to-br ${theme.bg} flex flex-col`}
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#D62300] via-[#FF8732] to-[#D62300] px-6 py-5 shadow-lg">
+      <div className={`bg-gradient-to-r ${theme.header} px-6 py-5 shadow-lg`}>
         <div className="max-w-4xl mx-auto">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-4">
@@ -172,16 +210,24 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
                     initial={{ scale: 0.9 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.1 }}
-                    className={`px-5 py-3.5 rounded-3xl shadow-lg ${
+                    className={`px-5 py-3.5 rounded-3xl shadow-lg rounded-br-md ${
                       isCustomer
                         ? 'bg-gradient-to-br from-[#4A5568] to-[#2D3748] text-white rounded-bl-md'
                         : isWelcome
-                        ? 'bg-gradient-to-br from-[#FFD93D] to-[#FFB03B] text-[#4A2800] rounded-br-md border-2 border-[#FF8732]'
-                        : isFinal
-                        ? 'bg-gradient-to-br from-[#FF8732] to-[#D62300] text-white rounded-br-md shadow-2xl'
-                        : 'bg-gradient-to-br from-[#FF8732] to-[#FF6B35] text-white rounded-br-md'
+                        ? 'text-[#4A2800] border-2'
+                        : 'text-white shadow-2xl'
                     }`}
-                    style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }}
+                    style={{
+                      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
+                      ...(!isCustomer && (isWelcome ? {
+                        background: 'linear-gradient(to bottom right, #FFD93D, #FFB03B)',
+                        borderColor: theme.accent
+                      } : isFinal ? {
+                        background: `linear-gradient(to bottom right, ${theme.accent}, ${theme.accent}DD)`
+                      } : {
+                        background: `linear-gradient(to bottom right, ${theme.accent}EE, ${theme.accent}CC)`
+                      }))
+                    }}
                   >
                     <p className={`text-[16px] leading-relaxed whitespace-pre-wrap ${
                       isCustomer ? 'font-normal' : 'font-medium'
@@ -238,7 +284,10 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
                 transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 className="flex justify-end"
               >
-                <div className="bg-gradient-to-br from-[#FF8732] to-[#FF6B35] px-7 py-4 rounded-3xl rounded-br-md shadow-lg">
+                <div
+                  className="px-7 py-4 rounded-3xl rounded-br-md shadow-lg"
+                  style={{ background: `linear-gradient(to bottom right, ${theme.accent}EE, ${theme.accent}CC)` }}
+                >
                   <div className="flex gap-2">
                     <motion.div
                       animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}

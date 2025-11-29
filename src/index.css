@@ -365,43 +365,63 @@ body {
   }
 }
 
-/* Tooltip container - glassmorphic design with animations */
+/* Tooltip container - BK-themed design with enhanced animations */
 .react-joyride__tooltip {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%) !important;
+  background: transparent !important;
   backdrop-filter: blur(60px) saturate(200%) !important;
   -webkit-backdrop-filter: blur(60px) saturate(200%) !important;
-  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  border: none !important;
   border-radius: 28px !important;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3),
-              0 15px 35px rgba(0, 0, 0, 0.2),
-              0 5px 15px rgba(0, 122, 255, 0.1),
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+              0 10px 20px rgba(0, 0, 0, 0.1),
               inset 0 2px 0 rgba(255, 255, 255, 0.8),
-              inset 0 -2px 0 rgba(0, 0, 0, 0.05) !important;
-  padding: 0 !important;
-  max-width: 500px !important;
-  min-width: 360px !important;
+              inset 0 -2px 0 rgba(214, 35, 0, 0.1) !important;
+  padding: 4px !important;
+  max-width: 520px !important;
+  min-width: 380px !important;
   font-family: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  animation: tooltipEnter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  animation: tooltipEnterBK 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   transform-origin: center !important;
   z-index: 10001 !important;
   overflow: hidden !important;
   position: relative !important;
 }
 
-/* Shimmer effect on tooltip */
+/* Gradient border using ::before */
 .react-joyride__tooltip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: 4px;
+  background: linear-gradient(135deg, #FF8732 0%, #D62300 50%, #FF8732 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Shimmer effect on tooltip */
+.react-joyride__tooltip::after {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: shimmer 3s infinite;
+  background: linear-gradient(90deg,
+              transparent,
+              rgba(255, 135, 50, 0.3),
+              rgba(214, 35, 0, 0.2),
+              transparent);
+  animation: shimmerBK 3s infinite;
   pointer-events: none;
+  border-radius: 28px;
+  z-index: 0;
 }
 
-@keyframes shimmer {
+@keyframes shimmerBK {
   0% {
     left: -100%;
   }
@@ -410,14 +430,17 @@ body {
   }
 }
 
-@keyframes tooltipEnter {
+@keyframes tooltipEnterBK {
   0% {
     opacity: 0;
-    transform: scale(0.9) translateY(20px) rotateX(10deg);
-    filter: blur(10px);
+    transform: scale(0.85) translateY(30px) rotateX(15deg);
+    filter: blur(15px);
   }
-  60% {
-    transform: scale(1.02) translateY(-5px) rotateX(0deg);
+  50% {
+    transform: scale(1.05) translateY(-8px) rotateX(-3deg);
+  }
+  70% {
+    transform: scale(0.98) translateY(2px) rotateX(1deg);
   }
   100% {
     opacity: 1;
@@ -431,68 +454,86 @@ body {
   padding: 32px 32px 24px 32px !important;
   position: relative !important;
   z-index: 1 !important;
+  background: linear-gradient(135deg,
+              rgba(255, 250, 240, 0.98) 0%,
+              rgba(255, 245, 235, 0.96) 50%,
+              rgba(255, 240, 230, 0.98) 100%) !important;
+  border-radius: 24px !important;
 }
 
-/* Tooltip header with gradient text */
+/* Tooltip header with BK gradient text */
 .react-joyride__tooltip h3,
 .react-joyride__tooltip h2 {
-  font-size: 24px !important;
-  font-weight: 800 !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
   font-family: 'Rubik', sans-serif !important;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+  background: linear-gradient(135deg, #D62300 0%, #FF8732 50%, #D62300 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
-  margin: 0 0 16px 0 !important;
-  line-height: 1.2 !important;
-  letter-spacing: -0.03em !important;
-  animation: titleSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards !important;
+  margin: 0 0 18px 0 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.04em !important;
+  text-shadow: 0 2px 8px rgba(214, 35, 0, 0.15) !important;
+  animation: titleSlideInBK 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s backwards !important;
 }
 
-@keyframes titleSlideIn {
-  from {
+@keyframes titleSlideInBK {
+  0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-15px) scale(0.95);
   }
-  to {
+  60% {
+    transform: translateY(3px) scale(1.02);
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 /* Tooltip body text with fade-in animation */
 .tutorial-content {
-  animation: contentFadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards !important;
+  animation: contentFadeInBK 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s backwards !important;
   font-family: 'Rubik', sans-serif !important;
+  color: #3d2817 !important;
 }
 
 .tutorial-content p {
-  margin: 0 0 10px 0 !important;
-  line-height: 1.7 !important;
+  margin: 0 0 12px 0 !important;
+  line-height: 1.75 !important;
+  font-size: 17px !important;
+  font-weight: 500 !important;
 }
 
 .tutorial-content strong {
   font-weight: 700 !important;
+  color: #D62300 !important;
 }
 
 .tutorial-content ul {
-  margin: 12px 0 !important;
-  padding-left: 24px !important;
+  margin: 14px 0 !important;
+  padding-left: 26px !important;
 }
 
 .tutorial-content li {
-  margin: 8px 0 !important;
-  line-height: 1.8 !important;
+  margin: 10px 0 !important;
+  line-height: 1.85 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
 }
 
-@keyframes contentFadeIn {
-  from {
+@keyframes contentFadeInBK {
+  0% {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(10px) scale(0.98);
   }
-  to {
+  60% {
+    transform: translateY(-2px) scale(1.01);
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -507,17 +548,22 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Footer with buttons */
+/* Footer with BK-themed styling */
 .react-joyride__tooltip footer {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.01)) !important;
-  border-top: 2px solid rgba(0, 0, 0, 0.05) !important;
-  padding: 20px 28px !important;
+  background: linear-gradient(to bottom,
+              rgba(255, 245, 230, 0.98),
+              rgba(255, 240, 220, 0.96)) !important;
+  border-top: 2px solid rgba(255, 135, 50, 0.2) !important;
+  padding: 22px 32px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  border-radius: 0 0 28px 28px !important;
+  border-radius: 0 0 24px 24px !important;
   margin: 0 !important;
-  gap: 16px !important;
+  gap: 18px !important;
+  box-shadow: inset 0 3px 8px rgba(255, 135, 50, 0.1) !important;
+  position: relative !important;
+  z-index: 2 !important;
 }
 
 /* Button container */
@@ -530,14 +576,14 @@ body {
 /* All buttons base styles */
 .react-joyride__tooltip button {
   font-family: 'Rubik', sans-serif !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  padding: 14px 28px !important;
-  border-radius: 16px !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  padding: 16px 32px !important;
+  border-radius: 18px !important;
   border: none !important;
   cursor: pointer !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  letter-spacing: -0.01em !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  letter-spacing: -0.02em !important;
   outline: none !important;
   position: relative !important;
   overflow: hidden !important;
@@ -563,36 +609,47 @@ body {
   height: 300px;
 }
 
-/* Primary button (Next, Start) with gradient animation */
+/* Primary button (Next, Start) with BK gradient animation */
 .react-joyride__tooltip button[data-action="primary"] {
-  background: linear-gradient(135deg, #007AFF 0%, #0066DD 50%, #007AFF 100%) !important;
+  background: linear-gradient(135deg, #FF8732 0%, #D62300 50%, #FF8732 100%) !important;
   background-size: 200% 200% !important;
   color: white !important;
-  box-shadow: 0 8px 24px rgba(0, 122, 255, 0.45),
-              0 4px 10px rgba(0, 0, 0, 0.12),
-              inset 0 2px 0 rgba(255, 255, 255, 0.4),
-              inset 0 -2px 0 rgba(0, 0, 0, 0.1) !important;
-  animation: gradientShift 3s ease infinite !important;
-  min-width: 140px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 10px 28px rgba(214, 35, 0, 0.5),
+              0 6px 14px rgba(255, 135, 50, 0.35),
+              inset 0 3px 0 rgba(255, 255, 255, 0.45),
+              inset 0 -3px 0 rgba(0, 0, 0, 0.15),
+              0 0 0 1px rgba(255, 135, 50, 0.4) !important;
+  animation: gradientShiftBK 3s ease infinite !important;
+  min-width: 150px !important;
 }
 
-@keyframes gradientShift {
+@keyframes gradientShiftBK {
   0%, 100% {
     background-position: 0% 50%;
+    box-shadow: 0 10px 28px rgba(214, 35, 0, 0.5),
+                0 6px 14px rgba(255, 135, 50, 0.35),
+                inset 0 3px 0 rgba(255, 255, 255, 0.45),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.15);
   }
   50% {
     background-position: 100% 50%;
+    box-shadow: 0 10px 28px rgba(255, 135, 50, 0.5),
+                0 6px 14px rgba(214, 35, 0, 0.35),
+                inset 0 3px 0 rgba(255, 255, 255, 0.45),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.15);
   }
 }
 
 .react-joyride__tooltip button[data-action="primary"]:hover {
-  background: linear-gradient(135deg, #0066DD 0%, #0055BB 50%, #0066DD 100%) !important;
+  background: linear-gradient(135deg, #E6761E 0%, #C01D00 50%, #E6761E 100%) !important;
   background-size: 200% 200% !important;
-  transform: translateY(-3px) scale(1.03) !important;
-  box-shadow: 0 12px 32px rgba(0, 122, 255, 0.6),
-              0 6px 16px rgba(0, 0, 0, 0.2),
-              inset 0 2px 0 rgba(255, 255, 255, 0.5),
-              inset 0 -2px 0 rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-4px) scale(1.05) !important;
+  box-shadow: 0 16px 40px rgba(214, 35, 0, 0.65),
+              0 8px 20px rgba(255, 135, 50, 0.45),
+              inset 0 3px 0 rgba(255, 255, 255, 0.55),
+              inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+              0 0 0 2px rgba(255, 135, 50, 0.6) !important;
 }
 
 .react-joyride__tooltip button[data-action="primary"]:active {
@@ -600,46 +657,50 @@ body {
   box-shadow: 0 4px 16px rgba(0, 122, 255, 0.5) !important;
 }
 
-/* Back button with subtle gradient */
+/* Back button with BK cream/tan gradient */
 .react-joyride__tooltip button[data-action="back"] {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.04)) !important;
-  color: #1e293b !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
-              0 2px 4px rgba(0, 0, 0, 0.06),
-              inset 0 1px 0 rgba(255, 255, 255, 0.6),
-              inset 0 -1px 0 rgba(0, 0, 0, 0.05) !important;
-  border: 2px solid rgba(0, 0, 0, 0.1) !important;
-  min-width: 100px !important;
+  background: linear-gradient(135deg, rgba(255, 245, 235, 0.95), rgba(255, 240, 220, 0.9)) !important;
+  color: #3d2817 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 16px rgba(214, 35, 0, 0.15),
+              0 3px 8px rgba(255, 135, 50, 0.12),
+              inset 0 2px 0 rgba(255, 255, 255, 0.7),
+              inset 0 -2px 0 rgba(214, 35, 0, 0.08),
+              0 0 0 2px rgba(255, 135, 50, 0.25) !important;
+  border: 2px solid rgba(255, 135, 50, 0.3) !important;
+  min-width: 110px !important;
 }
 
 .react-joyride__tooltip button[data-action="back"]:hover {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.08)) !important;
-  transform: translateY(-3px) scale(1.03) !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15),
-              0 3px 6px rgba(0, 0, 0, 0.08),
-              inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  background: linear-gradient(135deg, rgba(255, 240, 220, 0.98), rgba(255, 235, 210, 0.95)) !important;
+  transform: translateY(-4px) scale(1.05) !important;
+  box-shadow: 0 8px 20px rgba(214, 35, 0, 0.22),
+              0 4px 10px rgba(255, 135, 50, 0.18),
+              inset 0 2px 0 rgba(255, 255, 255, 0.8),
+              inset 0 -2px 0 rgba(214, 35, 0, 0.12),
+              0 0 0 2px rgba(255, 135, 50, 0.4) !important;
 }
 
 .react-joyride__tooltip button[data-action="back"]:active {
-  transform: translateY(-1px) scale(0.99) !important;
+  transform: translateY(-1px) scale(0.98) !important;
 }
 
-/* Skip button with hover gradient */
+/* Skip button with BK subtle styling */
 .react-joyride__tooltip button[data-action="skip"] {
   background: transparent !important;
-  color: #94a3b8 !important;
+  color: #8B6F47 !important;
   box-shadow: none !important;
-  padding: 14px 20px !important;
+  padding: 16px 24px !important;
   border: 2px solid transparent !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 
 .react-joyride__tooltip button[data-action="skip"]:hover {
-  background: linear-gradient(135deg, rgba(255, 59, 48, 0.1), rgba(255, 59, 48, 0.06)) !important;
-  color: #FF3B30 !important;
-  border: 2px solid rgba(255, 59, 48, 0.25) !important;
-  transform: scale(1.03) !important;
-  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.15) !important;
+  background: linear-gradient(135deg, rgba(214, 35, 0, 0.12), rgba(255, 135, 50, 0.08)) !important;
+  color: #D62300 !important;
+  border: 2px solid rgba(255, 135, 50, 0.25) !important;
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 6px 16px rgba(214, 35, 0, 0.2) !important;
 }
 
 /* Close button (X) */
@@ -709,6 +770,24 @@ body {
 .react-joyride__beacon span {
   background: var(--color-primary-blue) !important;
   box-shadow: 0 0 0 8px rgba(0, 122, 255, 0.2) !important;
+}
+
+/* Tour button glow animation */
+.tour-button-glow {
+  animation: tourButtonGlow 6s ease-in-out infinite !important;
+}
+
+@keyframes tourButtonGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(147, 51, 234, 0),
+                0 0 0 0 rgba(147, 51, 234, 0),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(147, 51, 234, 0.4),
+                0 0 40px 10px rgba(147, 51, 234, 0.2),
+                0 4px 12px rgba(147, 51, 234, 0.3);
+  }
 }
 
 /* Mobile responsive adjustments */

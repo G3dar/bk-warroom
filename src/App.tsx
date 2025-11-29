@@ -41,7 +41,7 @@ function AppContent({ complaints }: { complaints: any[] }) {
 
   return (
     <div className="h-screen flex flex-col bg-[#F5F5F7] overflow-hidden">
-      <Header complaints={complaints} onStartTutorial={startTutorial} />
+      <Header complaints={complaints} onStartTutorial={startTutorial} isTourRunning={runTutorial} />
 
       <div className="flex-1 overflow-hidden">
         <Routes>

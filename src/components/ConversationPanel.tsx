@@ -17,6 +17,17 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLiveView, setShowLiveView] = useState(false);
 
+  // Handle tone ratings
+  const handleToneRating = (complaintId: number, messageIndex: number, rating: 'up' | 'down' | null) => {
+    console.log('Tone rating:', {
+      complaintId,
+      messageIndex,
+      rating,
+      timestamp: new Date().toISOString(),
+    });
+    // TODO: Send to API for model fine-tuning
+  };
+
   useEffect(() => {
     if (!complaint || isFeedFocused) return;
 
@@ -161,7 +172,14 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
           </div>
 
           {complaint.thread.map((message, index) => (
-            <SMSBubble key={index} message={message} timestamp={timestamps[index]} index={index} />
+            <SMSBubble
+              key={index}
+              message={message}
+              timestamp={timestamps[index]}
+              index={index}
+              complaintId={complaint.id}
+              onRatingChange={handleToneRating}
+            />
           ))}
         </div>
 

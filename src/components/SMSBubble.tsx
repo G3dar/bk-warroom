@@ -1,4 +1,5 @@
-import { Crown, Image, CheckCheck } from 'lucide-react';
+import { useState } from 'react';
+import { Crown, Image, CheckCheck, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { ThreadMessage } from '../types/complaints';
 
@@ -6,10 +7,19 @@ interface SMSBubbleProps {
   message: ThreadMessage;
   timestamp: string;
   index: number;
+  complaintId: number;
+  onRatingChange?: (complaintId: number, messageIndex: number, rating: 'up' | 'down' | null) => void;
 }
 
-export function SMSBubble({ message, timestamp, index }: SMSBubbleProps) {
+export function SMSBubble({ message, timestamp, index, complaintId, onRatingChange }: SMSBubbleProps) {
   const isCustomer = message.role === 'customer';
+  const [rating, setRating] = useState<'up' | 'down' | null>(null);
+
+  const handleRating = (newRating: 'up' | 'down') => {
+    const finalRating = rating === newRating ? null : newRating;
+    setRating(finalRating);
+    onRatingChange?.(complaintId, index, finalRating);
+  };
 
   return (
     <motion.div
@@ -49,10 +59,38 @@ export function SMSBubble({ message, timestamp, index }: SMSBubbleProps) {
         </div>
 
         {/* Timestamp and status */}
-        <div className={`flex items-center gap-1 mt-1 px-2 ${isCustomer ? 'justify-start' : 'justify-end'}`}>
+        <div className={`flex items-center gap-2 mt-1 px-2 ${isCustomer ? 'justify-start' : 'justify-end'}`}>
           <span className="text-[10px] text-[#86868B]">{timestamp}</span>
           {!isCustomer && (
-            <CheckCheck className="w-3 h-3 text-[#007AFF]" />
+            <>
+              <CheckCheck className="w-3 h-3 text-[#007AFF]" />
+
+              {/* Tone Rating Buttons */}
+              <div className="flex items-center gap-1 ml-2 border-l border-[#E5E5E5] pl-2">
+                <button
+                  onClick={() => handleRating('up')}
+                  className={`p-1 rounded-md transition-all hover:scale-110 ${
+                    rating === 'up'
+                      ? 'bg-green-100 text-green-600'
+                      : 'text-[#86868B] hover:bg-green-50 hover:text-green-600'
+                  }`}
+                  title="Good tone"
+                >
+                  <ThumbsUp className={`w-3.5 h-3.5 ${rating === 'up' ? 'fill-current' : ''}`} />
+                </button>
+                <button
+                  onClick={() => handleRating('down')}
+                  className={`p-1 rounded-md transition-all hover:scale-110 ${
+                    rating === 'down'
+                      ? 'bg-red-100 text-red-600'
+                      : 'text-[#86868B] hover:bg-red-50 hover:text-red-600'
+                  }`}
+                  title="Poor tone"
+                >
+                  <ThumbsDown className={`w-3.5 h-3.5 ${rating === 'down' ? 'fill-current' : ''}`} />
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>

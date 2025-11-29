@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { X, Maximize2 } from 'lucide-react';
+import { X, MapPin, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ComplaintWithMetadata } from '../types/complaints';
+import { getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
 
 interface LiveChatViewProps {
   complaint: ComplaintWithMetadata;
@@ -27,18 +28,18 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
       if (currentMessage.role === 'customer' && nextMessage?.role === 'bk') {
         setTimeout(() => {
           setIsTyping(true);
-        }, 800);
+        }, 1200);
 
         setTimeout(() => {
           setIsTyping(false);
           setVisibleMessages(index + 2);
           showNextMessage(index + 2);
-        }, 2000);
+        }, 3500);
       } else {
         setTimeout(() => {
           setVisibleMessages(index + 1);
           showNextMessage(index + 1);
-        }, 1200);
+        }, 1800);
       }
     };
 
@@ -50,6 +51,17 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
     return () => clearTimeout(timer);
   }, [complaint]);
 
+  // Get anger color
+  const getAngerColor = (category: string) => {
+    switch (category) {
+      case 'furious': return '#FF3B30';
+      case 'angry': return '#FF9500';
+      case 'annoyed': return '#FFCC00';
+      case 'calm': return '#34C759';
+      default: return '#8E8E93';
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -58,25 +70,79 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
       className="fixed inset-0 z-50 bg-gradient-to-br from-[#F5E6D3] via-[#FFF8F0] to-[#FFE5CC] flex flex-col"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#D62300] via-[#FF8732] to-[#D62300] px-6 py-4 shadow-lg">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/40">
-                <span className="text-2xl">👤</span>
+      <div className="bg-gradient-to-r from-[#D62300] via-[#FF8732] to-[#D62300] px-6 py-5 shadow-lg">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/40 shadow-lg">
+                <span className="text-3xl">👤</span>
               </div>
               <div>
-                <h2 className="text-white font-bold text-lg">{complaint.customer.name}</h2>
-                <p className="text-white/80 text-sm">{complaint.customer.phone}</p>
+                <h2 className="text-white font-bold text-xl tracking-tight" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif' }}>
+                  {complaint.customer.name}
+                </h2>
+                <div className="flex items-center gap-3 mt-1">
+                  <div className="flex items-center gap-1.5 text-white/90">
+                    <Phone className="w-3.5 h-3.5" />
+                    <span className="text-sm font-medium">{complaint.customer.phone}</span>
+                  </div>
+                  <span className="text-white/60">•</span>
+                  <div className="flex items-center gap-1.5 text-white/90">
+                    <MapPin className="w-3.5 h-3.5" />
+                    <span className="text-sm font-medium">{complaint.location.city}, {complaint.location.stateAbbr}</span>
+                  </div>
+                </div>
               </div>
             </div>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/40"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/40"
-          >
-            <X className="w-6 h-6 text-white" />
-          </button>
+
+          {/* Meta Information */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Date */}
+            <div className="px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-semibold">
+              📅 {complaint.timestamp.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </div>
+
+            {/* Anger Level with Bar */}
+            <div className="px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center gap-2">
+              <span className="text-lg">{complaint.anger.emoji}</span>
+              <div className="flex flex-col gap-0.5">
+                <span className="text-white text-xs font-bold uppercase tracking-wide">{complaint.anger.category}</span>
+                <div className="w-16 h-1 bg-white/30 rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all"
+                    style={{
+                      width: `${(complaint.anger.level / 10) * 100}%`,
+                      backgroundColor: getAngerColor(complaint.anger.category)
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Category */}
+            <div className="px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-semibold">
+              {getCategoryEmoji(complaint.category)} {normalizeCategoryName(complaint.category)}
+            </div>
+
+            {/* Priority */}
+            {(complaint.priority === 'high' || complaint.anger.category === 'furious') && (
+              <div className="px-3 py-1.5 rounded-full bg-red-500/90 backdrop-blur-sm border border-white/40 text-white text-xs font-bold shadow-lg animate-pulse">
+                🔴 PRIORITY
+              </div>
+            )}
+
+            {/* ID */}
+            <div className="px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-semibold">
+              ID #{complaint.id}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -106,7 +172,7 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
                     initial={{ scale: 0.9 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.1 }}
-                    className={`px-5 py-3 rounded-3xl shadow-lg ${
+                    className={`px-5 py-3.5 rounded-3xl shadow-lg ${
                       isCustomer
                         ? 'bg-gradient-to-br from-[#4A5568] to-[#2D3748] text-white rounded-bl-md'
                         : isWelcome
@@ -115,10 +181,11 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
                         ? 'bg-gradient-to-br from-[#FF8732] to-[#D62300] text-white rounded-br-md shadow-2xl'
                         : 'bg-gradient-to-br from-[#FF8732] to-[#FF6B35] text-white rounded-br-md'
                     }`}
+                    style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }}
                   >
-                    <p className={`text-[15px] leading-relaxed whitespace-pre-wrap ${
+                    <p className={`text-[16px] leading-relaxed whitespace-pre-wrap ${
                       isCustomer ? 'font-normal' : 'font-medium'
-                    }`}>
+                    }`} style={{ letterSpacing: '-0.01em' }}>
                       {message.message}
                     </p>
 
@@ -150,7 +217,7 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
                   </motion.div>
 
                   {/* Timestamp */}
-                  <span className="text-xs text-[#8B7355] px-3 font-medium">
+                  <span className="text-[11px] text-[#8B7355] px-3 font-normal opacity-70" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }}>
                     {new Date(complaint.timestamp).toLocaleTimeString('en-US', {
                       hour: 'numeric',
                       minute: '2-digit',
@@ -171,50 +238,28 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
                 transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 className="flex justify-end"
               >
-                <div className="bg-gradient-to-br from-[#FF8732] to-[#FF6B35] px-6 py-4 rounded-3xl rounded-br-md shadow-lg">
-                  <div className="flex gap-1.5">
+                <div className="bg-gradient-to-br from-[#FF8732] to-[#FF6B35] px-7 py-4 rounded-3xl rounded-br-md shadow-lg">
+                  <div className="flex gap-2">
                     <motion.div
-                      animate={{ scale: [1, 1.3, 1] }}
-                      transition={{ repeat: Infinity, duration: 1, delay: 0 }}
-                      className="w-2.5 h-2.5 bg-white rounded-full"
+                      animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ repeat: Infinity, duration: 1.2, delay: 0 }}
+                      className="w-2 h-2 bg-white rounded-full"
                     />
                     <motion.div
-                      animate={{ scale: [1, 1.3, 1] }}
-                      transition={{ repeat: Infinity, duration: 1, delay: 0.2 }}
-                      className="w-2.5 h-2.5 bg-white rounded-full"
+                      animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ repeat: Infinity, duration: 1.2, delay: 0.2 }}
+                      className="w-2 h-2 bg-white rounded-full"
                     />
                     <motion.div
-                      animate={{ scale: [1, 1.3, 1] }}
-                      transition={{ repeat: Infinity, duration: 1, delay: 0.4 }}
-                      className="w-2.5 h-2.5 bg-white rounded-full"
+                      animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ repeat: Infinity, duration: 1.2, delay: 0.4 }}
+                      className="w-2 h-2 bg-white rounded-full"
                     />
                   </div>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Footer Info */}
-      <div className="bg-white/50 backdrop-blur-sm border-t border-[#FF8732]/20 px-6 py-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className={`px-3 py-1 rounded-full text-xs font-bold ${
-              complaint.anger.category === 'furious' ? 'bg-red-100 text-red-700' :
-              complaint.anger.category === 'angry' ? 'bg-orange-100 text-orange-700' :
-              complaint.anger.category === 'annoyed' ? 'bg-yellow-100 text-yellow-700' :
-              'bg-green-100 text-green-700'
-            }`}>
-              {complaint.anger.category.toUpperCase()}
-            </div>
-            <span className="text-sm text-[#8B7355] font-medium">
-              {complaint.location.city}, {complaint.location.stateAbbr}
-            </span>
-          </div>
-          <span className="text-xs text-[#8B7355] font-bold">
-            ID #{complaint.id}
-          </span>
         </div>
       </div>
     </motion.div>

@@ -7,7 +7,7 @@ interface SearchBarProps {
 
 export function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <div className="relative group">
+    <div className="relative group" data-tour="search-bar">
       <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#86868B] group-focus-within:text-[#007AFF] transition-colors pointer-events-none">
         <Search className="w-5 h-5 stroke-[2.5]" />
       </div>

@@ -75,7 +75,7 @@ export function KeywordAnalytics({ complaints }: KeywordAnalyticsProps) {
       <div className="flex-1 overflow-y-auto p-3 sm:p-6">
         <div className="max-w-7xl mx-auto">
           {/* Bar Chart */}
-          <div className="card p-3 sm:p-6 mb-4 sm:mb-6">
+          <div className="card p-3 sm:p-6 mb-4 sm:mb-6" data-tour="analytics-chart">
             <h2 className="text-[16px] sm:text-[20px] font-bold text-[#1D1D1F] mb-3 sm:mb-4">Keyword Frequency Distribution</h2>
             <ResponsiveContainer width="100%" height={300} className="sm:hidden">
               <BarChart data={keywordData} margin={{ top: 10, right: 10, left: -20, bottom: 60 }}>

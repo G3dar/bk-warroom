@@ -147,7 +147,7 @@ export function ComplaintFeed({
             </div>
           </div>
         ) : (
-          <div className="flex-1 min-h-0 overflow-y-auto scroll-smooth-container px-6 space-y-2 pb-6">
+          <div className="flex-1 min-h-0 overflow-y-auto scroll-smooth-container px-6 space-y-2 pb-6" data-tour="complaint-feed">
             {renderedCards}
           </div>
         )}

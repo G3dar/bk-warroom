@@ -66,7 +66,7 @@ export function SMSBubble({ message, timestamp, index, complaintId, onRatingChan
               <CheckCheck className="w-3 h-3 text-[#007AFF]" />
 
               {/* Tone Rating Buttons */}
-              <div className="flex items-center gap-1 ml-2 border-l border-[#E5E5E5] pl-2">
+              <div className="flex items-center gap-1 ml-2 border-l border-[#E5E5E5] pl-2" data-tour="tone-rating">
                 <button
                   onClick={() => handleRating('up')}
                   className={`p-1 rounded-md transition-all hover:scale-110 ${

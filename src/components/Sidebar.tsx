@@ -84,14 +84,14 @@ export function Sidebar({
   };
 
   return (
-    <aside className="w-80 h-full bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col overflow-hidden shadow-sm">
+    <aside className="w-80 h-full bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col overflow-hidden shadow-sm" data-tour="sidebar">
       <div className="flex-1 min-h-0 overflow-y-auto p-4">
         <h2 className="text-[11px] font-bold text-[#86868B] uppercase tracking-wider mb-6">
           Filters
         </h2>
 
         {/* Category Filter */}
-        <div className="mb-8">
+        <div className="mb-8" data-tour="category-filters">
           <button
             onClick={() => toggleSection('category')}
             className="flex items-center justify-between w-full mb-3 text-[#1D1D1F] font-semibold hover:text-[#007AFF] transition-colors text-[15px]"
@@ -278,7 +278,7 @@ export function Sidebar({
         </div>
 
         {/* Keywords Filter */}
-        <div className="mb-6">
+        <div className="mb-6" data-tour="keyword-filters">
           <button
             onClick={() => toggleSection('keywords')}
             className="flex items-center justify-between w-full mb-3 text-[#1D1D1F] font-semibold hover:text-[#007AFF] transition-colors text-[15px]"

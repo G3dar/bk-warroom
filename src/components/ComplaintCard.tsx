@@ -80,6 +80,7 @@ export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected
               }}
               className="group p-1 rounded-lg hover:bg-yellow-100 transition-all"
               title={isStarred ? "Unstar message" : "Star message"}
+              data-tour="star-button"
             >
               <Star
                 className={`w-5 h-5 transition-all ${
@@ -137,6 +138,7 @@ export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected
                   ? { backgroundColor: color.bg, borderColor: color.bg }
                   : { backgroundColor: color.bgLight, borderColor: color.border, color: color.bg }
               }
+              data-tour={idx === 0 ? "keyword-badge" : undefined}
             >
               {keyword}
             </button>

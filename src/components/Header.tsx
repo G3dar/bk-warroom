@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3 } from 'lucide-react';
+import { BarChart3, HelpCircle } from 'lucide-react';
 import type { ComplaintWithMetadata } from '../types/complaints';
 
 interface HeaderProps {
   complaints: ComplaintWithMetadata[];
+  onStartTutorial?: () => void;
 }
 
-export function Header({ complaints }: HeaderProps) {
+export function Header({ complaints, onStartTutorial }: HeaderProps) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const location = useLocation();
 
@@ -47,7 +48,7 @@ export function Header({ complaints }: HeaderProps) {
                 />
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-200 shadow-md">
+                <div className="flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-200 shadow-md" data-tour="live-indicator">
                   <div className="status-dot status-live pulse-subtle" />
                   <span className="text-[10px] sm:text-[12px] font-bold text-[#34C759]">Live</span>
                 </div>
@@ -89,7 +90,7 @@ export function Header({ complaints }: HeaderProps) {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 w-full lg:w-auto">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 w-full lg:w-auto" data-tour="header-stats">
             {/* Total */}
             <div className="stat-card min-w-[80px] sm:min-w-[100px] px-2 sm:px-3 py-1.5 sm:py-2 border-2 border-gray-200 shadow-md" style={{ backgroundColor: 'rgba(142, 142, 147, 0.12)' }}>
               <div className="text-[8px] sm:text-[9px] text-[#86868B] uppercase tracking-widest font-bold mb-0.5 sm:mb-1">Total</div>
@@ -121,10 +122,29 @@ export function Header({ complaints }: HeaderProps) {
               <div className="text-[9px] sm:text-[10px] text-[#86868B] font-semibold">out of 10</div>
             </div>
 
+            {/* Tour Button */}
+            {location.pathname === '/' && onStartTutorial && (
+              <button
+                onClick={onStartTutorial}
+                className="stat-card min-w-[100px] sm:min-w-[140px] px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-purple-200 shadow-md hover:shadow-xl transition-all cursor-pointer group"
+                style={{ backgroundColor: 'rgba(147, 51, 234, 0.12)' }}
+                title="Start Feature Tour"
+              >
+                <div className="flex items-center justify-center gap-2 h-full">
+                  <HelpCircle className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600 group-hover:scale-110 transition-transform" />
+                  <div className="flex flex-col items-start leading-none">
+                    <div className="text-[11px] sm:text-[13px] font-black text-purple-600">Welcome</div>
+                    <div className="text-[11px] sm:text-[13px] font-black text-purple-600">Tour</div>
+                  </div>
+                </div>
+              </button>
+            )}
+
             {/* Analytics Link */}
             {location.pathname === '/' && (
               <Link
                 to="/analytics"
+                data-tour="analytics-link"
                 className="stat-card min-w-[100px] sm:min-w-[120px] px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-[#007AFF] shadow-md hover:shadow-xl transition-all cursor-pointer group"
                 style={{ backgroundColor: 'rgba(0, 122, 255, 0.15)' }}
               >

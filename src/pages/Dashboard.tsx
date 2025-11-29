@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { Filter, X } from 'lucide-react';
 import { Sidebar } from '../components/Sidebar';
 import { ComplaintFeed } from '../components/ComplaintFeed';
 import { ConversationPanel } from '../components/ConversationPanel';
@@ -17,6 +18,7 @@ export function Dashboard({ complaints }: DashboardProps) {
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isFeedFocused, setIsFeedFocused] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [starredIds, setStarredIds] = useState<Set<number>>(() => {
     // Load starred IDs from localStorage
     const stored = localStorage.getItem('starredComplaints');
@@ -114,18 +116,52 @@ export function Dashboard({ complaints }: DashboardProps) {
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden">
-      <Sidebar
-        complaints={complaints}
-        selectedCategory={selectedCategory}
-        selectedAnger={selectedAnger}
-        selectedState={selectedState}
-        selectedKeywords={selectedKeywords}
-        onCategoryChange={setSelectedCategory}
-        onAngerChange={setSelectedAnger}
-        onStateChange={setSelectedState}
-        onKeywordsChange={setSelectedKeywords}
-      />
+    <div className="flex-1 flex overflow-hidden relative">
+      {/* Mobile Filter Button */}
+      <button
+        onClick={() => setIsSidebarOpen(true)}
+        className="lg:hidden fixed bottom-6 right-6 z-40 bg-[#007AFF] text-white p-4 rounded-full shadow-2xl hover:shadow-xl transition-all hover:scale-110"
+      >
+        <Filter className="w-6 h-6" />
+      </button>
+
+      {/* Sidebar Overlay for Mobile */}
+      {isSidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className={`
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:translate-x-0
+        fixed lg:relative
+        z-50 lg:z-auto
+        transition-transform duration-300 ease-in-out
+        h-full
+      `}>
+        <Sidebar
+          complaints={complaints}
+          selectedCategory={selectedCategory}
+          selectedAnger={selectedAnger}
+          selectedState={selectedState}
+          selectedKeywords={selectedKeywords}
+          onCategoryChange={setSelectedCategory}
+          onAngerChange={setSelectedAnger}
+          onStateChange={setSelectedState}
+          onKeywordsChange={setSelectedKeywords}
+        />
+
+        {/* Close button for mobile */}
+        <button
+          onClick={() => setIsSidebarOpen(false)}
+          className="lg:hidden absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg"
+        >
+          <X className="w-5 h-5 text-[#1D1D1F]" />
+        </button>
+      </div>
 
       <ComplaintFeed
         complaints={sortedComplaints}
@@ -141,12 +177,15 @@ export function Dashboard({ complaints }: DashboardProps) {
         selectedKeywords={selectedKeywords}
       />
 
-      <ConversationPanel
-        complaint={selectedComplaint}
-        onClose={() => setSelectedComplaint(null)}
-        isFeedFocused={isFeedFocused}
-        onFocusChange={setIsFeedFocused}
-      />
+      {/* ConversationPanel - hide on mobile when not selected */}
+      <div className={`${selectedComplaint ? 'block' : 'hidden lg:block'}`}>
+        <ConversationPanel
+          complaint={selectedComplaint}
+          onClose={() => setSelectedComplaint(null)}
+          isFeedFocused={isFeedFocused}
+          onFocusChange={setIsFeedFocused}
+        />
+      </div>
     </div>
   );
 }

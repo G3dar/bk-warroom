@@ -58,10 +58,10 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
   }, [complaint, isFeedFocused, onFocusChange]);
   if (!complaint) {
     return (
-      <div className="w-[600px] bg-white border-l border-[#E5E5E5] flex items-center justify-center">
-        <div className="text-center p-8">
-          <div className="text-7xl mb-4">💬</div>
-          <div className="text-xl font-medium text-[#1D1D1F] mb-2">Select a Message</div>
+      <div className="w-full lg:w-[600px] bg-white border-l border-[#E5E5E5] flex items-center justify-center">
+        <div className="text-center p-4 sm:p-8">
+          <div className="text-5xl sm:text-7xl mb-4">💬</div>
+          <div className="text-lg sm:text-xl font-medium text-[#1D1D1F] mb-2">Select a Message</div>
           <div className="text-sm text-[#86868B]">Choose a conversation from the list to view details</div>
         </div>
       </div>
@@ -86,16 +86,20 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: 100, opacity: 0 }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className={`w-[600px] bg-white border-l flex flex-col ${
-          isFeedFocused ? 'border-[#E5E5E5]' : 'border-[#007AFF] border-l-4'
-        }`}
+        className={`
+          fixed lg:relative
+          inset-0 lg:inset-auto
+          w-full lg:w-[600px]
+          bg-white border-l flex flex-col z-30
+          ${isFeedFocused ? 'border-[#E5E5E5]' : 'border-[#007AFF] lg:border-l-4'}
+        `}
         onClick={() => onFocusChange(false)}
       >
         {/* Header */}
-        <div className="px-4 py-3 border-b border-[#E5E5E5] bg-gradient-to-r from-white to-[#FAFAFA] shadow-sm">
+        <div className="px-3 sm:px-4 py-2 sm:py-3 border-b border-[#E5E5E5] bg-gradient-to-r from-white to-[#FAFAFA] shadow-sm">
           <div className="flex items-start justify-between mb-2">
             <div className="flex-1">
-              <h2 className="text-xl font-semibold text-[#1D1D1F] mb-1">
+              <h2 className="text-lg sm:text-xl font-semibold text-[#1D1D1F] mb-1">
                 {complaint.customer.name}
               </h2>
               <div className="flex flex-col gap-1 text-sm text-[#86868B]">
@@ -112,20 +116,21 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <button
                 onClick={() => setShowLiveView(true)}
-                className="px-3 py-2 rounded-lg bg-gradient-to-r from-[#FF8732] to-[#D62300] text-white hover:shadow-lg transition-all flex items-center gap-2 font-semibold text-sm"
+                className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-[#FF8732] to-[#D62300] text-white hover:shadow-lg transition-all flex items-center gap-1 sm:gap-2 font-semibold text-xs sm:text-sm"
                 title="View Live Chat Simulation"
               >
-                <Maximize2 className="w-4 h-4" />
-                Live View
+                <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">Live View</span>
+                <span className="sm:hidden">Live</span>
               </button>
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg hover:bg-[#F5F5F7] transition-colors"
+                className="p-1.5 sm:p-2 rounded-lg hover:bg-[#F5F5F7] transition-colors"
               >
-                <X className="w-5 h-5 text-[#86868B]" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5 text-[#86868B]" />
               </button>
             </div>
           </div>

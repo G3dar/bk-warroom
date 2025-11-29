@@ -44,39 +44,67 @@ export function KeywordAnalytics({ complaints }: KeywordAnalyticsProps) {
     <div className="h-screen flex flex-col bg-[#F5F5F7]">
       {/* Header */}
       <header className="bg-gradient-to-br from-orange-50/60 via-white to-red-50/40 border-b-2 border-[#FF8732]/30 shadow-lg">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+        <div className="px-3 sm:px-6 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
               <Link
                 to="/"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-[#007AFF] text-[#007AFF] hover:bg-[#007AFF] hover:text-white transition-all font-semibold shadow-md"
+                className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-white border-2 border-[#007AFF] text-[#007AFF] hover:bg-[#007AFF] hover:text-white transition-all font-semibold shadow-md text-sm"
               >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Dashboard
+                <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">Back to Dashboard</span>
+                <span className="sm:hidden">Back</span>
               </Link>
-              <div className="h-10 w-0.5 bg-gradient-to-b from-transparent via-[#FF8732]/40 to-transparent"></div>
+              <div className="hidden sm:block h-10 w-0.5 bg-gradient-to-b from-transparent via-[#FF8732]/40 to-transparent"></div>
               <div>
-                <h1 className="text-[28px] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D62300] via-[#FF8732] to-[#D62300] tracking-tight leading-none mb-1">
+                <h1 className="text-[20px] sm:text-[28px] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D62300] via-[#FF8732] to-[#D62300] tracking-tight leading-none mb-1">
                   Keyword Analytics
                 </h1>
-                <p className="text-[13px] text-[#86868B] font-semibold">Top 20 Most Frequent Keywords</p>
+                <p className="text-[11px] sm:text-[13px] text-[#86868B] font-semibold">Top 20 Most Frequent Keywords</p>
               </div>
             </div>
-            <div className="stat-card px-4 py-2 border-2 border-blue-200 shadow-md" style={{ backgroundColor: 'rgba(0, 122, 255, 0.15)' }}>
-              <div className="text-[9px] text-[#86868B] uppercase tracking-widest font-bold mb-1">Total Keywords</div>
-              <div className="text-[24px] font-black text-[#007AFF] leading-none">{keywordData.length}</div>
+            <div className="stat-card px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-blue-200 shadow-md" style={{ backgroundColor: 'rgba(0, 122, 255, 0.15)' }}>
+              <div className="text-[8px] sm:text-[9px] text-[#86868B] uppercase tracking-widest font-bold mb-1">Total Keywords</div>
+              <div className="text-[20px] sm:text-[24px] font-black text-[#007AFF] leading-none">{keywordData.length}</div>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-3 sm:p-6">
         <div className="max-w-7xl mx-auto">
           {/* Bar Chart */}
-          <div className="card p-6 mb-6">
-            <h2 className="text-[20px] font-bold text-[#1D1D1F] mb-4">Keyword Frequency Distribution</h2>
-            <ResponsiveContainer width="100%" height={500}>
+          <div className="card p-3 sm:p-6 mb-4 sm:mb-6">
+            <h2 className="text-[16px] sm:text-[20px] font-bold text-[#1D1D1F] mb-3 sm:mb-4">Keyword Frequency Distribution</h2>
+            <ResponsiveContainer width="100%" height={300} className="sm:hidden">
+              <BarChart data={keywordData} margin={{ top: 10, right: 10, left: -20, bottom: 60 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
+                <XAxis
+                  dataKey="keyword"
+                  angle={-45}
+                  textAnchor="end"
+                  height={80}
+                  style={{ fontSize: '9px', fontWeight: 600, fill: '#1D1D1F' }}
+                />
+                <YAxis style={{ fontSize: '10px', fontWeight: 600, fill: '#1D1D1F' }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: 'white',
+                    border: '2px solid #007AFF',
+                    borderRadius: '12px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  }}
+                  labelStyle={{ fontWeight: 'bold', color: '#1D1D1F' }}
+                />
+                <Bar dataKey="count" radius={[6, 6, 0, 0]}>
+                  {keywordData.map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            <ResponsiveContainer width="100%" height={500} className="hidden sm:block">
               <BarChart data={keywordData} margin={{ top: 20, right: 30, left: 20, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
                 <XAxis
@@ -106,34 +134,34 @@ export function KeywordAnalytics({ complaints }: KeywordAnalyticsProps) {
           </div>
 
           {/* Keyword List */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {keywordData.map((item, index) => {
               const percentage = ((item.count / complaints.length) * 100).toFixed(1);
               const color = colors[index % colors.length];
 
               return (
-                <div key={item.keyword} className="card p-4 hover:shadow-lg transition-all">
+                <div key={item.keyword} className="card p-3 sm:p-4 hover:shadow-lg transition-all">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-md flex-shrink-0"
                         style={{ backgroundColor: color }}
                       >
                         {index + 1}
                       </div>
                       <div>
-                        <h3 className="text-[16px] font-bold text-[#1D1D1F] capitalize">{item.keyword}</h3>
-                        <p className="text-[12px] text-[#86868B]">{percentage}% of messages</p>
+                        <h3 className="text-[14px] sm:text-[16px] font-bold text-[#1D1D1F] capitalize">{item.keyword}</h3>
+                        <p className="text-[10px] sm:text-[12px] text-[#86868B]">{percentage}% of messages</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-[24px] font-black" style={{ color }}>
+                      <div className="text-[20px] sm:text-[24px] font-black" style={{ color }}>
                         {item.count}
                       </div>
-                      <div className="text-[10px] text-[#86868B] font-semibold">occurrences</div>
+                      <div className="text-[9px] sm:text-[10px] text-[#86868B] font-semibold">occurrences</div>
                     </div>
                   </div>
-                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 sm:h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{

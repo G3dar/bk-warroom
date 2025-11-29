@@ -1,4 +1,4 @@
-import { useState, useCallback, createElement } from 'react';
+import { useState, useCallback, createElement, useMemo } from 'react';
 import type { Step } from 'react-joyride';
 
 const TUTORIAL_STORAGE_KEY = 'bk-tutorial-completed';
@@ -11,11 +11,16 @@ const createContent = (html: string) => {
   });
 };
 
+// Helper to detect mobile devices
+const isMobileDevice = () => {
+  return window.innerWidth < 1024; // lg breakpoint
+};
+
 export const useTutorial = () => {
   const [runTutorial, setRunTutorial] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
 
-  const tutorialSteps: Step[] = [
+  const allTutorialSteps: Step[] = [
     {
       target: 'body',
       title: 'Welcome to the BK War Room!',
@@ -99,6 +104,7 @@ export const useTutorial = () => {
       `),
       placement: 'right',
       disableBeacon: true,
+      data: { desktopOnly: true },
     },
     {
       target: '[data-tour="category-filters"]',
@@ -115,6 +121,7 @@ export const useTutorial = () => {
       `),
       placement: 'right',
       disableBeacon: true,
+      data: { desktopOnly: true },
     },
     {
       target: '[data-tour="keyword-filters"]',
@@ -133,6 +140,7 @@ export const useTutorial = () => {
       `),
       placement: 'right',
       disableBeacon: true,
+      data: { desktopOnly: true },
     },
     {
       target: '[data-tour="complaint-feed"]',
@@ -296,6 +304,18 @@ export const useTutorial = () => {
       disableBeacon: true,
     },
   ];
+
+  // Filter steps based on device type
+  const tutorialSteps = useMemo(() => {
+    const isMobile = isMobileDevice();
+    return allTutorialSteps.filter(step => {
+      // Skip desktop-only steps on mobile
+      if (isMobile && step.data?.desktopOnly) {
+        return false;
+      }
+      return true;
+    });
+  }, []);
 
   const startTutorial = useCallback(() => {
     setStepIndex(0);

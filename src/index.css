@@ -551,8 +551,8 @@ body {
 /* Footer with BK-themed styling */
 .react-joyride__tooltip footer {
   background: linear-gradient(to bottom,
-              rgba(255, 245, 230, 0.98),
-              rgba(255, 240, 220, 0.96)) !important;
+              rgb(255, 245, 230),
+              rgb(255, 240, 220)) !important;
   border-top: 2px solid rgba(255, 135, 50, 0.2) !important;
   padding: 22px 32px !important;
   display: flex !important;

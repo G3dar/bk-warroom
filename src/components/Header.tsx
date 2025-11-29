@@ -123,11 +123,11 @@ export function Header({ complaints, onStartTutorial, isTourRunning }: HeaderPro
               <div className="text-[9px] sm:text-[10px] text-[#86868B] font-semibold">out of 10</div>
             </div>
 
-            {/* Tour Button */}
+            {/* Tour Button - Desktop Only */}
             {location.pathname === '/' && onStartTutorial && (
               <button
                 onClick={onStartTutorial}
-                className={`stat-card min-w-[100px] sm:min-w-[140px] px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-purple-200 shadow-md hover:shadow-xl transition-all cursor-pointer group ${!isTourRunning ? 'tour-button-glow' : ''}`}
+                className={`hidden lg:flex stat-card min-w-[100px] sm:min-w-[140px] px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-purple-200 shadow-md hover:shadow-xl transition-all cursor-pointer group ${!isTourRunning ? 'tour-button-glow' : ''}`}
                 style={{ backgroundColor: 'rgba(147, 51, 234, 0.12)' }}
                 title="Start Feature Tour"
               >

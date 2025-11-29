@@ -116,7 +116,7 @@ export function Dashboard({ complaints }: DashboardProps) {
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden relative">
+    <div className="flex-1 flex overflow-hidden relative h-full">
       {/* Mobile Filter Button */}
       <button
         onClick={() => setIsSidebarOpen(true)}

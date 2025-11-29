@@ -58,7 +58,7 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
   }, [complaint, isFeedFocused, onFocusChange]);
   if (!complaint) {
     return (
-      <div className="w-full lg:w-[600px] bg-white border-l border-[#E5E5E5] flex items-center justify-center">
+      <div className="w-full lg:w-[600px] h-full bg-white border-l border-[#E5E5E5] flex items-center justify-center">
         <div className="text-center p-4 sm:p-8">
           <div className="text-5xl sm:text-7xl mb-4">💬</div>
           <div className="text-lg sm:text-xl font-medium text-[#1D1D1F] mb-2">Select a Message</div>

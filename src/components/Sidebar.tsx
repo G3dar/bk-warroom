@@ -84,8 +84,8 @@ export function Sidebar({
   };
 
   return (
-    <aside className="w-80 bg-[#FAFAFA] border-r border-[#E5E5E5] overflow-y-auto shadow-sm">
-      <div className="p-4">
+    <aside className="w-80 h-full bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col overflow-hidden shadow-sm">
+      <div className="flex-1 min-h-0 overflow-y-auto p-4">
         <h2 className="text-[11px] font-bold text-[#86868B] uppercase tracking-wider mb-6">
           Filters
         </h2>

@@ -41,9 +41,9 @@ export function KeywordAnalytics({ complaints }: KeywordAnalyticsProps) {
   ];
 
   return (
-    <div className="h-screen flex flex-col bg-[#F5F5F7]">
+    <div className="h-full flex flex-col bg-[#F5F5F7] overflow-hidden">
       {/* Header */}
-      <header className="bg-gradient-to-br from-orange-50/60 via-white to-red-50/40 border-b-2 border-[#FF8732]/30 shadow-lg">
+      <header className="bg-gradient-to-br from-orange-50/60 via-white to-red-50/40 border-b-2 border-[#FF8732]/30 shadow-lg flex-shrink-0">
         <div className="px-3 sm:px-6 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">

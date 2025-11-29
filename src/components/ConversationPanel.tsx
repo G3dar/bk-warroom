@@ -90,6 +90,7 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
           fixed lg:relative
           inset-0 lg:inset-auto
           w-full lg:w-[600px]
+          h-full
           bg-white border-l flex flex-col z-30
           ${isFeedFocused ? 'border-[#E5E5E5]' : 'border-[#007AFF] lg:border-l-4'}
         `}
@@ -164,7 +165,7 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
         </div>
 
         {/* Conversation Thread */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-4 py-4 bg-gradient-to-b from-[#F8F8F8] to-[#FAFAFA]">
+        <div ref={scrollContainerRef} className="flex-1 min-h-0 overflow-y-auto px-4 py-4 bg-gradient-to-b from-[#F8F8F8] to-[#FAFAFA]">
           <div className="mb-4 text-center">
             <div className="inline-block px-3 py-1 rounded-full bg-white text-xs text-[#86868B] shadow-sm">
               {complaint.timestamp.toLocaleDateString('en-US', {

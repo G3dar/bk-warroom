@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { motion } from 'framer-motion';
 import { MapPin, Clock, Star } from 'lucide-react';
 import type { ComplaintWithMetadata } from '../types/complaints';
 import { formatRelativeTime, getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
@@ -41,9 +42,10 @@ export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected
   const preview = firstMessage.length > 85 ? firstMessage.slice(0, 85) + '...' : firstMessage;
 
   return (
-    <button
+    <motion.div
       onClick={onClick}
-      className={`w-full text-left p-3 rounded-xl transition-all hover:scale-[1.005] ${
+      whileHover={{ scale: 1.005 }}
+      className={`w-full text-left p-3 rounded-xl transition-all cursor-pointer ${
         isSelected
           ? 'card-selected'
           : 'card'
@@ -141,6 +143,6 @@ export const ComplaintCard = memo(function ComplaintCard({ complaint, isSelected
           );
         })}
       </div>
-    </button>
+    </motion.div>
   );
 });

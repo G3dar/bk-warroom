@@ -17,7 +17,7 @@ function App() {
       <div className="h-screen flex flex-col bg-[#F5F5F7] overflow-hidden">
         <Header complaints={complaints} />
 
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 overflow-hidden">
           <Routes>
             <Route path="/" element={<Dashboard complaints={complaints} />} />
             <Route path="/analytics" element={<KeywordAnalytics complaints={complaints} />} />

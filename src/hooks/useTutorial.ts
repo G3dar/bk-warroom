@@ -56,17 +56,6 @@ export const useTutorial = () => {
       disableBeacon: true,
     },
     {
-      target: '[data-tour="live-indicator"]',
-      title: 'Live Status',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6;">
-          The <strong style="color: #34C759;">pulsing green dot</strong> shows the system is actively monitoring for new complaints in real-time.
-        </p>
-      `),
-      placement: 'bottom',
-      disableBeacon: true,
-    },
-    {
       target: '[data-tour="search-bar"]',
       title: 'Smart Search',
       content: createContent(`
@@ -87,55 +76,19 @@ export const useTutorial = () => {
     },
     {
       target: '[data-tour="sidebar"]',
-      title: 'Advanced Filters',
+      title: 'Filter Panel',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Filter complaints by <strong style="color: #FF8732;">multiple criteria</strong>:
+          Powerful filtering with <strong style="color: #FF8732;">visual cards</strong> showing:
         </p>
         <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
-          <li>Category</li>
-          <li>Anger level</li>
-          <li>US state</li>
-          <li>Keywords</li>
+          <li>Category breakdown with percentages</li>
+          <li>Anger level distribution</li>
+          <li>Filter by US state</li>
+          <li>Top 20 most frequent keywords</li>
         </ul>
         <p style="font-size: 13px; margin-top: 10px; color: #666;">
-          Combine filters for precise results!
-        </p>
-      `),
-      placement: 'right',
-      disableBeacon: true,
-      data: { desktopOnly: true },
-    },
-    {
-      target: '[data-tour="category-filters"]',
-      title: 'Category Filters',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Beautiful <strong style="color: #9333EA;">visual cards</strong> show complaint distribution with:
-        </p>
-        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
-          <li>Counts & percentages</li>
-          <li>Color-coded progress bars</li>
-          <li>Click to filter instantly</li>
-        </ul>
-      `),
-      placement: 'right',
-      disableBeacon: true,
-      data: { desktopOnly: true },
-    },
-    {
-      target: '[data-tour="keyword-filters"]',
-      title: 'Keyword Power',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Select <strong style="color: #007AFF;">multiple keywords</strong> to narrow down complaints instantly!
-        </p>
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px; border-radius: 12px; margin: 10px 0;">
-          <div style="font-size: 24px; font-weight: bold; text-align: center;">Top 20</div>
-          <div style="font-size: 12px; text-align: center; opacity: 0.9;">Most frequent keywords</div>
-        </div>
-        <p style="font-size: 13px; color: #666;">
-          Each shows occurrence count
+          Combine multiple filters for precise results
         </p>
       `),
       placement: 'right',

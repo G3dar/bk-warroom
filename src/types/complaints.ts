@@ -12,7 +12,7 @@ export interface Complaint {
 export interface ThreadMessage {
   role: 'customer' | 'bk';
   message: string;
-  type?: 'final';
+  type?: 'final' | 'welcome';
   animation?: boolean;
   attachment?: boolean;
 }

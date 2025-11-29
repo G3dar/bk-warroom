@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Joyride, { STATUS, ACTIONS } from 'react-joyride';
 import { Header } from './components/Header';
 import { Dashboard } from './pages/Dashboard';
@@ -8,7 +8,6 @@ import { useComplaints } from './hooks/useComplaints';
 import { useTutorial } from './hooks/useTutorial';
 
 function AppContent({ complaints }: { complaints: any[] }) {
-  const location = useLocation();
   const {
     runTutorial,
     stepIndex,

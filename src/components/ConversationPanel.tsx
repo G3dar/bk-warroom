@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { Phone, MapPin, X, Info } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Phone, MapPin, X, Info, Maximize2 } from 'lucide-react';
 import { SMSBubble } from './SMSBubble';
+import { LiveChatView } from './LiveChatView';
 import type { ComplaintWithMetadata } from '../types/complaints';
 import { getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
 
@@ -14,6 +15,7 @@ interface ConversationPanelProps {
 
 export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusChange }: ConversationPanelProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLiveView, setShowLiveView] = useState(false);
 
   useEffect(() => {
     if (!complaint || isFeedFocused) return;
@@ -99,12 +101,22 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
               </div>
             </div>
 
-            <button
-              onClick={onClose}
-              className="p-2 rounded-lg hover:bg-[#F5F5F7] transition-colors"
-            >
-              <X className="w-5 h-5 text-[#86868B]" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowLiveView(true)}
+                className="px-3 py-2 rounded-lg bg-gradient-to-r from-[#FF8732] to-[#D62300] text-white hover:shadow-lg transition-all flex items-center gap-2 font-semibold text-sm"
+                title="View Live Chat Simulation"
+              >
+                <Maximize2 className="w-4 h-4" />
+                Live View
+              </button>
+              <button
+                onClick={onClose}
+                className="p-2 rounded-lg hover:bg-[#F5F5F7] transition-colors"
+              >
+                <X className="w-5 h-5 text-[#86868B]" />
+              </button>
+            </div>
           </div>
 
           {/* Meta badges */}
@@ -224,6 +236,13 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
             )}
           </div>
         </div>
+
+        {/* Live Chat View Modal */}
+        <AnimatePresence>
+          {showLiveView && (
+            <LiveChatView complaint={complaint} onClose={() => setShowLiveView(false)} />
+          )}
+        </AnimatePresence>
       </motion.div>
     </AnimatePresence>
   );

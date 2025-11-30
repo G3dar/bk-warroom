@@ -183,7 +183,7 @@ export const useTutorial = () => {
     },
     {
       target: '[data-tour="live-view-button"]',
-      title: 'Live View Experience',
+      title: 'Full Screen View',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
           Watch conversations <strong style="color: #FF8732;">unfold in real-time</strong> with beautiful animations!
@@ -192,9 +192,10 @@ export const useTutorial = () => {
           <li>Messages appear one by one</li>
           <li>Typing indicators</li>
           <li>Anger-level themed backgrounds</li>
+          <li>Rate response tone with thumbs up/down</li>
         </ul>
         <p style="font-size: 13px; margin-top: 8px; color: #666;">
-          It's like watching a live chat
+          Immersive view with animations and rating
         </p>
       `),
       placement: 'bottom',

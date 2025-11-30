@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, MapPin, Phone } from 'lucide-react';
+import { X, MapPin, Phone, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { ComplaintWithMetadata } from '../types/complaints';
 import { getCategoryEmoji, normalizeCategoryName } from '../utils/formatters';
@@ -12,6 +12,20 @@ interface LiveChatViewProps {
 export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [isTyping, setIsTyping] = useState(false);
+  const [ratings, setRatings] = useState<Record<number, 'up' | 'down' | null>>({});
+
+  const handleToneRating = (messageIndex: number, rating: 'up' | 'down') => {
+    const finalRating = ratings[messageIndex] === rating ? null : rating;
+    setRatings(prev => ({ ...prev, [messageIndex]: finalRating }));
+
+    console.log('Tone rating:', {
+      complaintId: complaint.id,
+      messageIndex,
+      rating: finalRating,
+      timestamp: new Date().toISOString(),
+    });
+    // TODO: Send to API for model fine-tuning
+  };
 
   useEffect(() => {
     // Reset when complaint changes
@@ -262,13 +276,43 @@ export function LiveChatView({ complaint, onClose }: LiveChatViewProps) {
                     )}
                   </motion.div>
 
-                  {/* Timestamp */}
-                  <span className="text-[11px] text-[#8B7355] px-3 font-normal opacity-70" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }}>
-                    {new Date(complaint.timestamp).toLocaleTimeString('en-US', {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                    })}
-                  </span>
+                  {/* Timestamp and Rating */}
+                  <div className="flex items-center gap-2 px-3">
+                    <span className="text-[11px] text-[#8B7355] font-normal opacity-70" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }}>
+                      {new Date(complaint.timestamp).toLocaleTimeString('en-US', {
+                        hour: 'numeric',
+                        minute: '2-digit',
+                      })}
+                    </span>
+
+                    {/* Rating Buttons (only for BK messages) */}
+                    {!isCustomer && (
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => handleToneRating(index, 'up')}
+                          className={`p-1 rounded-md transition-all hover:scale-110 ${
+                            ratings[index] === 'up'
+                              ? 'bg-white/40 backdrop-blur-sm text-white'
+                              : 'text-[#8B7355] opacity-70 hover:bg-white/20 hover:text-white hover:opacity-100'
+                          }`}
+                          title="Good tone"
+                        >
+                          <ThumbsUp className={`w-3 h-3 ${ratings[index] === 'up' ? 'fill-current' : ''}`} />
+                        </button>
+                        <button
+                          onClick={() => handleToneRating(index, 'down')}
+                          className={`p-1 rounded-md transition-all hover:scale-110 ${
+                            ratings[index] === 'down'
+                              ? 'bg-white/40 backdrop-blur-sm text-white'
+                              : 'text-[#8B7355] opacity-70 hover:bg-white/20 hover:text-white hover:opacity-100'
+                          }`}
+                          title="Poor tone"
+                        >
+                          <ThumbsDown className={`w-3 h-3 ${ratings[index] === 'down' ? 'fill-current' : ''}`} />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             );

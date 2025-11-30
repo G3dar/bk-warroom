@@ -122,12 +122,12 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
               <button
                 onClick={() => setShowLiveView(true)}
                 className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-[#FF8732] to-[#D62300] text-white hover:shadow-lg transition-all flex items-center gap-1 sm:gap-2 font-semibold text-xs sm:text-sm"
-                title="View Live Chat Simulation"
+                title="View Full Screen"
                 data-tour="live-view-button"
               >
                 <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Live View</span>
-                <span className="sm:hidden">Live</span>
+                <span className="hidden sm:inline">Full Screen</span>
+                <span className="sm:hidden">Full</span>
               </button>
               <button
                 onClick={onClose}

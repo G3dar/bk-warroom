@@ -550,9 +550,7 @@ body {
 
 /* Footer with BK-themed styling */
 .react-joyride__tooltip footer {
-  background: linear-gradient(to bottom,
-              rgb(255, 245, 230),
-              rgb(255, 240, 220)) !important;
+  background: rgb(255, 240, 220) !important;
   border-top: 2px solid rgba(255, 135, 50, 0.2) !important;
   padding: 22px 32px !important;
   display: flex !important;
@@ -564,6 +562,9 @@ body {
   box-shadow: inset 0 3px 8px rgba(255, 135, 50, 0.1) !important;
   position: relative !important;
   z-index: 2 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
 }
 
 /* Button container */

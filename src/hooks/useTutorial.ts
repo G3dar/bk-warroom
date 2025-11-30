@@ -117,73 +117,23 @@ export const useTutorial = () => {
       disableBeacon: true,
     },
     {
-      target: '[data-tour="keyword-badge"]',
-      title: 'Clickable Keywords',
+      target: '[data-tour="complaint-feed"]',
+      title: 'Click to View Details',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Keywords are <strong style="color: #9333EA;">auto-extracted</strong> from each complaint using AI!
-        </p>
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          <strong style="color: #007AFF;">Click any badge</strong> to instantly filter and find similar issues
-        </p>
-        <p style="font-size: 13px; color: #666; margin-top: 10px;">
-          Great for spotting trending problems
-        </p>
-      `),
-      placement: 'left',
-      disableBeacon: true,
-    },
-    {
-      target: '[data-tour="conversation-panel"]',
-      title: 'Full Conversation',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Click any message to see the <strong style="color: #007AFF;">complete SMS thread</strong>!
+          <strong style="color: #007AFF;">Click any message card</strong> to see the full conversation with:
         </p>
         <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
-          <li>iMessage-style bubbles</li>
-          <li>Extracted details card</li>
-          <li>Escalation status</li>
+          <li>Complete SMS thread (iMessage-style)</li>
+          <li>Extracted details & escalation status</li>
+          <li>Rate AI responses with 👍👎</li>
+          <li>Full Screen view with animations</li>
         </ul>
-      `),
-      placement: 'left',
-      disableBeacon: true,
-    },
-    {
-      target: '[data-tour="tone-rating"]',
-      title: '👍👎 Rate Response Tone',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Give feedback on BK's AI responses!
-        </p>
-        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 8px;">
-          Your feedback helps improve the model's tone and communication style
-        </p>
-        <p style="font-size: 13px; color: #666; margin-top: 8px;">
-          Better responses = Happier customers
+        <p style="font-size: 13px; margin-top: 10px; color: #666;">
+          Full immersive conversation experience
         </p>
       `),
-      placement: 'left',
-      disableBeacon: true,
-    },
-    {
-      target: '[data-tour="live-view-button"]',
-      title: 'Full Screen View',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Watch conversations <strong style="color: #FF8732;">unfold in real-time</strong> with beautiful animations!
-        </p>
-        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
-          <li>Messages appear one by one</li>
-          <li>Typing indicators</li>
-          <li>Anger-level themed backgrounds</li>
-          <li>Rate response tone with thumbs up/down</li>
-        </ul>
-        <p style="font-size: 13px; margin-top: 8px; color: #666;">
-          Immersive view with animations and rating
-        </p>
-      `),
-      placement: 'bottom',
+      placement: 'top',
       disableBeacon: true,
     },
     {

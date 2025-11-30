@@ -107,28 +107,13 @@ export const useTutorial = () => {
           <li>Anger level</li>
           <li>Category</li>
           <li>Preview</li>
+          <li>⭐ Star icon to favorite messages</li>
         </ul>
         <p style="font-size: 13px; margin-top: 10px; color: #666;">
-          Use <strong>↑↓</strong> arrow keys to navigate
+          Use <strong>↑↓</strong> arrow keys to navigate. Starred messages auto-sort to top.
         </p>
       `),
       placement: 'top',
-      disableBeacon: true,
-    },
-    {
-      target: '[data-tour="star-button"]',
-      title: '⭐ Star Important Messages',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Click the <strong style="color: #FBBF24;">⭐ star icon</strong> to favorite important complaints!
-        </p>
-        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
-          <li>Auto-sort to top</li>
-          <li>Saved for quick access</li>
-          <li>Persistent storage</li>
-        </ul>
-      `),
-      placement: 'left',
       disableBeacon: true,
     },
     {

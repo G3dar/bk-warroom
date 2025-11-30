@@ -167,22 +167,7 @@ export function ConversationPanel({ complaint, onClose, isFeedFocused, onFocusCh
         </div>
 
         {/* Conversation Thread */}
-        <div
-          ref={scrollContainerRef}
-          className="flex-1 min-h-0 overflow-y-auto px-4 py-4 bg-gradient-to-b from-[#F8F8F8] to-[#FAFAFA]"
-          style={{
-            backgroundImage: `
-              repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 3px,
-                rgba(0, 0, 0, 0.015) 3px,
-                rgba(0, 0, 0, 0.015) 6px
-              ),
-              linear-gradient(to bottom, #F8F8F8, #FAFAFA)
-            `
-          }}
-        >
+        <div ref={scrollContainerRef} className="flex-1 min-h-0 overflow-y-auto px-4 py-4 bg-gradient-to-b from-[#F8F8F8] to-[#FAFAFA]">
           <div className="mb-4 text-center">
             <div className="inline-block px-3 py-1 rounded-full bg-white text-xs text-[#86868B] shadow-sm">
               {complaint.timestamp.toLocaleDateString('en-US', {

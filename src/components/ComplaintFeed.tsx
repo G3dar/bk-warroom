@@ -121,6 +121,17 @@ export function ComplaintFeed({
       ref={containerRef}
       className="flex-1 bg-[#F5F5F7] flex flex-col overflow-hidden"
       onClick={() => onFocusChange(true)}
+      style={{
+        backgroundImage: `
+          repeating-linear-gradient(
+            30deg,
+            transparent,
+            transparent 15px,
+            rgba(0, 0, 0, 0.025) 15px,
+            rgba(0, 0, 0, 0.025) 16px
+          )
+        `
+      }}
     >
       <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col min-h-0">
         <div className="flex-shrink-0 px-6 pt-6 pb-4">

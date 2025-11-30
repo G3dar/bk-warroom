@@ -5,12 +5,16 @@ import { ComplaintFeed } from '../components/ComplaintFeed';
 import { ConversationPanel } from '../components/ConversationPanel';
 import type { ComplaintWithMetadata } from '../types/complaints';
 import { normalizeCategoryName } from '../utils/formatters';
+import type { Step } from 'react-joyride';
 
 interface DashboardProps {
   complaints: ComplaintWithMetadata[];
+  tutorialStepIndex?: number;
+  tutorialSteps?: Step[];
+  isTourRunning?: boolean;
 }
 
-export function Dashboard({ complaints }: DashboardProps) {
+export function Dashboard({ complaints, tutorialStepIndex, tutorialSteps, isTourRunning }: DashboardProps) {
   const [selectedComplaint, setSelectedComplaint] = useState<ComplaintWithMetadata | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedAnger, setSelectedAnger] = useState<string | null>(null);
@@ -90,6 +94,22 @@ export function Dashboard({ complaints }: DashboardProps) {
       return b.timestamp.getTime() - a.timestamp.getTime();
     });
   }, [filteredComplaints, starredIds]);
+
+  // Auto-select first complaint when tutorial reaches conversation panel step
+  useEffect(() => {
+    if (
+      isTourRunning &&
+      tutorialStepIndex !== undefined &&
+      tutorialSteps &&
+      tutorialSteps[tutorialStepIndex]
+    ) {
+      const currentStep = tutorialSteps[tutorialStepIndex];
+      // Check if this step has autoOpenConversation flag
+      if (currentStep.data?.autoOpenConversation && !selectedComplaint && sortedComplaints.length > 0) {
+        setSelectedComplaint(sortedComplaints[0]);
+      }
+    }
+  }, [tutorialStepIndex, isTourRunning, tutorialSteps, selectedComplaint, sortedComplaints]);
 
   // Handle keyword click - toggle keyword selection
   const handleKeywordClick = (keyword: string) => {

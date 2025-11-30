@@ -44,7 +44,17 @@ function AppContent({ complaints }: { complaints: any[] }) {
 
       <div className="flex-1 overflow-hidden">
         <Routes>
-          <Route path="/" element={<Dashboard complaints={complaints} />} />
+          <Route
+            path="/"
+            element={
+              <Dashboard
+                complaints={complaints}
+                tutorialStepIndex={stepIndex}
+                tutorialSteps={tutorialSteps}
+                isTourRunning={runTutorial}
+              />
+            }
+          />
           <Route path="/analytics" element={<KeywordAnalytics complaints={complaints} />} />
         </Routes>
       </div>

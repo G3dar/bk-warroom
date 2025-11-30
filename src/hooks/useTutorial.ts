@@ -138,43 +138,53 @@ export const useTutorial = () => {
     },
     {
       target: '[data-tour="complaint-feed"]',
-      title: 'Click to View Details',
+      title: 'Message Feed',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          <strong style="color: #007AFF;">Click any message card</strong> to see the full conversation thread
+          Browse all complaints with rich cards showing customer info, anger levels, and previews
         </p>
-        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
-          <li>Complete SMS thread (iMessage-style)</li>
-          <li>Extracted details & escalation status</li>
-          <li>Full Screen view with animations</li>
-        </ul>
-        <p style="font-size: 13px; margin-top: 10px; color: #666;">
-          The conversation panel will open on the right
+        <p style="font-size: 14px; line-height: 1.6; margin-top: 10px; color: #666;">
+          Use <strong>↑↓</strong> arrow keys to navigate. Starred messages auto-sort to top.
         </p>
       `),
       placement: 'top',
       disableBeacon: true,
     },
     {
-      target: 'body',
+      target: '[data-tour="conversation-panel"]',
+      title: 'Conversation Panel',
+      content: createContent(`
+        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
+          Click any message card to view the <strong style="color: #007AFF;">full conversation thread</strong>
+        </p>
+        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
+          <li>Complete SMS history (iMessage-style)</li>
+          <li>Extracted details & escalation status</li>
+          <li>Full Screen view option</li>
+        </ul>
+      `),
+      placement: 'left',
+      disableBeacon: true,
+      data: { desktopOnly: true, autoOpenConversation: true },
+    },
+    {
+      target: '[data-tour="tone-rating"]',
       title: 'Train the AI Model',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          <strong style="color: #FF8732;">Rate every AI response</strong> to help improve the model!
-        </p>
-        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
-          In the conversation panel, you'll see <strong>👍 and 👎</strong> buttons next to each BK response.
+          <strong style="color: #FF8732;">Rate every AI response</strong> with the thumbs up/down buttons!
         </p>
         <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
           <li><strong>👍 Thumbs Up</strong> - Good tone and response quality</li>
           <li><strong>👎 Thumbs Down</strong> - Poor tone or inappropriate response</li>
         </ul>
         <p style="font-size: 13px; margin-top: 10px; color: #666;">
-          Your ratings help train the AI to respond better to customer complaints
+          Your ratings help train the AI to respond better to complaints
         </p>
       `),
-      placement: 'center',
+      placement: 'left',
       disableBeacon: true,
+      data: { desktopOnly: true },
     },
     {
       target: '[data-tour="analytics-link"]',

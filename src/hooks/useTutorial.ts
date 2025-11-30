@@ -151,28 +151,31 @@ export const useTutorial = () => {
       disableBeacon: true,
     },
     {
-      target: '[data-tour="conversation-panel"]',
+      target: 'body',
       title: 'Conversation Panel',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          Click any message card to view the <strong style="color: #007AFF;">full conversation thread</strong>
+          Let's open a conversation to see the <strong style="color: #007AFF;">full message thread</strong>
         </p>
         <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
           <li>Complete SMS history (iMessage-style)</li>
           <li>Extracted details & escalation status</li>
           <li>Full Screen view option</li>
         </ul>
+        <p style="font-size: 13px; margin-top: 10px; color: #666;">
+          Click Next to see the conversation panel
+        </p>
       `),
-      placement: 'left',
+      placement: 'center',
       disableBeacon: true,
       data: { desktopOnly: true, autoOpenConversation: true },
     },
     {
-      target: '[data-tour="tone-rating"]',
+      target: 'body',
       title: 'Train the AI Model',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          <strong style="color: #FF8732;">Rate every AI response</strong> with the thumbs up/down buttons!
+          Look at the <strong style="color: #FF8732;">👍 and 👎 buttons</strong> next to each BK response in the conversation!
         </p>
         <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
           <li><strong>👍 Thumbs Up</strong> - Good tone and response quality</li>
@@ -182,7 +185,7 @@ export const useTutorial = () => {
           Your ratings help train the AI to respond better to complaints
         </p>
       `),
-      placement: 'left',
+      placement: 'center',
       disableBeacon: true,
       data: { desktopOnly: true },
     },

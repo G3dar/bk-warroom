@@ -141,19 +141,39 @@ export const useTutorial = () => {
       title: 'Click to View Details',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          <strong style="color: #007AFF;">Click any message card</strong> to see the full conversation with:
+          <strong style="color: #007AFF;">Click any message card</strong> to see the full conversation thread
         </p>
         <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
           <li>Complete SMS thread (iMessage-style)</li>
           <li>Extracted details & escalation status</li>
-          <li>Rate AI responses with 👍👎</li>
           <li>Full Screen view with animations</li>
         </ul>
         <p style="font-size: 13px; margin-top: 10px; color: #666;">
-          Full immersive conversation experience
+          The conversation panel will open on the right
         </p>
       `),
       placement: 'top',
+      disableBeacon: true,
+    },
+    {
+      target: 'body',
+      title: 'Train the AI Model',
+      content: createContent(`
+        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
+          <strong style="color: #FF8732;">Rate every AI response</strong> to help improve the model!
+        </p>
+        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
+          In the conversation panel, you'll see <strong>👍 and 👎</strong> buttons next to each BK response.
+        </p>
+        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
+          <li><strong>👍 Thumbs Up</strong> - Good tone and response quality</li>
+          <li><strong>👎 Thumbs Down</strong> - Poor tone or inappropriate response</li>
+        </ul>
+        <p style="font-size: 13px; margin-top: 10px; color: #666;">
+          Your ratings help train the AI to respond better to customer complaints
+        </p>
+      `),
+      placement: 'center',
       disableBeacon: true,
     },
     {

@@ -117,6 +117,26 @@ export const useTutorial = () => {
       disableBeacon: true,
     },
     {
+      target: '[data-tour="keyword-filters"]',
+      title: 'Clickable Keywords',
+      content: createContent(`
+        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
+          Discover the <strong style="color: #FF8732;">top 20 most frequent keywords</strong> from all complaints!
+        </p>
+        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
+          <li>Click any keyword to filter messages</li>
+          <li>See keyword frequency counts</li>
+          <li>Identify common complaint themes</li>
+        </ul>
+        <p style="font-size: 13px; margin-top: 10px; color: #666;">
+          Great for spotting patterns and trends
+        </p>
+      `),
+      placement: 'right',
+      disableBeacon: true,
+      data: { desktopOnly: true },
+    },
+    {
       target: '[data-tour="complaint-feed"]',
       title: 'Click to View Details',
       content: createContent(`
@@ -138,36 +158,20 @@ export const useTutorial = () => {
     },
     {
       target: '[data-tour="analytics-link"]',
-      title: '📈 Keyword Analytics',
+      title: 'Keyword Analytics',
       content: createContent(`
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
           Dive deeper into <strong style="color: #007AFF;">keyword trends</strong> and patterns!
         </p>
         <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
           <li>Interactive charts</li>
-          <li>Top 20 keywords</li>
+          <li>Top 20 keywords visualization</li>
         </ul>
         <p style="font-size: 13px; color: #666; margin-top: 8px;">
-          Click to explore trends
+          Click to explore detailed analytics
         </p>
       `),
       placement: 'bottom',
-      disableBeacon: true,
-    },
-    {
-      target: '[data-tour="analytics-chart"]',
-      title: '📊 Keyword Frequency Chart',
-      content: createContent(`
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 10px;">
-          This <strong style="color: #007AFF;">interactive bar chart</strong> shows the top 20 keywords by frequency!
-        </p>
-        <ul style="margin: 0; padding-left: 0; font-size: 14px; line-height: 1.8; list-style: none;">
-          <li>Color-coded bars</li>
-          <li>Hover for exact counts</li>
-          <li>Spot trends at a glance</li>
-        </ul>
-      `),
-      placement: 'top',
       disableBeacon: true,
     },
     {
